@@ -1,0 +1,721 @@
+<title>Spec Pedro Lucena Sax</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+:root {
+  --doc-bg:#F3F5F6; --doc-surface:#FFFFFF; --doc-sunken:#EAEEF0;
+  --doc-ink:#0B0D0E; --doc-body:#333C41; --doc-muted:#6B767C; --doc-faint:#98A3A9;
+  --doc-rule:#D2DADE; --doc-hair:#E4E9EC; --doc-accent:#1E6C85;
+  --f-d:"Archivo",-apple-system,sans-serif; --f-b:"Archivo",-apple-system,sans-serif;
+  --f-m:"JetBrains Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --doc-bg:#080A0B; --doc-surface:#101416; --doc-sunken:#171D20;
+  --doc-ink:#EEF2F3; --doc-body:#C0CACE; --doc-muted:#8B979D; --doc-faint:#6A757B;
+  --doc-rule:#2A3338; --doc-hair:#1D2427; --doc-accent:#4FA8C4; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --doc-bg:#080A0B; --doc-surface:#101416; --doc-sunken:#171D20;
+  --doc-ink:#EEF2F3; --doc-body:#C0CACE; --doc-muted:#8B979D; --doc-faint:#6A757B;
+  --doc-rule:#2A3338; --doc-hair:#1D2427; --doc-accent:#4FA8C4; color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{background:var(--doc-bg);color:var(--doc-body);font-family:var(--f-b);font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased;margin:0;padding:0 0 5rem}
+.wrap{max-width:940px;margin:0 auto;padding:0 clamp(1rem,4vw,2rem)}
+
+.masthead{background:#0B0D0E;color:#F2F4F5;padding:clamp(3rem,9vw,6rem) 0 clamp(2.5rem,6vw,4rem);margin-bottom:3rem}
+.masthead .wrap{display:flex;flex-direction:column;gap:1.5rem}
+.mh-kicker{font-family:var(--f-m);font-size:.6875rem;letter-spacing:.2em;text-transform:uppercase;color:#4FA8C4}
+.mh-title{font-family:var(--f-d);font-variation-settings:"wdth" 118,"wght" 800;font-size:clamp(2.4rem,7.5vw,4.6rem);line-height:.94;letter-spacing:-.02em;text-transform:uppercase;color:#fff;margin:0}
+.mh-sub{font-size:clamp(1rem,2.2vw,1.15rem);color:#B4C0C6;max-width:62ch;margin:0}
+.mh-meta{display:flex;flex-wrap:wrap;gap:.5rem 2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.14);font-family:var(--f-m);font-size:.75rem;color:#8B979D}
+
+h2{font-family:var(--f-d);font-variation-settings:"wdth" 112,"wght" 700;font-size:clamp(1.4rem,3.4vw,2rem);line-height:1.1;text-transform:uppercase;letter-spacing:-.01em;color:var(--doc-ink);margin:3.5rem 0 .35rem;padding-top:1.5rem;border-top:2px solid var(--doc-ink)}
+h2:first-of-type{margin-top:0}
+h2 .num{font-family:var(--f-m);font-size:.6875rem;letter-spacing:.16em;color:var(--doc-accent);display:block;margin-bottom:.5rem;font-variation-settings:normal}
+h3{font-family:var(--f-d);font-variation-settings:"wght" 700;font-size:1.0625rem;color:var(--doc-ink);margin:2rem 0 .5rem}
+h4{font-family:var(--f-d);font-variation-settings:"wght" 600;font-size:.9375rem;color:var(--doc-ink);margin:1.25rem 0 .35rem}
+p{margin:0 0 .85rem;max-width:72ch}
+strong{color:var(--doc-ink);font-weight:600}
+code,.mono{font-family:var(--f-m);font-size:.85em;background:var(--doc-sunken);padding:.1em .38em;border-radius:3px;color:var(--doc-ink)}
+a{color:var(--doc-accent)}
+ul{margin:0 0 1rem;padding-left:1.15rem}
+li{margin-bottom:.32rem;max-width:72ch}
+hr{border:0;border-top:1px solid var(--doc-hair);margin:2rem 0}
+
+.lede{font-size:1.0625rem;color:var(--doc-body)}
+.small{font-size:.8125rem;color:var(--doc-muted)}
+.tw{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.875rem}
+th{text-align:left;font-family:var(--f-m);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--doc-muted);padding:0 .8rem .5rem 0;border-bottom:1.5px solid var(--doc-rule);white-space:nowrap}
+td{padding:.6rem .8rem .6rem 0;border-bottom:1px solid var(--doc-hair);vertical-align:top}
+th:last-child,td:last-child{padding-right:0}
+
+.note{background:var(--doc-sunken);border:1px solid var(--doc-rule);border-radius:3px;padding:1.05rem 1.25rem;margin:1.25rem 0;font-size:.9375rem}
+.note p:last-child{margin-bottom:0}
+.note strong{color:var(--doc-ink)}
+
+/* swatches */
+.sw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin:1rem 0}
+.sw{border:1px solid var(--doc-rule);border-radius:4px;overflow:hidden}
+.sw-chip{height:64px}
+.sw-meta{padding:.5rem .6rem;background:var(--doc-surface);font-family:var(--f-m);font-size:.6875rem;line-height:1.5}
+.sw-name{color:var(--doc-ink);display:block}
+.sw-hex{color:var(--doc-muted);text-transform:uppercase}
+
+/* type specimens */
+.spec-row{border-top:1px solid var(--doc-hair);padding:1rem 0;display:grid;grid-template-columns:140px 1fr;gap:1.25rem;align-items:baseline}
+.spec-label{font-family:var(--f-m);font-size:.6875rem;color:var(--doc-muted);line-height:1.5}
+.spec-demo{color:var(--doc-ink);overflow:hidden}
+@media(max-width:620px){.spec-row{grid-template-columns:1fr;gap:.35rem}}
+
+.d-xl{font-family:var(--f-d);font-variation-settings:"wdth" 118,"wght" 800;font-size:clamp(2rem,6vw,3.4rem);line-height:.92;text-transform:uppercase;letter-spacing:-.02em}
+.d-l{font-family:var(--f-d);font-variation-settings:"wdth" 112,"wght" 700;font-size:clamp(1.5rem,4vw,2.2rem);line-height:1.04;text-transform:uppercase}
+.d-m{font-family:var(--f-d);font-variation-settings:"wght" 700;font-size:1.25rem}
+.d-nar{font-family:var(--f-d);font-variation-settings:"wdth" 78,"wght" 500;font-size:1.0625rem;text-transform:uppercase;letter-spacing:.02em}
+.d-body{font-family:var(--f-b);font-size:1.0625rem}
+.d-mono{font-family:var(--f-m);font-size:.9375rem;font-variant-numeric:tabular-nums}
+
+/* preview do site */
+.preview{background:#0B0D0E;border-radius:6px;overflow:hidden;margin:1.25rem 0;border:1px solid var(--doc-rule)}
+.pv-nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.09);gap:1rem}
+.pv-logo{font-family:var(--f-d);font-variation-settings:"wdth" 112,"wght" 700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;white-space:nowrap}
+.pv-links{display:flex;gap:1rem;font-family:var(--f-d);font-variation-settings:"wdth" 88,"wght" 500;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#94A0A6;flex-wrap:wrap}
+.pv-hero{display:grid;grid-template-columns:1.15fr .85fr;min-height:230px}
+@media(max-width:620px){.pv-hero{grid-template-columns:1fr}.pv-photo{min-height:130px}}
+.pv-copy{padding:1.6rem 1.2rem;display:flex;flex-direction:column;justify-content:center;gap:.7rem}
+.pv-name{font-family:var(--f-d);font-variation-settings:"wdth" 118,"wght" 800;font-size:clamp(1.7rem,5vw,2.7rem);line-height:.9;text-transform:uppercase;color:#fff;letter-spacing:-.02em}
+.pv-role{font-family:var(--f-d);font-variation-settings:"wdth" 78,"wght" 500;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#4FA8C4}
+.pv-ctas{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.3rem}
+.pv-btn{font-family:var(--f-d);font-variation-settings:"wght" 600;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1rem;border-radius:2px}
+.pv-btn.pri{background:#4FA8C4;color:#0B0D0E}
+.pv-btn.sec{border:1px solid rgba(255,255,255,.3);color:#F2F4F5}
+.pv-photo{background:linear-gradient(155deg,#1B2A30,#0B0D0E 65%);display:flex;align-items:flex-end;justify-content:center;padding:.7rem;color:#4A585F;font-family:var(--f-m);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase}
+.pv-bill{padding:1.1rem 1.2rem;border-top:1px solid rgba(255,255,255,.09);display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.15rem .9rem}
+.pv-bill span{font-family:var(--f-d);font-variation-settings:"wdth" 78,"wght" 500;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:#B4C0C6;padding:.22rem 0;border-bottom:1px solid rgba(255,255,255,.07)}
+
+.pill{display:inline-block;font-family:var(--f-m);font-size:.625rem;letter-spacing:.08em;text-transform:uppercase;padding:.16em .5em;border:1px solid currentColor;border-radius:2px;white-space:nowrap}
+.pill.pub{color:#1D7A4F}.pill.priv{color:#A8641C}.pill.adm{color:#8C4A9E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill.pub{color:#5EC98F}
+ :root:not([data-theme="light"]) .pill.priv{color:#D9A55E}
+ :root:not([data-theme="light"]) .pill.adm{color:#C58ED6}}
+:root[data-theme="dark"] .pill.pub{color:#5EC98F}
+:root[data-theme="dark"] .pill.priv{color:#D9A55E}
+:root[data-theme="dark"] .pill.adm{color:#C58ED6}
+
+pre{background:var(--doc-sunken);border:1px solid var(--doc-hair);border-radius:4px;padding:1rem;overflow-x:auto;font-family:var(--f-m);font-size:.78rem;line-height:1.6;margin:1rem 0}
+pre code{background:none;padding:0;font-size:inherit}
+
+.toc-box{background:var(--doc-surface);border:1px solid var(--doc-rule);border-radius:5px;padding:1.25rem 1.5rem;margin-bottom:2rem}
+.toc-box ol{margin:0;padding-left:1.3rem;columns:2;column-gap:2rem}
+.toc-box li{margin-bottom:.28rem;font-size:.875rem}
+@media(max-width:620px){.toc-box ol{columns:1}}
+</style>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="mh-kicker">Especificação de produto e design</div>
+    <h1 class="mh-title">Pedro Lucena<br>Saxofonista</h1>
+    <p class="mh-sub">Site público, loja com pagamento por Pix, conta de cliente e painel
+    administrativo. Sistema visual derivado da análise técnica das seis referências indicadas
+    pelo cliente.</p>
+    <div class="mh-meta">
+      <span>Proposta #260901</span><span>02/09/2026</span><span>Next.js 16 · Prisma · PostgreSQL</span><span>pedrolucenasax.com.br</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="toc-box">
+  <ol>
+    <li><a href="#leitura">Leitura do briefing</a></li>
+    <li><a href="#refs">O que as referências fazem</a></li>
+    <li><a href="#posicionamento">Posicionamento</a></li>
+    <li><a href="#cor">Cor</a></li>
+    <li><a href="#tipografia">Tipografia</a></li>
+    <li><a href="#malha">Malha, forma e movimento</a></li>
+    <li><a href="#fotografia">Fotografia</a></li>
+    <li><a href="#componentes">Componentes</a></li>
+    <li><a href="#paginas">Páginas públicas</a></li>
+    <li><a href="#loja">Loja e checkout</a></li>
+    <li><a href="#conta">Conta do cliente</a></li>
+    <li><a href="#admin">Painel administrativo</a></li>
+    <li><a href="#dados">Modelo de dados</a></li>
+    <li><a href="#emails">E-mails</a></li>
+    <li><a href="#seo">SEO e descoberta</a></li>
+    <li><a href="#qualidade">Acessibilidade e performance</a></li>
+    <li><a href="#ordem">Ordem de construção</a></li>
+  </ol>
+</div>
+
+<h2 id="leitura"><span class="num">01</span>Leitura do briefing</h2>
+<p class="lede">Portfólio e EPK de saxofonista de jazz em atividade, para contratantes,
+produtores, assessores e alunos, com loja de produto digital acoplada. Linguagem escura,
+tipográfica e fotográfica, tendendo a pôster de show — não a site de música genérico.</p>
+
+<div class="tw"><table>
+<thead><tr><th style="width:26%">Dial</th><th style="width:12%">Valor</th><th>Razão</th></tr></thead>
+<tbody>
+<tr><td>Variância de layout</td><td class="mono">7 / 10</td><td>Assimetria real (herói dividido, grades desiguais), mas sem caos. O cliente pediu neutro e sóbrio.</td></tr>
+<tr><td>Intensidade de movimento</td><td class="mono">5 / 10</td><td>Entrada do herói, revelação no scroll, retorno no hover. Sem sequestro de rolagem, sem parallax, sem marquee.</td></tr>
+<tr><td>Densidade visual</td><td class="mono">4 / 10</td><td>Respiro alto na maior parte, exceto na parede de credenciais, que é deliberadamente densa.</td></tr>
+</tbody></table></div>
+
+<p><strong>Modo por superfície.</strong> O site público é <em>Experiência</em>: o artista lidera,
+a interface recua. A loja, a conta e o painel são <em>Operação</em>: o que importa é concluir a
+tarefa, e a marca vive no detalhe preciso.</p>
+
+<h2 id="refs"><span class="num">02</span>O que as referências fazem</h2>
+<p>Cada um dos seis sites foi aberto em navegador real a 1440px e teve tipografia, cor,
+raio e navegação extraídos do CSS computado. Não é impressão — são os valores em produção
+em 02/09/2026.</p>
+
+<div class="tw"><table>
+<thead><tr><th>Site</th><th>Fundo</th><th>Tipografia</th><th>Acento</th><th>Herói</th></tr></thead>
+<tbody>
+<tr><td><strong>Braxton Cook</strong></td><td class="mono">#FFFFFF</td><td>Cormorant, 74px, caixa alta, <strong>tracking 0.27em</strong></td><td>nenhum</td><td>Foto sangrada, nome centralizado, 4 botões fantasma em grade 2×2</td></tr>
+<tr><td><strong>Chad LB</strong></td><td class="mono">#FFFFFF</td><td>Helvetica / Arial</td><td class="mono">#22677C</td><td>Faixa de promoção, nav branca, retrato sangrado</td></tr>
+<tr><td><strong>Grace Kelly</strong></td><td class="mono">#121111</td><td>Roboto Condensed + Arsenal, 79px</td><td class="mono">#E45536</td><td>Composição pesada, nome + função + 1 CTA fantasma</td></tr>
+<tr><td><strong>Kenny G</strong></td><td class="mono">#0A0A1D</td><td>Cardo + Red Rose, serifada</td><td class="mono">#C6B49E</td><td>Palco escuro, título à direita, botão pílula 100px</td></tr>
+<tr><td><strong>Mateus Asato</strong></td><td class="mono">#1A1D23</td><td>CircularStd, 64px/700, <strong>tracking −0.02em</strong></td><td>verde Spotify</td><td>Dividido: texto à esquerda, capa à direita. Loja em cartões com preço em R$</td></tr>
+<tr><td><strong>Alex Hahn</strong></td><td class="mono">#110909</td><td>Oswald 300, caixa alta condensada</td><td>nenhum</td><td>Nav vertical à esquerda, foto sangrada, nome sobre a foto</td></tr>
+</tbody></table></div>
+
+<h3>O que isso ensina</h3>
+<ul>
+  <li><strong>Escuro é a norma.</strong> Quatro dos seis usam fundo quase preto. O branco do Braxton é a exceção, e é o único que depende de uma foto clara para funcionar.</li>
+  <li><strong>Todos abrem com retrato sangrado.</strong> Seis de seis. A fotografia é o produto.</li>
+  <li><strong>O "azul do Chad" não é azul.</strong> É <span class="mono">#22677C</span>, um petróleo dessaturado. Tratar como azul brilhante seria trair a referência.</li>
+  <li><strong>Todos têm loja no menu.</strong> Seis de seis. Três têm ensino (Masterclass, Course, Education).</li>
+  <li><strong>Mateus Asato é o único com loja real e login</strong> — e é brasileiro, com preço em R$ e alternância PT/EN. É o modelo estrutural mais próximo do que o Pedro precisa.</li>
+  <li><strong>Grace Kelly tem a melhor arquitetura de informação comercial:</strong> Tour, Bookings, Corporate Events, Soloist, Teaching, Masterclass, Store. É quase o mapa do negócio do Pedro.</li>
+</ul>
+
+<h3>E o que não copiar</h3>
+<ul>
+  <li>A navegação do Braxton <strong>quebra em duas linhas</strong> a 1440px. É o site que o Pedro mais gostou, e tem um defeito de layout evidente.</li>
+  <li>A nav vertical do Alex Hahn força "SAXOPHONE SOUND ESSENTIALS COURSE" a ocupar quatro linhas.</li>
+  <li>O herói do Chad LB é ocupado por uma faixa de liquidação antes de dizer quem ele é. O Pedro pediu "quem sou eu" primeiro.</li>
+  <li>O bege e latão do Kenny G é o clichê visual de "jazz". Também é a paleta que a IA escolhe sozinha para qualquer briefing artesanal. Está descartada.</li>
+</ul>
+
+<h2 id="posicionamento"><span class="num">03</span>Posicionamento</h2>
+<p>Kenny G é o veterano consagrado; Braxton Cook, o editorial contemporâneo; Alex Hahn, o
+professor. Pedro tem 20 e poucos anos, formação Souza Lima &amp; Berklee, palco com Guinga,
+Mônica Salmaso, Jeff Coffin, Anat Cohen e John Surman, e ainda toca casamento de alto padrão
+e acompanha Dilsinho.</p>
+<p><strong>A posição é: jovem, credenciado, versátil, sério.</strong> Não nostálgico, não
+professor, não pop. E a frase dele resolve o resto:</p>
+<div class="note"><p>"Quero que meu nome gere valor." <span class="small">— documento de requisitos, 2.5</span></p></div>
+<p>O site não é vitrine. É instrumento de posicionamento e de filtragem: sustenta preço
+mais alto e afasta o trabalho errado.</p>
+
+<h3>A assinatura do site</h3>
+<p>Uma coisa é exclusivamente dele e nenhuma referência resolve bem: <strong>a lista de com
+quem já tocou.</strong> Grace Kelly enterra a dela; Kenny G não precisa; Braxton não tem.</p>
+<p>Então a <strong>parede de credenciais</strong> é o gesto central: os nomes compostos em
+grade densa, condensada, em caixa alta, como cartaz de festival de jazz. É a única seção com
+densidade alta no site inteiro, e é ela que justifica o cachê.</p>
+
+<div class="preview">
+  <div class="pv-nav">
+    <span class="pv-logo">Pedro Lucena</span>
+    <span class="pv-links"><span>Sobre</span><span>Credenciais</span><span>Eventos</span><span>Mentoria</span><span>Loja</span><span>Agenda</span><span>Contato</span></span>
+  </div>
+  <div class="pv-hero">
+    <div class="pv-copy">
+      <span class="pv-role">Saxofonista · São Paulo</span>
+      <span class="pv-name">Pedro<br>Lucena</span>
+      <div class="pv-ctas"><span class="pv-btn pri">Contratar</span><span class="pv-btn sec">Estudar comigo</span></div>
+    </div>
+    <div class="pv-photo">retrato vertical, sangrado à direita</div>
+  </div>
+  <div class="pv-bill">
+    <span>Guinga</span><span>Mônica Salmaso</span><span>Jeff Coffin</span><span>Anat Cohen</span>
+    <span>John Surman</span><span>Danilo Pérez</span><span>Proveta</span><span>Nelson Ayres</span>
+    <span>Dilsinho</span><span>Luiza Possi</span><span>Falamansa</span><span>Tierry</span>
+  </div>
+</div>
+<p class="small">Esboço do herói e da parede de credenciais, renderizado com os tokens reais
+desta spec. A foto é um espaço reservado.</p>
+
+<h2 id="cor"><span class="num">04</span>Cor</h2>
+<p>Neutros de viés frio, puxados na direção do acento, mais um único petróleo derivado do
+<span class="mono">#22677C</span> do Chad LB e clareado para atingir contraste sobre fundo
+escuro. <strong>Um acento só, no site inteiro.</strong> Sem preto puro e sem branco puro.</p>
+
+<div class="sw-grid">
+  <div class="sw"><div class="sw-chip" style="background:#0B0D0E"></div><div class="sw-meta"><span class="sw-name">ink</span><span class="sw-hex">#0B0D0E</span></div></div>
+  <div class="sw"><div class="sw-chip" style="background:#14191C"></div><div class="sw-meta"><span class="sw-name">surface</span><span class="sw-hex">#14191C</span></div></div>
+  <div class="sw"><div class="sw-chip" style="background:#F2F4F5"></div><div class="sw-meta"><span class="sw-name">paper</span><span class="sw-hex">#F2F4F5</span></div></div>
+  <div class="sw"><div class="sw-chip" style="background:#94A0A6"></div><div class="sw-meta"><span class="sw-name">muted</span><span class="sw-hex">#94A0A6</span></div></div>
+  <div class="sw"><div class="sw-chip" style="background:#4FA8C4"></div><div class="sw-meta"><span class="sw-name">accent</span><span class="sw-hex">#4FA8C4</span></div></div>
+  <div class="sw"><div class="sw-chip" style="background:#1E6C85"></div><div class="sw-meta"><span class="sw-name">accent-deep</span><span class="sw-hex">#1E6C85</span></div></div>
+</div>
+
+<div class="tw"><table>
+<thead><tr><th>Par</th><th style="width:18%">Contraste</th><th style="width:14%">Nível</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td>paper sobre ink</td><td class="mono">17.65:1</td><td>AAA</td><td>Texto corrido e títulos</td></tr>
+<tr><td>muted sobre ink</td><td class="mono">7.27:1</td><td>AAA</td><td>Texto secundário, legendas</td></tr>
+<tr><td>accent sobre ink</td><td class="mono">7.17:1</td><td>AAA</td><td>Links, rótulos, foco</td></tr>
+<tr><td>accent sobre surface</td><td class="mono">6.52:1</td><td>AA</td><td>Links dentro de cartão</td></tr>
+<tr><td>ink sobre accent</td><td class="mono">7.17:1</td><td>AAA</td><td>Botão primário</td></tr>
+<tr><td>paper sobre accent-deep</td><td class="mono">5.38:1</td><td>AA</td><td>Botão em fundo claro</td></tr>
+</tbody></table></div>
+
+<div class="note"><p><strong>Tema travado em escuro.</strong> Um tema só no site inteiro. Nenhuma
+seção inverte para claro no meio da rolagem. Quatro das seis referências são escuras, a
+fotografia do Pedro ganha em fundo escuro, e o compromisso com um só mundo visual é mais
+forte que oferecer os dois pela metade.</p></div>
+
+<h2 id="tipografia"><span class="num">05</span>Tipografia</h2>
+<p>Uma superfamília variável, <strong>Archivo</strong>, explorada em três larguras. Isso dá
+variação real sem misturar famílias — e mistura de famílias para dar ênfase é justamente o
+erro amador que as referências cometem.</p>
+<p>Archivo Expanded no nome e nos títulos entrega o peso de cartaz que Oswald e Roboto
+Condensed dão nas referências, sem copiar nenhuma delas. Archivo Narrow resolve a parede de
+credenciais, onde cabem muitos nomes próprios longos em pouca largura.</p>
+
+<div class="spec-row"><div class="spec-label">display-xl<br>wdth 118 · wght 800<br>clamp(3.5rem, 9vw, 7rem)</div><div class="spec-demo d-xl">Pedro Lucena</div></div>
+<div class="spec-row"><div class="spec-label">display-l<br>wdth 112 · wght 700<br>clamp(2.5rem, 6vw, 4.5rem)</div><div class="spec-demo d-l">Credenciais</div></div>
+<div class="spec-row"><div class="spec-label">heading<br>wght 700 · 1.25rem</div><div class="spec-demo d-m">Mentoria online individual</div></div>
+<div class="spec-row"><div class="spec-label">narrow<br>wdth 78 · wght 500<br>caixa alta · tracking .02em</div><div class="spec-demo d-nar">Orquestra Jovem Tom Jobim · 2021—2025</div></div>
+<div class="spec-row"><div class="spec-label">body<br>wght 400 · 1.0625rem<br>máx. 68ch</div><div class="spec-demo d-body">Bacharel em Música com especialidade em saxofone pela Faculdade Souza Lima &amp; Berklee.</div></div>
+<div class="spec-row"><div class="spec-label">mono<br>JetBrains Mono<br>tabular-nums</div><div class="spec-demo d-mono">R$ 150,00 · 12/10/2026 · 1h15</div></div>
+
+<p class="small"><strong>Regras.</strong> Caixa alta só em display, rótulos e navegação, nunca em
+texto corrido. Ênfase dentro de um título usa peso ou itálico da mesma família — nunca outra
+família. Números de preço, data e duração sempre em <span class="mono">tabular-nums</span>.
+Texto corrido travado em 68ch.</p>
+
+<h2 id="malha"><span class="num">06</span>Malha, forma e movimento</h2>
+
+<h3>Malha</h3>
+<ul>
+  <li>Contêiner máximo <span class="mono">1320px</span>, respiro lateral <span class="mono">clamp(1rem, 5vw, 3rem)</span></li>
+  <li>Grade de 12 colunas no desktop; o herói usa <span class="mono">7fr 5fr</span>, não 50/50</li>
+  <li>Escala de espaço em múltiplos de 4: <span class="mono">4 8 12 16 24 32 48 64 96 128</span></li>
+  <li>Respiro entre seções <span class="mono">clamp(4rem, 10vw, 8rem)</span></li>
+  <li>Toda seção multi-coluna declara explicitamente o colapso abaixo de <span class="mono">768px</span></li>
+  <li>Altura de tela sempre <span class="mono">min-height:100dvh</span>, nunca <span class="mono">100vh</span></li>
+</ul>
+
+<h3>Forma</h3>
+<p>Raio <strong>2px em tudo</strong> — botões, campos, cartões, imagens. Quase reto, nunca
+pílula. As referências oscilam entre 0 (Braxton, Alex Hahn), 3px (Grace Kelly) e 100px
+(Kenny G). O quase-reto é o que combina com tipografia de cartaz e não envelhece.</p>
+<p>Sem sombra em fundo escuro: hierarquia por <strong>superfície e filete</strong>
+(<span class="mono">#14191C</span> sobre <span class="mono">#0B0D0E</span>, filete
+<span class="mono">rgba(255,255,255,.09)</span>). Sombra preta sobre fundo preto não existe.</p>
+
+<h3>Movimento</h3>
+<div class="tw"><table>
+<thead><tr><th style="width:24%">Momento</th><th>Comportamento</th><th style="width:20%">Justificativa</th></tr></thead>
+<tbody>
+<tr><td>Entrada do herói</td><td>Nome sobe 24px com máscara, 700ms, <span class="mono">cubic-bezier(.16,1,.3,1)</span>. Uma vez só.</td><td>Hierarquia</td></tr>
+<tr><td>Parede de credenciais</td><td>Linhas entram escalonadas 40ms no scroll, <span class="mono">whileInView</span>, <span class="mono">once:true</span></td><td>Narrativa: a lista se acumula</td></tr>
+<tr><td>Cartão de produto e galeria</td><td>Imagem <span class="mono">scale(1.03)</span> em 400ms no hover</td><td>Retorno</td></tr>
+<tr><td>Botões</td><td><span class="mono">translateY(-1px)</span> no hover, <span class="mono">scale(.98)</span> no active</td><td>Retorno tátil</td></tr>
+<tr><td>Adicionar ao carrinho</td><td>Contador do carrinho pulsa uma vez; item voa para o ícone</td><td>Transição de estado</td></tr>
+</tbody></table></div>
+<p class="small">Proibido: sequestro de rolagem, parallax, marquee, cursor customizado,
+animação em loop infinito, <span class="mono">window.addEventListener('scroll')</span>. Toda
+animação passa por <span class="mono">useReducedMotion()</span> e colapsa para estática.</p>
+
+<h2 id="fotografia"><span class="num">07</span>Fotografia</h2>
+<p>O site inteiro se apoia em foto, porque vídeo e áudio ainda não existem. É o material
+crítico do projeto.</p>
+<div class="tw"><table>
+<thead><tr><th style="width:24%">Uso</th><th style="width:18%">Formato</th><th>Direção</th></tr></thead>
+<tbody>
+<tr><td>Retrato do herói</td><td>Vertical 4:5</td><td>Um só. Sangra na direita, escurece para <span class="mono">#0B0D0E</span> na borda esquerda com gradiente, para o nome ler sobre ela.</td></tr>
+<tr><td>Faixa de credenciais</td><td>Panorâmica 21:9</td><td>Palco ou big band, tratada em duotone ink/accent a 35% de opacidade, atrás dos nomes.</td></tr>
+<tr><td>Eventos e mentoria</td><td>Horizontal 3:2</td><td>Uma por seção, contextual: evento em ação, aula em close no instrumento.</td></tr>
+<tr><td>Galeria</td><td>Livre</td><td>8 a 12, grade masonry, proporções variadas, <span class="mono">object-fit:cover</span>.</td></tr>
+<tr><td>Capa de produto</td><td>Quadrado 1:1</td><td>Tratada como capa de disco, não como thumbnail de PDF.</td></tr>
+</tbody></table></div>
+<p class="small">Todas em <span class="mono">next/image</span>, AVIF e WebP, <span class="mono">priority</span>
+só no retrato do herói, <span class="mono">sizes</span> declarado em todas. Espaço reservado
+sempre, para CLS zero. Enquanto o material real não chega, usar
+<span class="mono">picsum.photos</span> com seed descritiva e marcar cada ponto com
+<span class="mono">TODO</span>.</p>
+
+<h2 id="componentes"><span class="num">08</span>Componentes</h2>
+
+<h3>Navegação</h3>
+<ul>
+  <li><strong>Uma linha, sempre.</strong> Altura 68px. É o defeito visível do site do Braxton e não se repete aqui.</li>
+  <li>Logotipo à esquerda (nome em Archivo Expanded), links ao centro, carrinho e conta à direita</li>
+  <li>Sete itens: Sobre · Credenciais · Eventos · Mentoria · Loja · Agenda · Contato</li>
+  <li>Transparente sobre o herói; ao rolar 80px ganha fundo <span class="mono">#0B0D0E</span> com filete inferior</li>
+  <li>Abaixo de 1024px vira menu de gaveta em tela cheia; carrinho permanece visível na barra</li>
+  <li>Contador do carrinho aparece só quando <span class="mono">&gt; 0</span></li>
+</ul>
+
+<h3>Botões</h3>
+<div class="tw"><table>
+<thead><tr><th style="width:18%">Tipo</th><th>Estilo</th><th style="width:30%">Uso</th></tr></thead>
+<tbody>
+<tr><td>Primário</td><td>Fundo <span class="mono">#4FA8C4</span>, texto <span class="mono">#0B0D0E</span>, raio 2px, caixa alta, tracking .1em</td><td>Contratar, Comprar, Confirmar</td></tr>
+<tr><td>Secundário</td><td>Filete <span class="mono">rgba(255,255,255,.3)</span>, texto paper</td><td>Estudar comigo, Ver agenda</td></tr>
+<tr><td>Texto</td><td>Accent com sublinhado no hover</td><td>Links dentro de texto</td></tr>
+</tbody></table></div>
+<p class="small">Rótulo em uma linha, máximo três palavras. Foco visível em todos:
+<span class="mono">outline:2px solid #4FA8C4; outline-offset:3px</span>. Alvo mínimo de toque
+44×44px.</p>
+
+<h3>Formulários</h3>
+<ul>
+  <li>Rótulo <strong>acima</strong> do campo, sempre. Nunca placeholder como rótulo.</li>
+  <li>Campo: fundo <span class="mono">#14191C</span>, filete <span class="mono">rgba(255,255,255,.14)</span>, texto paper, 44px de altura</li>
+  <li>Texto de ajuda abaixo do rótulo; erro <strong>abaixo do campo</strong>, em vermelho que passa AA sobre <span class="mono">#0B0D0E</span></li>
+  <li>Erro descreve o que houve <em>e</em> como resolver</li>
+  <li>Estados obrigatórios: vazio, preenchendo, enviando, sucesso, erro de campo, erro de envio</li>
+</ul>
+
+<h3>Cartão de produto</h3>
+<p>Capa 1:1, título em Archivo 600, preço em mono tabular, botão primário. Sem etiqueta
+sobreposta na imagem, sem legenda decorativa. O preço é texto, não pílula.</p>
+
+<h2 id="paginas"><span class="num">09</span>Páginas públicas</h2>
+<p>Página única com âncoras para as seções de apresentação, e rotas próprias para loja,
+produto, conta e checkout. Cada seção usa uma família de layout diferente — nenhuma se repete.</p>
+
+<div class="tw"><table>
+<thead><tr><th style="width:16%">Seção</th><th style="width:22%">Família de layout</th><th>Conteúdo e ação</th></tr></thead>
+<tbody>
+<tr><td><strong>Início</strong></td><td>Herói dividido 7fr / 5fr</td><td>Função em rótulo, nome em display-xl, dois CTAs: Contratar (primário) e Estudar comigo (secundário). Foto sangrada à direita. Máximo 4 elementos de texto.</td></tr>
+<tr><td><strong>Credenciais</strong></td><td>Parede tipográfica densa</td><td>Nomes em grade condensada sobre foto em duotone, agrupados por contexto: big bands e orquestras, jazz internacional, pop nacional, festivais. A assinatura do site.</td></tr>
+<tr><td><strong>Sobre</strong></td><td>Duas colunas assimétricas 5fr / 7fr</td><td>Retrato à esquerda, trajetória à direita em prosa. Linha do tempo da formação. Botão de download do currículo em PDF.</td></tr>
+<tr><td><strong>Eventos</strong></td><td>Grade de formatos + formulário</td><td>Segmentos atendidos e os seis formatos (playback, banda, sax e DJ, DJ + cantora + sax, duo, trio, quinteto). Formulário que abre o WhatsApp preenchido.</td></tr>
+<tr><td><strong>Mentoria</strong></td><td>Faixa de largura total, fundo surface</td><td>Como funciona, 1h15, para quem é. Valor sob consulta ou exibido, a definir. Formulário próprio de inscrição.</td></tr>
+<tr><td><strong>Loja</strong></td><td>Grade de cartões 3 col</td><td>E-books e métodos com capa, título, preço e botão. Chama a rota <span class="mono">/loja</span>.</td></tr>
+<tr><td><strong>Vídeos e áudio</strong></td><td>Destaque + fileira secundária</td><td>Um vídeo em destaque, demais em fileira. Estruturada e vazia até o material existir; oculta automaticamente se não houver itens.</td></tr>
+<tr><td><strong>Galeria</strong></td><td>Masonry</td><td>8 a 12 fotos, lightbox com navegação por teclado.</td></tr>
+<tr><td><strong>Agenda</strong></td><td>Lista de linhas com filete</td><td>Data em mono, local, cidade, link. Oculta automaticamente se não houver eventos futuros.</td></tr>
+<tr><td><strong>Contato</strong></td><td>Rodapé expandido</td><td>WhatsApp, e-mail, redes. Sem repetir formulário — os CTAs já vivem nas seções certas.</td></tr>
+</tbody></table></div>
+
+<div class="note"><p><strong>Um rótulo por intenção.</strong> "Contratar" é o único texto usado para
+contratação, na nav, no herói e na seção de eventos. Nunca "Fale comigo" ao lado de "Entre em
+contato" ao lado de "Vamos conversar".</p></div>
+
+<h3>Rotas</h3>
+<div class="tw"><table>
+<thead><tr><th style="width:34%">Rota</th><th style="width:16%">Acesso</th><th>Função</th></tr></thead>
+<tbody>
+<tr><td class="mono">/</td><td><span class="pill pub">Público</span></td><td>Página principal com todas as seções</td></tr>
+<tr><td class="mono">/loja</td><td><span class="pill pub">Público</span></td><td>Catálogo completo</td></tr>
+<tr><td class="mono">/loja/[slug]</td><td><span class="pill pub">Público</span></td><td>Página de produto</td></tr>
+<tr><td class="mono">/carrinho</td><td><span class="pill pub">Público</span></td><td>Carrinho</td></tr>
+<tr><td class="mono">/checkout</td><td><span class="pill pub">Público</span></td><td>Dados e confirmação</td></tr>
+<tr><td class="mono">/pedido/[id]</td><td><span class="pill priv">Cliente</span></td><td>Pix, QR e situação do pedido</td></tr>
+<tr><td class="mono">/entrar</td><td><span class="pill pub">Público</span></td><td>Senha ou link mágico</td></tr>
+<tr><td class="mono">/criar-conta</td><td><span class="pill pub">Público</span></td><td>Cadastro</td></tr>
+<tr><td class="mono">/esqueci-senha</td><td><span class="pill pub">Público</span></td><td>Recuperação</td></tr>
+<tr><td class="mono">/conta</td><td><span class="pill priv">Cliente</span></td><td>Dados, pedidos, biblioteca</td></tr>
+<tr><td class="mono">/conta/download/[id]</td><td><span class="pill priv">Cliente</span></td><td>Link assinado e temporário</td></tr>
+<tr><td class="mono">/admin/*</td><td><span class="pill adm">Admin</span></td><td>Painel</td></tr>
+<tr><td class="mono">/privacidade</td><td><span class="pill pub">Público</span></td><td>Aviso LGPD</td></tr>
+<tr><td class="mono">/termos</td><td><span class="pill pub">Público</span></td><td>Termos de compra</td></tr>
+</tbody></table></div>
+
+<h2 id="loja"><span class="num">10</span>Loja e checkout</h2>
+
+<h3>Fluxo</h3>
+<pre><code>catálogo → produto → carrinho → checkout → pedido criado (aguardando_pagamento)
+   → Pix copia-e-cola + QR → cliente paga no banco
+   → Pedro confere o extrato e clica "Confirmar pagamento" no painel
+   → pedido vira "pago" → download liberado + e-mail de acesso disparado</code></pre>
+
+<h3>Geração da cobrança Pix</h3>
+<p>Payload EMV (BR Code) montado no servidor a partir da chave que o Pedro cadastra no painel.
+Sem API externa, sem gateway, sem taxa.</p>
+<div class="tw"><table>
+<thead><tr><th style="width:14%">Campo</th><th style="width:26%">Conteúdo</th><th>Origem</th></tr></thead>
+<tbody>
+<tr><td class="mono">00</td><td>Payload Format Indicator</td><td>fixo <span class="mono">01</span></td></tr>
+<tr><td class="mono">26</td><td>GUI <span class="mono">br.gov.bcb.pix</span> + chave</td><td><span class="mono">SiteSetting.pixKey</span></td></tr>
+<tr><td class="mono">52 / 53</td><td>MCC <span class="mono">0000</span>, moeda <span class="mono">986</span></td><td>fixos</td></tr>
+<tr><td class="mono">54</td><td>Valor com duas casas</td><td><span class="mono">Order.totalCents</span></td></tr>
+<tr><td class="mono">58 / 59 / 60</td><td>BR, nome e cidade do recebedor</td><td><span class="mono">SiteSetting.pixName / pixCity</span></td></tr>
+<tr><td class="mono">62</td><td>txid = número do pedido</td><td><span class="mono">Order.orderNumber</span></td></tr>
+<tr><td class="mono">63</td><td>CRC16-CCITT-FALSE</td><td>calculado sobre o payload</td></tr>
+</tbody></table></div>
+<div class="note"><p><strong>A confirmação é manual, e a tela precisa dizer isso.</strong> Chave Pix
+estática não notifica o site. A página do pedido mostra: "Assim que o Pedro confirmar o
+recebimento, o arquivo é liberado aqui e enviado no seu e-mail. Normalmente leva alguns
+minutos." Sem prometer instantaneidade que o sistema não entrega.</p></div>
+
+<h3>Estados do pedido</h3>
+<p class="mono small">aguardando_pagamento · pago · entregue · expirado · cancelado · reembolsado</p>
+<p class="small">Pedido em <span class="mono">aguardando_pagamento</span> há mais de 72h vira
+<span class="mono">expirado</span> por tarefa agendada. O cliente pode gerar novo pedido a
+partir do expirado, com um clique.</p>
+
+<h3>Entrega do arquivo</h3>
+<ul>
+  <li>Arquivos em bucket privado, sem leitura anônima, <strong>nunca com URL pública</strong></li>
+  <li>Download por URL assinada com validade de 15 minutos, gerada a cada clique</li>
+  <li>Servida por rota autenticada que verifica: sessão válida, pedido pago, pedido pertence àquele cliente</li>
+  <li>Contador de downloads por pedido, visível no painel; sem limite rígido, para não punir cliente legítimo</li>
+</ul>
+
+<h3>Estados de interface obrigatórios</h3>
+<div class="tw"><table>
+<thead><tr><th style="width:22%">Tela</th><th>Vazio</th><th>Carregando</th><th>Erro</th></tr></thead>
+<tbody>
+<tr><td>Catálogo</td><td>"Os primeiros materiais estão a caminho." + CTA para mentoria</td><td>6 esqueletos com a forma do cartão</td><td>Mensagem + botão de recarregar</td></tr>
+<tr><td>Carrinho</td><td>"Seu carrinho está vazio." + link para a loja</td><td>Esqueleto de linha</td><td>Item indisponível marcado na linha</td></tr>
+<tr><td>Biblioteca</td><td>"Você ainda não tem materiais." + link para a loja</td><td>Esqueletos</td><td>Inline por item</td></tr>
+<tr><td>Pedido</td><td>—</td><td>QR com esqueleto</td><td>"Não conseguimos gerar o código" + botão de tentar de novo + WhatsApp</td></tr>
+</tbody></table></div>
+
+<h2 id="conta"><span class="num">11</span>Conta do cliente</h2>
+<p>Sessão <strong>completamente separada</strong> da do administrador. Mesmo padrão já em
+produção no <span class="mono">bydap.com.br</span>: cookie assinado com HMAC-SHA256,
+<span class="mono">httpOnly</span>, <span class="mono">sameSite=lax</span>,
+<span class="mono">secure</span>, validade de 30 dias com renovação deslizante. O payload
+carrega apenas o id e a expiração; o registro é carregado do banco depois de verificar a
+assinatura.</p>
+
+<div class="tw"><table>
+<thead><tr><th style="width:26%">Tela</th><th>Conteúdo</th></tr></thead>
+<tbody>
+<tr><td><span class="mono">/entrar</span></td><td>E-mail + senha, ou "Entrar sem senha" que envia link mágico. Erro genérico, sem revelar se o e-mail existe.</td></tr>
+<tr><td><span class="mono">/criar-conta</span></td><td>Nome, e-mail, senha (mínimo 8), aceite dos termos com data e versão registradas.</td></tr>
+<tr><td><span class="mono">/esqueci-senha</span></td><td>Envia link de redefinição, validade 1h, uso único. Resposta sempre igual, exista o e-mail ou não.</td></tr>
+<tr><td><span class="mono">/conta</span></td><td>Três blocos: dados cadastrais editáveis, histórico de pedidos com situação, e biblioteca com botão de download por item.</td></tr>
+</tbody></table></div>
+<p class="small">Compra sem cadastro prévio é permitida: a conta é criada ao final do checkout
+e o cliente recebe link mágico para acessar a biblioteca. Limite de tentativas em login,
+recuperação e link mágico, por e-mail e por IP.</p>
+
+<h2 id="admin"><span class="num">12</span>Painel administrativo</h2>
+<p>Modo Operação. Prioridade é escanear e concluir tarefa, não expressar marca. Interface em
+português, densidade maior que a do site, mesma paleta.</p>
+
+<div class="tw"><table>
+<thead><tr><th style="width:28%">Tela</th><th>Função</th></tr></thead>
+<tbody>
+<tr><td class="mono">/admin</td><td>Painel: pedidos aguardando confirmação em destaque no topo, mensagens não lidas, vendas do mês, próximos shows</td></tr>
+<tr><td class="mono">/admin/pedidos</td><td>Lista filtrável por situação, com valor, cliente e data. <strong>Botão "Confirmar pagamento" direto na linha.</strong></td></tr>
+<tr><td class="mono">/admin/pedidos/[id]</td><td>Itens, dados do comprador, código Pix gerado, histórico de situação, downloads feitos, cancelar e reembolsar</td></tr>
+<tr><td class="mono">/admin/produtos</td><td>Lista com capa, preço, situação e ordem</td></tr>
+<tr><td class="mono">/admin/produtos/[id]</td><td>Título, slug, descrição, capa, preço em centavos, upload de arquivos, ativo/inativo</td></tr>
+<tr><td class="mono">/admin/clientes</td><td>Cadastrados, com histórico de compras</td></tr>
+<tr><td class="mono">/admin/mensagens</td><td>Caixa dos três formulários, com marcação de lida e resposta</td></tr>
+<tr><td class="mono">/admin/credenciais</td><td>Artistas acompanhados, agrupados por contexto, reordenáveis</td></tr>
+<tr><td class="mono">/admin/agenda</td><td>Apresentações: data, local, cidade, link</td></tr>
+<tr><td class="mono">/admin/galeria</td><td>Upload múltiplo, ordenação por arrastar, legendas</td></tr>
+<tr><td class="mono">/admin/midia</td><td>Vídeos e áudios por link ou upload</td></tr>
+<tr><td class="mono">/admin/conteudo</td><td>Textos do site: bio curta, média e longa, chamadas de seção</td></tr>
+<tr><td class="mono">/admin/configuracoes</td><td><strong>Chave Pix, tipo, nome e cidade do recebedor</strong>, contatos, links de redes, currículo em PDF</td></tr>
+</tbody></table></div>
+
+<div class="note"><p><strong>A tela que mais importa é a lista de pedidos.</strong> É a única que o
+Pedro vai abrir com pressa, possivelmente no celular, com o cliente esperando. Confirmar um
+pagamento tem que ser <em>um</em> toque a partir da lista, com confirmação clara do que vai
+acontecer: "Isso libera o download e envia o e-mail de acesso."</p></div>
+
+<h2 id="dados"><span class="num">13</span>Modelo de dados</h2>
+<pre><code>model SiteSetting {
+  id            String @id @default("main")
+  name          String @default("Pedro Lucena")
+  tagline       String @default("Saxofonista")
+  city          String @default("São Paulo")
+  email         String @default("")
+  whatsapp      String @default("")
+  bioShort      String @db.Text
+  bioMedium     String @db.Text
+  bioLong       String @db.Text
+  heroImageUrl  String @default("")
+  resumeUrl     String @default("")
+  instagramUrl  String @default("")
+  youtubeUrl    String @default("")
+  tiktokUrl     String @default("")
+  linkedinUrl   String @default("")
+  spotifyUrl    String @default("")
+  // Pix — editável pelo Pedro, sem intervenção técnica
+  pixKey        String @default("")
+  pixKeyType    PixKeyType @default(email)
+  pixName       String @default("")
+  pixCity       String @default("SAO PAULO")
+  updatedAt     DateTime @updatedAt
+}
+
+enum PixKeyType { cpf cnpj email phone random }
+
+model Credential {          // a parede — a assinatura do site
+  id        String @id @default(cuid())
+  artist    String          // "Guinga"
+  context   CredentialGroup // agrupamento na parede
+  year      String?         // "2021—2025"
+  note      String?         // "Orquestra Jovem Tom Jobim"
+  sortOrder Int    @default(0)
+}
+enum CredentialGroup { big_band jazz_internacional pop_nacional festival }
+
+model Product {
+  id           String @id @default(cuid())
+  slug         String @unique
+  title        String
+  description  String @db.Text
+  coverUrl     String
+  priceCents   Int
+  active       Boolean @default(true)
+  sortOrder    Int     @default(0)
+  files        ProductFile[]
+  createdAt    DateTime @default(now())
+}
+
+model ProductFile {         // bucket privado, nunca URL pública
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  label     String            // "Método completo (PDF)"
+  storageKey String           // chave no bucket, não URL
+  sizeBytes Int
+  mimeType  String
+}
+
+model Customer {
+  id              String @id @default(cuid())
+  email           String @unique
+  name            String?
+  phone           String?
+  passwordHash    String?         // null em conta só por link mágico
+  emailVerifiedAt DateTime?
+  savedCart       Json?
+  orders          Order[]
+  createdAt       DateTime @default(now())
+}
+
+model CustomerLoginToken {
+  id         String    @id @default(cuid())
+  token      String    @unique   // hash do token, nunca o token em claro
+  email      String
+  purpose    TokenPurpose
+  expiresAt  DateTime
+  consumedAt DateTime?
+  @@index([email])
+}
+enum TokenPurpose { magic_link password_reset }
+
+model Order {
+  id            String @id @default(cuid())
+  orderNumber   String @unique          // vira o txid do Pix
+  customerId    String?
+  customer      Customer? @relation(fields: [customerId], references: [id])
+  customerName  String
+  customerEmail String
+  customerPhone String
+  customerCpf   String?                 // opcional, para nota do Pedro
+  items         Json                    // snapshot: título e preço no momento da compra
+  totalCents    Int
+  status        OrderStatus @default(aguardando_pagamento)
+  pixPayload    String?     @db.Text    // BR Code gerado
+  paidAt        DateTime?
+  paidBy        String?                 // admin que confirmou
+  downloadCount Int @default(0)
+  termsAcceptedAt DateTime?
+  termsVersion  String?
+  createdAt     DateTime @default(now())
+  @@index([status, createdAt])
+  @@index([customerEmail])
+}
+enum OrderStatus { aguardando_pagamento pago entregue expirado cancelado reembolsado }
+
+model ContactMessage {
+  id        String @id @default(cuid())
+  kind      MessageKind
+  name      String
+  email     String
+  phone     String?
+  payload   Json                        // campos específicos por tipo
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+}
+enum MessageKind { evento mentoria geral }
+
+model Show      { id String @id @default(cuid()) date DateTime venue String city String url String? }
+model GalleryItem{ id String @id @default(cuid()) url String caption String? sortOrder Int @default(0) }
+model MediaItem { id String @id @default(cuid()) kind MediaKind url String title String sortOrder Int @default(0) }
+enum MediaKind { video audio }
+
+model AdminUser { id String @id @default(cuid()) email String @unique passwordHash String name String }</code></pre>
+
+<h2 id="emails"><span class="num">14</span>E-mails</h2>
+<p>SMTP autenticado a partir de caixa no domínio próprio. Todos com a mesma identidade:
+fundo escuro, nome em Archivo Expanded, um acento. Versão em texto puro sempre incluída.</p>
+<div class="tw"><table>
+<thead><tr><th style="width:30%">Gatilho</th><th style="width:16%">Para</th><th>Conteúdo</th></tr></thead>
+<tbody>
+<tr><td>Pedido criado</td><td>Cliente</td><td>Resumo, valor, <strong>Pix copia-e-cola e QR</strong>, o que acontece depois</td></tr>
+<tr><td>Pagamento confirmado</td><td>Cliente</td><td>Confirmação e botão de acesso à biblioteca</td></tr>
+<tr><td>Link mágico</td><td>Cliente</td><td>Botão único, validade 15 min, uso único</td></tr>
+<tr><td>Redefinir senha</td><td>Cliente</td><td>Botão, validade 1h, aviso de ignorar se não foi ele</td></tr>
+<tr><td>Novo pedido</td><td>Pedro</td><td>Alerta com valor e link direto para confirmar</td></tr>
+<tr><td>Nova mensagem</td><td>Pedro</td><td>Campos do formulário e link para responder</td></tr>
+</tbody></table></div>
+
+<h2 id="seo"><span class="num">15</span>SEO e descoberta</h2>
+<ul>
+  <li><span class="mono">Person</span> com <span class="mono">jobTitle</span>, <span class="mono">alumniOf</span> (Souza Lima &amp; Berklee), <span class="mono">knowsAbout</span> e <span class="mono">areaServed</span></li>
+  <li><span class="mono">MusicGroup</span> para o quinteto autoral</li>
+  <li><span class="mono">Product</span> + <span class="mono">Offer</span> em cada produto, com preço em BRL e disponibilidade</li>
+  <li><span class="mono">Event</span> em cada apresentação da agenda</li>
+  <li><span class="mono">BreadcrumbList</span> nas rotas de loja</li>
+  <li>Título alvo: <em>Pedro Lucena — Saxofonista em São Paulo</em>. Descrição citando formação e formatos.</li>
+  <li>Open Graph com o retrato do herói, 1200×630, e título por rota</li>
+  <li><span class="mono">sitemap.xml</span> e <span class="mono">robots.txt</span> gerados; <span class="mono">/admin</span> e <span class="mono">/conta</span> com <span class="mono">noindex</span></li>
+  <li><span class="mono">llms.txt</span> descrevendo quem ele é, o que faz e como contratar, para assistentes de IA</li>
+</ul>
+
+<h2 id="qualidade"><span class="num">16</span>Acessibilidade e performance</h2>
+<div class="tw"><table>
+<thead><tr><th style="width:30%">Item</th><th>Alvo</th></tr></thead>
+<tbody>
+<tr><td>Contraste</td><td>AA mínimo; AAA no texto do herói. Tabela da seção 04 é o contrato.</td></tr>
+<tr><td>Teclado</td><td>Toda ação alcançável; foco visível de 2px em accent; ordem de tabulação lógica; sem armadilha em modal</td></tr>
+<tr><td>Leitor de tela</td><td>Marcos semânticos, <span class="mono">alt</span> descritivo em toda foto, <span class="mono">aria-live</span> no contador do carrinho e nas mensagens de erro</td></tr>
+<tr><td>Movimento</td><td><span class="mono">prefers-reduced-motion</span> honrado em tudo</td></tr>
+<tr><td>Alvo de toque</td><td>44×44px mínimo</td></tr>
+<tr><td>LCP</td><td>&lt; 2,5s — retrato do herói com <span class="mono">priority</span> e pré-carregado</td></tr>
+<tr><td>CLS</td><td>&lt; 0,1 — espaço reservado em toda imagem e fonte com <span class="mono">display:swap</span> e métrica de fallback</td></tr>
+<tr><td>INP</td><td>&lt; 200ms — movimento só em <span class="mono">transform</span> e <span class="mono">opacity</span></td></tr>
+<tr><td>Fonte</td><td>Archivo via <span class="mono">next/font</span>, subset latin-ext, self-hosted</td></tr>
+</tbody></table></div>
+
+<h2 id="ordem"><span class="num">17</span>Ordem de construção</h2>
+<div class="tw"><table>
+<thead><tr><th style="width:12%">Etapa</th><th style="width:26%">Entrega</th><th>Conteúdo</th></tr></thead>
+<tbody>
+<tr><td class="mono">Dias 1-3</td><td>Fundação</td><td>Projeto, tokens, tipografia, schema, autenticação de admin, deploy no ar</td></tr>
+<tr><td class="mono">Dias 4-8</td><td>Site público</td><td>Herói, credenciais, sobre, eventos, mentoria, galeria, agenda, contato, formulários com WhatsApp preenchido</td></tr>
+<tr><td class="mono">Dia 8</td><td><strong>1ª versão no ar</strong></td><td>Link de pré-visualização para o Pedro navegar</td></tr>
+<tr><td class="mono">Dias 9-15</td><td>Painel de conteúdo</td><td>Todas as telas de conteúdo, upload de imagem, caixa de mensagens. 1ª rodada de ajustes.</td></tr>
+<tr><td class="mono">Dias 16-20</td><td>Loja</td><td>Catálogo, produto, carrinho, checkout, pedidos</td></tr>
+<tr><td class="mono">Dias 21-25</td><td>Pagamento e conta</td><td>BR Code, QR, sessão de cliente, link mágico, biblioteca, entrega assinada, seis e-mails</td></tr>
+<tr><td class="mono">Dias 26-28</td><td>Fechamento</td><td>2ª e 3ª rodadas, venda de teste ponta a ponta, domínio, backup, monitoramento</td></tr>
+<tr><td class="mono">Dia 30</td><td>Entrega</td><td>Credenciais, guia de uso, acompanhamento</td></tr>
+</tbody></table></div>
+
+<div class="note">
+  <p><strong>Critério de pronto da loja.</strong> Uma compra de teste percorre tudo: produto,
+  carrinho, cadastro, checkout, código Pix lido pelo aplicativo de um banco real, confirmação
+  no painel, liberação do download e e-mail de acesso. E o arquivo do produto <em>não</em> é
+  acessível sem pedido pago.</p>
+</div>
+
+<hr>
+<p class="small">Spec derivada do documento de requisitos preenchido pelo cliente em
+01/09/2026 e da captura técnica das seis referências em 02/09/2026. Paleta verificada por
+cálculo de contraste WCAG. Padrões de sessão de cliente, pedido e entrega digital herdados de
+<span class="mono">bydap.com.br</span>, em produção.</p>
+
+</div>

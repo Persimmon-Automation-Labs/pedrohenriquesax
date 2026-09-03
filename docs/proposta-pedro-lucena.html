@@ -1,0 +1,1105 @@
+<title>Proposta Pedro Lucena Sax</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   Proposta #260901 — Pedro Lucena · revisão 3, 02/09/2026
+   Escopo fechado a partir do documento de requisitos do cliente.
+   Registro formal de SOW; o azul do acento vem da referência
+   que o próprio cliente indicou (chadlb.com).
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --paper:#FFFFFF; --ground:#F2F5F6; --ink:#12171B; --body:#333A40;
+  --muted:#69727A; --faint:#98A1A8; --rule:#C4CCD1; --hair:#E3E8EB;
+  --sunken:#F6F8F9; --accent:#1F5C8B; --ok:#1D6647;
+  --shadow:0 1px 2px rgba(18,23,27,.05), 0 14px 34px rgba(18,23,27,.07);
+  --f-head:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Source Sans 3","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:#12171B; --ground:#0A0E11; --ink:#EEF2F4; --body:#C4CDD3;
+    --muted:#8C979F; --faint:#6C767E; --rule:#333D45; --hair:#232C33;
+    --sunken:#182027; --accent:#6FA8D4; --ok:#5CBE92;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 14px 34px rgba(0,0,0,.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper:#12171B; --ground:#0A0E11; --ink:#EEF2F4; --body:#C4CDD3;
+  --muted:#8C979F; --faint:#6C767E; --rule:#333D45; --hair:#232C33;
+  --sunken:#182027; --accent:#6FA8D4; --ok:#5CBE92;
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 14px 34px rgba(0,0,0,.4);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background:var(--ground); color:var(--body); font-family:var(--f-body);
+       font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; padding:0 0 3rem; }
+
+@page { size: A4; margin: 16mm 18mm; }
+
+.page { width:min(210mm,100%); margin:0 auto; background:var(--paper);
+        padding:clamp(1.6rem,5.5vw,22mm) clamp(1.2rem,5vw,20mm) clamp(1.4rem,4vw,14mm);
+        min-height:0; display:flex; flex-direction:column; gap:1.5rem; box-shadow:var(--shadow); }
+.page + .page { margin-top:1.25rem; }
+
+h1,h2,h3,h4 { font-family:var(--f-head); color:var(--ink); margin:0; text-wrap:balance; break-after:avoid; }
+h2 { font-size:1.0625rem; font-weight:600; text-transform:uppercase; letter-spacing:.16em;
+     padding-bottom:.5rem; border-bottom:1.5px solid var(--ink); position:relative; }
+h2::after { content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:var(--accent); }
+h3 { font-size:.9375rem; font-weight:700; letter-spacing:.01em; margin-top:.35rem; }
+h4 { font-size:.875rem; font-weight:600; color:var(--ink); }
+
+p { margin:0; max-width:74ch; orphans:3; widows:3; }
+strong { color:var(--ink); font-weight:600; }
+section { display:flex; flex-direction:column; gap:.85rem; }
+.stack { display:flex; flex-direction:column; gap:.7rem; }
+.tight { gap:.45rem; }
+
+ul.b { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.42rem; }
+ul.b > li { position:relative; padding-left:1.15rem; max-width:72ch; font-size:.9375rem; }
+ul.b > li::before { content:"•"; position:absolute; left:.2rem; top:-.04em; color:var(--muted); font-size:1rem; }
+
+ol.n { margin:0; padding:0; list-style:none; counter-reset:n; display:flex; flex-direction:column; gap:1rem; }
+ol.n > li { counter-increment:n; display:grid; grid-template-columns:1.9rem 1fr; gap:.7rem; break-inside:avoid; }
+ol.n > li::before { content:counter(n) "."; font-family:var(--f-mono); font-size:.8125rem;
+                    color:var(--accent); font-weight:500; padding-top:.12em; }
+
+.cover { min-height:60vh; justify-content:center; gap:0; }
+.cover-mark { font-family:var(--f-head); font-size:clamp(1.6rem,5vw,2.1rem); font-weight:700;
+              letter-spacing:.2em; text-transform:uppercase; color:var(--ink); line-height:1; }
+.cover-tag { font-family:var(--f-head); font-size:.625rem; letter-spacing:.28em;
+             text-transform:uppercase; color:var(--muted); margin-top:.7rem; }
+.cover-rule { height:2px; background:var(--ink); margin:2.5rem 0 .18rem; }
+.cover-rule-b { height:1px; background:var(--accent); margin-bottom:3rem; }
+.cover-client { font-family:var(--f-head); font-size:clamp(1.5rem,5vw,2rem); font-weight:600;
+                letter-spacing:.17em; text-transform:uppercase; color:var(--ink); line-height:1.15; }
+.cover-no { font-family:var(--f-mono); font-size:.875rem; letter-spacing:.1em; color:var(--muted); margin-top:.65rem; }
+.cover-foot { margin-top:3.25rem; padding-top:.9rem; border-top:1px solid var(--rule);
+              display:flex; flex-direction:column; gap:.6rem; }
+.cover-addr { font-family:var(--f-head); font-size:.6875rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink); }
+.cover-conf { font-size:.6875rem; line-height:1.5; color:var(--muted); max-width:none; }
+
+.toc { display:flex; flex-direction:column; gap:1.35rem; }
+.leader { display:flex; align-items:baseline; gap:.55rem; }
+.leader .l-name { font-family:var(--f-head); font-size:.8125rem; font-weight:600;
+                  letter-spacing:.14em; text-transform:uppercase; color:var(--ink); white-space:nowrap; }
+.leader .l-dots { flex:1 1 auto; border-bottom:1px dotted var(--rule); transform:translateY(-.22em); min-width:1.5rem; }
+.leader .l-val { font-family:var(--f-mono); font-size:.8125rem; color:var(--ink); font-variant-numeric:tabular-nums; }
+.leader.price .l-name { font-family:var(--f-body); font-weight:700; font-size:.9375rem; letter-spacing:0; text-transform:none; white-space:normal; }
+.leader.price .l-val { font-size:1.0625rem; font-weight:500; }
+
+.tw { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:.875rem; }
+thead { display:table-header-group; }
+th { text-align:left; font-family:var(--f-head); font-weight:600; font-size:.625rem;
+     letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
+     padding:0 .75rem .45rem 0; border-bottom:1.5px solid var(--rule); }
+td { padding:.6rem .75rem .6rem 0; border-bottom:1px solid var(--hair); vertical-align:top; }
+th:last-child, td:last-child { padding-right:0; }
+tr { break-inside:avoid; }
+tbody tr:last-child td { border-bottom:none; }
+td.num { font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink); }
+.total td { border-top:1.5px solid var(--ink); border-bottom:none; font-weight:700; color:var(--ink); padding-top:.7rem; }
+
+.note { background:var(--sunken); border-left:2px solid var(--accent); padding:.85rem 1.05rem;
+        font-size:.875rem; display:flex; flex-direction:column; gap:.5rem; break-inside:avoid; }
+.note p { max-width:none; }
+.quote { border-left:2px solid var(--rule); padding-left:1rem; font-size:.9375rem;
+         color:var(--body); font-style:italic; display:flex; flex-direction:column; gap:.45rem; }
+.small { font-size:.8125rem; color:var(--muted); }
+.mono { font-family:var(--f-mono); font-variant-numeric:tabular-nums; }
+.kicker { font-family:var(--f-head); font-size:.6875rem; font-weight:600; letter-spacing:.16em;
+          text-transform:uppercase; color:var(--accent); }
+.fill { font-family:var(--f-mono); font-size:.82em; color:var(--accent);
+        border-bottom:1px dashed var(--accent); padding:0 .15em; white-space:nowrap; }
+.pill { display:inline-block; font-family:var(--f-mono); font-size:.625rem; letter-spacing:.06em;
+        text-transform:uppercase; padding:.16em .45em; border:1px solid currentColor; white-space:nowrap; }
+.pill.ok { color:var(--ok); }
+.pill.tbd { color:var(--accent); }
+a { color:var(--accent); text-underline-offset:2px; }
+a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+
+.sig { margin-top:1.6rem; display:flex; flex-direction:column; gap:.3rem; max-width:340px; }
+.sig-line { border-bottom:1px solid var(--ink); height:2.6rem; }
+.sig-lbl { font-family:var(--f-head); font-size:.625rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); text-align:center; }
+.sig-fields { margin-top:1.2rem; display:flex; flex-direction:column; gap:.8rem; }
+.sig-field { display:flex; align-items:baseline; gap:.6rem; }
+.sig-field .k { font-family:var(--f-head); font-size:.6875rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); width:4.5rem; }
+.sig-field .v { flex:1; border-bottom:1px solid var(--rule); height:1.15rem; }
+
+.foot { margin-top:auto; padding-top:.8rem; border-top:1px solid var(--rule);
+        display:flex; justify-content:space-between; gap:1rem;
+        font-family:var(--f-head); font-size:.625rem; letter-spacing:.13em;
+        text-transform:uppercase; color:var(--faint); }
+
+@media print {
+  body { background:#fff; padding:0; margin:0; font-size:9.4pt; line-height:1.5; }
+  .page { box-shadow:none; margin:0; width:auto; min-height:auto; padding:0 0 3mm;
+          overflow:visible; gap:4.5mm; background:#fff; break-after:page; }
+  .page:last-child { break-after:auto; }
+  .cover { min-height:200mm; }
+  section { gap:.6rem; } .stack { gap:.5rem; } ul.b { gap:.3rem; } ol.n { gap:.7rem; }
+  td, th { padding-top:.42rem; padding-bottom:.42rem; }
+  h2 { font-size:.95rem; padding-bottom:.4rem; } h3 { font-size:.875rem; } h4 { font-size:.8125rem; }
+  .note, .quote, .leader, .sig, .toc { break-inside:avoid; }
+  ol.n > li, ul.b > li, tr { break-inside:avoid; }
+  h2,h3,h4 { break-after:avoid; }
+  .note,.pill,.kicker,h2::after,.cover-rule-b,ol.n > li::before,.fill {
+    -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+</style>
+
+<!-- ══════ 1 · CAPA ══════ -->
+<div class="page cover">
+  <div>
+    <div class="cover-mark">Renato do Prado</div>
+    <div class="cover-tag">Desenvolvimento de software sob medida</div>
+  </div>
+  <div class="cover-rule"></div><div class="cover-rule-b"></div>
+  <div>
+    <div class="cover-client">Pedro Lucena</div>
+    <div class="cover-no">Proposta #260901 &nbsp;·&nbsp; revisão 3 &nbsp;·&nbsp; 30 dias</div>
+  </div>
+  <div class="cover-foot">
+    <div class="cover-addr">Renato do Prado &nbsp;·&nbsp; <span class="fill">e-mail</span> &nbsp;·&nbsp; <span class="fill">WhatsApp</span></div>
+    <p class="cover-conf">Escopo fechado a partir do documento de requisitos enviado por Pedro
+    Lucena em 01/09/2026, com a loja ampliada para venda e pagamento dentro do próprio site.
+    Esta revisão substitui as anteriores. Documento confidencial, destinado exclusivamente ao
+    destinatário indicado. Validade de 30 dias a partir de 02/09/2026.</p>
+  </div>
+</div>
+
+<!-- ══════ 2 · ÍNDICE ══════ -->
+<div class="page">
+  <h2>Conteúdo</h2>
+  <div class="toc">
+    <div class="leader"><span class="l-name">Como eu trabalho</span><span class="l-dots"></span><span class="l-val">3</span></div>
+    <div class="leader"><span class="l-name">Desenho do projeto</span><span class="l-dots"></span><span class="l-val">4</span></div>
+    <div class="leader"><span class="l-name">Loja e área do cliente</span><span class="l-dots"></span><span class="l-val">8</span></div>
+    <div class="leader"><span class="l-name">Direção visual</span><span class="l-dots"></span><span class="l-val">14</span></div>
+    <div class="leader"><span class="l-name">Arquitetura técnica</span><span class="l-dots"></span><span class="l-val">15</span></div>
+    <div class="leader"><span class="l-name">Considerações importantes</span><span class="l-dots"></span><span class="l-val">16</span></div>
+    <div class="leader"><span class="l-name">Investimento</span><span class="l-dots"></span><span class="l-val">18</span></div>
+    <div class="leader"><span class="l-name">Prazos e próximos passos</span><span class="l-dots"></span><span class="l-val">21</span></div>
+    <div class="leader"><span class="l-name">Termos e condições</span><span class="l-dots"></span><span class="l-val">22</span></div>
+  </div>
+  <div class="foot"><span>Página 2</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 3 · COMO EU TRABALHO ══════ -->
+<div class="page">
+  <h2>Como eu trabalho</h2>
+  <section class="stack">
+    <h3>Código do zero, e a propriedade é sua</h3>
+    <p>Eu construo sistemas web sob medida. Não uso template, WordPress ou construtor de site:
+    cada página é programada especificamente para o seu caso, o que significa que qualquer
+    coisa — uma fonte, uma cor, um espaçamento, o comportamento de um botão — pode ser
+    mudada, porque não existe um tema de terceiro no caminho.</p>
+    <p>O que eu entrego é seu de forma permanente. <strong>O código-fonte completo fica
+    disponível para você a qualquer momento</strong>, e o site pode ser levado para qualquer
+    outro servidor ou desenvolvedor sem depender de mim. Não há mensalidade, assinatura nem
+    trava de fornecedor.</p>
+  </section>
+  <section class="stack">
+    <h3>Ciclo de feedback curto</h3>
+    <p>A forma como eu trabalho é conversando: você aponta o que incomodou, eu resolvo,
+    normalmente em menos de 24 horas. Você não precisa saber descrever o problema em termos
+    técnicos — descreve o incômodo, e a tradução é comigo.</p>
+  </section>
+  <section class="stack">
+    <h3>Contexto — e por que este valor</h3>
+    <p>Eu trabalho com programação nos Estados Unidos, onde construo sistemas web sob medida
+    para empresas americanas. Este projeto chega até mim pela indicação do Fran, e o valor
+    proposto reflete isso: <strong>é um preço de parceria, não de mercado.</strong></p>
+    <p>Você recebe o mesmo padrão técnico dos meus outros projetos e a mesma atenção nos
+    ajustes. O que não existe aqui é a estrutura formal de uma agência: não há equipe de
+    suporte, contrato com garantia de tempo de resposta, nem plantão. Sou eu, direto com
+    você, e é assim que o preço fecha.</p>
+  </section>
+  <section class="stack">
+    <h3>Projetos entregues e no ar</h3>
+    <ul class="b">
+      <li><span class="mono">bydap.com.br</span> — loja completa com catálogo, carrinho, conta de cliente, checkout e pedidos. <strong>É a base da loja desta proposta.</strong></li>
+      <li><span class="mono">decofaria.com.br</span> — portfólio + sistema de gestão de produção audiovisual</li>
+      <li><span class="mono">fran-nogueira.com.br</span> — portfólio de músico, produtor e baixista</li>
+      <li><span class="mono">piccino.com.br</span> — site institucional</li>
+    </ul>
+  </section>
+  <div class="foot"><span>Página 3</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 4 · VISÃO GERAL ══════ -->
+<div class="page">
+  <h2>Desenho do projeto</h2>
+  <section class="stack tight">
+    <div class="kicker">Escopo do trabalho</div>
+    <h3>Pedro Lucena — Site profissional, loja e painel de gestão</h3>
+  </section>
+  <section class="stack">
+    <h4>Visão geral</h4>
+    <p>Pedro Lucena é saxofonista, bacharel em Música pela Faculdade Souza Lima &amp; Berklee.
+    Sua trajetória passa pela EMMSP, pela EMESP e por cinco anos na Orquestra Jovem Tom Jobim,
+    sob direção de Nelson Ayres e Tiago Costa. Em 2026 foi selecionado para a Big Band do
+    Berklee Global Jazz Institute no Brasil, sob direção de Danilo Pérez, atuando como
+    saxofonista alto lead. Acompanhou de Guinga, Mônica Salmaso e Proveta a Jeff Coffin,
+    Anat Cohen e John Surman — além de artistas do pop nacional como Dilsinho, Luiza Possi,
+    Guilherme Arantes e Falamansa.</p>
+    <p><strong>Nada disso está reunido em lugar nenhum.</strong> Toda a presença profissional
+    dele vive no Instagram, onde o contratante de um casamento de alto padrão, o produtor, o
+    assessor e o aluno de mentoria chegam pela mesma caixa de entrada, sem registro e sem
+    ordem. Um currículo dessa densidade, disperso em stories, não consegue sustentar preço.</p>
+    <p>Pedro foi direto sobre o que quer:</p>
+    <div class="quote">
+      <p>"Quero me posicionar melhor como artista, para que meu nome soe como uma marca e eu
+      consiga vender isso, desde um trabalho de live sax a um show instrumental. Quero que
+      meu nome gere valor."</p>
+    </div>
+    <p>Isso define a função do site: ele não é uma vitrine, é um <strong>instrumento de
+    posicionamento e de filtragem</strong>. Precisa apresentar a credencial de forma que
+    justifique um preço mais alto, e separar os caminhos para que cada público chegue pelo
+    canal certo — contratação pelo WhatsApp, mentoria por formulário.</p>
+    <p>A esses dois caminhos soma-se um terceiro: <strong>a venda direta de e-books e
+    métodos</strong>, feita dentro do próprio site, com pagamento por Pix caindo direto na
+    conta do Pedro e entrega automática do arquivo ao comprador.</p>
+  </section>
+  <div class="foot"><span>Página 4</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 5 · OBJETIVOS ══════ -->
+<div class="page">
+  <section class="stack">
+    <h4>Objetivos</h4>
+    <ul class="b">
+      <li>Reunir trajetória, formação e credenciais em um endereço próprio, sob controle do Pedro e independente de qualquer rede social</li>
+      <li>Elevar o valor percebido do trabalho, para sustentar preço mais alto e reduzir a dependência de trabalhos que desgastam e pagam pouco</li>
+      <li>Abrir o site por "quem sou eu", conforme ele definiu, e transmitir valor nos primeiros três segundos</li>
+      <li>Separar os quatro públicos — contratantes, produtores, assessores e alunos — em caminhos distintos</li>
+      <li>Levar a contratação de evento para o WhatsApp <strong>já com o contexto preenchido</strong></li>
+      <li>Captar alunos de mentoria por formulário, com registro de toda solicitação</li>
+      <li><strong>Vender e-books e métodos dentro do próprio site</strong>, sem intermediário e sem comissão de plataforma</li>
+      <li><strong>Receber o pagamento por Pix direto na conta do Pedro</strong>, com o valor integral</li>
+      <li><strong>Entregar o arquivo automaticamente</strong> ao comprador assim que o pagamento for confirmado</li>
+      <li>Dar ao comprador uma conta própria, onde ele acessa o que comprou a qualquer momento</li>
+      <li>Dar autonomia total sobre conteúdo, produtos e preços, sem intervenção técnica</li>
+      <li>Tornar o trabalho localizável por busca no Google e por assistentes de IA</li>
+      <li>Deixar as áreas de vídeo, áudio e Spotify estruturadas para receber material quando existir</li>
+    </ul>
+  </section>
+  <section class="stack">
+    <h4>Escopo</h4>
+    <p>O projeto está organizado em quatro componentes: o site público, a loja com área do
+    cliente, o painel administrativo e a infraestrutura de publicação.</p>
+  </section>
+  <div class="foot"><span>Página 5</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 6 · SITE PÚBLICO ══════ -->
+<div class="page">
+  <section class="stack">
+    <h3>Site público</h3>
+    <p>Desenhado sob medida a partir das referências indicadas pelo Pedro, com o celular como
+    tela principal — a maior parte das visitas virá do link da bio no Instagram.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:23%">Seção</th><th>Conteúdo e função</th><th style="width:17%">Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Início</strong></td><td>Abre por "quem sou eu": retrato, nome, posicionamento em uma frase e as credenciais de maior peso. Três caminhos — contratar, estudar e comprar.</td><td><span class="pill ok">Fechado</span></td></tr>
+          <tr><td><strong>Sobre</strong></td><td>Trajetória e formação: EMMSP, Souza Lima &amp; Berklee, EMESP, Orquestra Jovem Tom Jobim, Berklee Global Jazz Institute. Currículo em PDF.</td><td><span class="pill ok">Fechado</span></td></tr>
+          <tr><td><strong>Credenciais</strong></td><td>Com quem já tocou, por contexto — big bands e orquestras, jazz internacional, pop nacional, festivais. É a seção que sustenta o preço.</td><td><span class="pill ok">Fechado</span></td></tr>
+          <tr><td><strong>Eventos</strong></td><td>Segmentos e formatos: playback, banda, sax e DJ, DJ + cantora + sax, duo, trio, quinteto autoral. Formulário que leva ao WhatsApp.</td><td><span class="pill ok">Fechado</span></td></tr>
+          <tr><td><strong>Mentoria</strong></td><td>Mentoria online individual: 1h15, de sonoridade a improvisação. Formulário de inscrição.</td><td><span class="pill ok">Fechado</span></td></tr>
+          <tr><td><strong>Loja</strong></td><td>E-books e métodos, com carrinho, conta de cliente, pagamento por Pix e entrega automática do arquivo. Detalhada nas páginas 8 a 12.</td><td><span class="pill ok">Fechado</span></td></tr>
+          <tr><td><strong>Vídeos e áudio</strong></td><td>Área estruturada e publicável pelo painel, pronta para receber material. Ver considerações, item 2.</td><td><span class="pill ok">Fechado</span></td></tr>
+          <tr><td><strong>Galeria</strong></td><td>Fotos de palco, big band, estúdio e bastidores, ordenáveis pelo Pedro.</td><td><span class="pill ok">Fechado</span></td></tr>
+          <tr><td><strong>Agenda</strong></td><td>Próximas apresentações, com data, local e link.</td><td><span class="pill ok">Fechado</span></td></tr>
+          <tr><td><strong>Contato</strong></td><td>WhatsApp, e-mail do site e redes sociais.</td><td><span class="pill ok">Fechado</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <div class="foot"><span>Página 6</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 7 · FORMULÁRIOS ══════ -->
+<div class="page">
+  <section class="stack">
+    <h3>Formulários e captação</h3>
+    <p>Pedro perguntou se seria possível a pessoa preencher os dados do evento e isso
+    direcionar para o WhatsApp. <strong>É possível, e é exatamente o que será feito.</strong></p>
+    <div class="note">
+      <p><strong>Como funciona o formulário de eventos.</strong> A pessoa preenche data, tipo
+      de evento, cidade, duração e formato desejado. Ao enviar, o site abre o WhatsApp do
+      Pedro <strong>com a mensagem já escrita e preenchida</strong> com todos esses dados.</p>
+      <p>Ele recebe o contexto completo e continua a conversa por lá, como prefere — sem
+      perder nenhuma informação e sem precisar perguntar o básico. Uma cópia é registrada no
+      painel e enviada ao e-mail do site.</p>
+    </div>
+    <ul class="b">
+      <li><strong>Formulário de eventos</strong> — nome, contato, data, tipo, cidade, duração, formato e observações; envia ao WhatsApp com tudo preenchido</li>
+      <li><strong>Formulário de mentoria</strong> — nome, contato, nível de experiência, objetivo de estudo e disponibilidade</li>
+      <li><strong>Contato geral</strong> — para produtores, assessores e imprensa</li>
+      <li>Notificação por e-mail a cada mensagem recebida</li>
+      <li>Registro de toda mensagem no painel, com data, origem e marcação de lida</li>
+      <li>Botão de WhatsApp fixo e acessível de qualquer ponto do site</li>
+      <li>Proteção contra envio automatizado de spam</li>
+    </ul>
+  </section>
+  <div class="foot"><span>Página 7</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 8 · LOJA — abertura ══════ -->
+<div class="page">
+  <h2>Loja e área do cliente</h2>
+  <section class="stack">
+    <p>A loja é construída <strong>dentro do próprio site</strong>, no mesmo padrão da
+    <span class="mono">bydap.com.br</span> — catálogo, carrinho, conta de cliente, checkout e
+    gestão de pedidos. Não há plataforma de terceiro, não há redirecionamento para fora e
+    <strong>não há comissão sobre as vendas</strong>.</p>
+    <div class="note">
+      <p><strong>Por que isso importa financeiramente.</strong> Plataformas de infoproduto
+      cobram tipicamente entre 10% e 20% de cada venda. Vendendo pelo próprio site com Pix, o
+      Pedro recebe <strong>o valor integral, direto na conta dele</strong>. Num método de
+      R$ 150, a diferença é de R$ 15 a R$ 30 por unidade vendida.</p>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h4>Catálogo de produtos</h4>
+    <ul class="b">
+      <li>Página de listagem da loja, com capa, título e preço de cada produto</li>
+      <li>Página individual de produto, com capa, descrição longa, sumário do conteúdo, preço e botão de compra</li>
+      <li>Produtos digitais: e-books, métodos, partituras e playalongs</li>
+      <li>Cadastro de produto pelo painel: título, descrição, capa, preço, arquivo entregue, ordem de exibição e status ativo ou inativo</li>
+      <li>Suporte a mais de um arquivo por produto (por exemplo, PDF do método mais os áudios de acompanhamento)</li>
+      <li>Endereço próprio e legível por produto, otimizado para busca</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h4>Carrinho</h4>
+    <ul class="b">
+      <li>Adicionar e remover produtos, com atualização do total</li>
+      <li>Carrinho preservado entre visitas, mesmo sem estar logado</li>
+      <li>Carrinho vinculado à conta assim que o cliente entra</li>
+      <li>Resumo do pedido antes de finalizar</li>
+    </ul>
+  </section>
+  <div class="foot"><span>Página 8</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 9 · CONTA DO CLIENTE ══════ -->
+<div class="page">
+  <section class="stack">
+    <h4>Conta do cliente</h4>
+    <p>Cada comprador tem uma conta própria, separada do painel administrativo do Pedro. É por
+    ela que ele acessa o que comprou, a qualquer momento, sem depender de reencontrar um
+    e-mail antigo.</p>
+    <ul class="b">
+      <li>Cadastro com nome, e-mail e senha, armazenada de forma criptografada</li>
+      <li>Login e logout</li>
+      <li><strong>Entrada por link mágico</strong> — o cliente informa o e-mail e recebe um link que o conecta sem senha</li>
+      <li>Recuperação e redefinição de senha por e-mail</li>
+      <li>Sessão por cookie assinado, com validade e renovação automática</li>
+      <li>Área "Minha conta": dados cadastrais, histórico de pedidos e biblioteca de downloads</li>
+      <li>Compra permitida também sem cadastro prévio, com a conta criada automaticamente ao final</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h4>Checkout</h4>
+    <ul class="b">
+      <li>Revisão dos itens e do valor total</li>
+      <li>Dados do comprador: nome, e-mail e telefone; CPF opcional, para emissão de nota pelo Pedro</li>
+      <li>Aceite dos termos de compra e da política de privacidade, com registro de data e versão do texto aceito</li>
+      <li>Criação do pedido com número próprio e situação inicial "aguardando pagamento"</li>
+      <li>E-mail automático de confirmação do pedido, com o código Pix incluído</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h4>Entrega do arquivo</h4>
+    <ul class="b">
+      <li>Arquivos guardados em área privada, <strong>nunca acessíveis por endereço público</strong></li>
+      <li>Download liberado somente para pedido pago, e somente para a conta que comprou</li>
+      <li>Link de download temporário, gerado a cada acesso</li>
+      <li>Biblioteca permanente na conta do cliente, com todos os produtos adquiridos</li>
+      <li>E-mail automático de liberação assim que o pagamento é confirmado</li>
+    </ul>
+  </section>
+  <div class="foot"><span>Página 9</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 10 · PIX ══════ -->
+<div class="page">
+  <section class="stack">
+    <h4>Pagamento por Pix</h4>
+    <p>O pagamento é feito por Pix, <strong>direto para a conta do Pedro</strong>. O dinheiro
+    não passa por mim, nem por gateway, nem por intermediário — e não há taxa sobre a venda.</p>
+  </section>
+
+  <section class="stack">
+    <ol class="n">
+      <li><div class="stack tight">
+        <h4>Pedro cadastra a chave Pix no painel</h4>
+        <p>Em Configurações, ele informa a chave (CPF, CNPJ, e-mail, telefone ou aleatória),
+        o nome do recebedor e a cidade. Pode trocar quando quiser, sem me acionar.</p>
+      </div></li>
+      <li><div class="stack tight">
+        <h4>O site gera o código de cobrança do pedido</h4>
+        <p>A cada pedido, o site monta automaticamente um <strong>Pix copia-e-cola</strong> e
+        um <strong>QR Code</strong>, já com o valor exato e um identificador do pedido. O
+        cliente copia o código ou lê o QR pelo aplicativo do banco e paga.</p>
+      </div></li>
+      <li><div class="stack tight">
+        <h4>Pedro confere e confirma no painel</h4>
+        <p>Ao ver o Pix cair no extrato, ele abre o pedido no painel e clica em
+        <strong>Confirmar pagamento</strong>. Nesse instante o download é liberado na conta do
+        cliente e o e-mail de acesso é disparado automaticamente.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <div class="note">
+    <p><strong>A confirmação é manual — e isso é deliberado.</strong> Uma chave Pix comum não
+    avisa o site quando o dinheiro entra; quem recebe esse aviso é o banco do Pedro. Por isso
+    a conferência é feita por ele, no painel, em dois cliques.</p>
+    <p>Na prática, isso significa que o comprador recebe o arquivo <strong>assim que o Pedro
+    confirmar</strong> — normalmente em minutos, mas não de madrugada. Em troca, ele não paga
+    comissão nenhuma e não depende de aprovação de gateway.</p>
+    <p>Se no futuro o volume justificar, dá para integrar um provedor de Pix (Mercado Pago,
+    Asaas ou equivalente) e ter confirmação automática 24 horas por dia. Isso é escopo
+    adicional, orçado à parte, e o restante da loja não precisa mudar.</p>
+  </div>
+
+  <section class="stack">
+    <h4>Situações do pedido</h4>
+    <p class="small">Aguardando pagamento &middot; Pago &middot; Entregue &middot; Expirado &middot; Cancelado &middot; Reembolsado</p>
+  </section>
+  <div class="foot"><span>Página 10</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 11 · PAINEL ══════ -->
+<div class="page">
+  <section class="stack">
+    <h3>Painel administrativo</h3>
+    <p>Aplicação web privada, acessível apenas por login e não indexada por buscadores. Toda a
+    interface em português.</p>
+    <h4>Conteúdo do site</h4>
+    <ul class="b">
+      <li>Acesso por usuário e senha individuais, com senha criptografada</li>
+      <li>Edição de todos os textos, incluindo biografia em versão curta, média e longa</li>
+      <li>Envio e substituição de fotos, com recorte e otimização automática</li>
+      <li>Cadastro de credenciais e artistas acompanhados, agrupados por contexto</li>
+      <li>Cadastro de apresentações na agenda</li>
+      <li>Gestão da galeria, com ordenação e legendas</li>
+      <li>Cadastro de vídeos e áudios por link ou upload</li>
+      <li>Substituição do currículo em PDF</li>
+      <li>Caixa de mensagens dos formulários, com marcação de lida</li>
+      <li>Configurações: contatos, links de redes, imagens de destaque, cores e fontes</li>
+    </ul>
+    <h4>Loja</h4>
+    <ul class="b">
+      <li><strong>Chave Pix, nome do recebedor e cidade</strong>, editáveis a qualquer momento</li>
+      <li>Cadastro e edição de produtos, com upload do arquivo entregue</li>
+      <li>Definição e alteração de preço, sem intervenção técnica</li>
+      <li>Lista de pedidos, filtrável por situação, com valor e data</li>
+      <li>Detalhe do pedido: itens, dados do comprador, código Pix gerado e histórico</li>
+      <li><strong>Botão "Confirmar pagamento"</strong>, que libera o download e dispara o e-mail</li>
+      <li>Cancelamento e marcação de reembolso</li>
+      <li>Lista de clientes cadastrados, com histórico de compras</li>
+      <li>Resumo de vendas por período</li>
+    </ul>
+  </section>
+  <div class="foot"><span>Página 11</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 12 · E-MAILS + INTEGRAÇÕES ══════ -->
+<div class="page">
+  <section class="stack">
+    <h4>E-mails automáticos</h4>
+    <p>Todos com a identidade visual do site, enviados a partir de um e-mail do domínio próprio.</p>
+    <ul class="b">
+      <li>Confirmação de pedido, com o código Pix para pagamento</li>
+      <li>Confirmação de pagamento, com o acesso ao download</li>
+      <li>Link mágico de entrada na conta</li>
+      <li>Redefinição de senha</li>
+      <li>Aviso ao Pedro a cada novo pedido recebido</li>
+      <li>Aviso ao Pedro a cada mensagem de formulário</li>
+    </ul>
+  </section>
+  <section class="stack">
+    <h3>Integrações e descoberta</h3>
+    <ul class="b">
+      <li>Instagram, YouTube, TikTok, LinkedIn e WhatsApp conectados ao site</li>
+      <li>Campo de Spotify preparado, a preencher quando o perfil existir</li>
+      <li>Reprodução de vídeos e áudios dentro da própria página</li>
+      <li>Otimização para busca: títulos, descrições, endereços legíveis e mapa do site</li>
+      <li>Dados estruturados <span class="mono">schema.org</span> dos tipos <span class="mono">Person</span>, <span class="mono">MusicGroup</span> e <span class="mono">Product</span>, para que buscadores e assistentes de IA identifiquem a atividade, a formação e os produtos à venda</li>
+      <li>Imagem de pré-visualização ao compartilhar o link</li>
+      <li>Otimização de desempenho, com imagens em formato moderno</li>
+      <li>Contraste verificado, navegação por teclado e alvos de toque adequados no celular</li>
+    </ul>
+  </section>
+  <section class="stack">
+    <h3>Infraestrutura e publicação</h3>
+    <ul class="b">
+      <li>Registro do domínio <span class="mono">pedrolucenasax.com.br</span>, em nome do Pedro — primeiro ano incluso</li>
+      <li>DNS, HTTPS com renovação automática, banco de dados e armazenamento</li>
+      <li>Publicação em servidor dedicado, com reinício automático dos serviços</li>
+      <li>Pipeline de publicação automatizado e ambiente de pré-visualização</li>
+      <li>Backup diário do banco de dados e dos arquivos de produto, com retenção</li>
+      <li>Monitoramento de disponibilidade, com alerta</li>
+    </ul>
+  </section>
+  <div class="foot"><span>Página 12</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 13 · ENTREGÁVEIS ══════ -->
+<div class="page">
+  <section class="stack">
+    <h3>Entrega e transferência</h3>
+    <ul class="b">
+      <li>Credenciais de acesso ao painel</li>
+      <li>Transferência da titularidade do domínio</li>
+      <li><strong>Cópia completa do código-fonte em <span class="mono">.zip</span>, sempre que solicitada</strong></li>
+      <li>Repositório privado com histórico completo</li>
+      <li>Guia de uso do painel, em português, incluindo o fluxo de conferência de pagamento</li>
+      <li>Documentação técnica de publicação</li>
+      <li>Sessão de acompanhamento para percorrer o painel e simular uma venda de ponta a ponta</li>
+    </ul>
+  </section>
+  <section class="stack">
+    <h4>Entregáveis</h4>
+    <ul class="b">
+      <li>Site público responsivo, no ar em <span class="mono">pedrolucenasax.com.br</span> com HTTPS</li>
+      <li>Dez seções de conteúdo conforme a tabela de escopo</li>
+      <li>Loja completa: catálogo, carrinho, checkout, pedidos e entrega digital</li>
+      <li>Conta de cliente com senha, link mágico e recuperação de acesso</li>
+      <li>Pagamento por Pix com código copia-e-cola e QR Code gerados por pedido</li>
+      <li>Painel com gestão de conteúdo, produtos, pedidos, clientes e chave Pix</li>
+      <li>Seis e-mails automáticos</li>
+      <li>Três formulários com integração ao WhatsApp e registro no painel</li>
+      <li>Currículo em PDF publicado e substituível</li>
+      <li>Integrações sociais e campo de Spotify preparado</li>
+      <li>Otimização para busca e dados estruturados</li>
+      <li>Domínio registrado em nome do Pedro, primeiro ano pago</li>
+      <li>Hospedagem, banco, armazenamento, HTTPS, backup e monitoramento</li>
+      <li>Código-fonte em <span class="mono">.zip</span> mediante solicitação</li>
+      <li>Guia de uso e documentação técnica</li>
+      <li>Três rodadas de ajustes após a primeira versão</li>
+    </ul>
+  </section>
+  <div class="foot"><span>Página 13</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 14 · DIREÇÃO VISUAL ══════ -->
+<div class="page">
+  <h2>Direção visual</h2>
+  <section class="stack">
+    <p>Pedro indicou seis referências e uma direção de cor clara. Esta seção registra o que
+    foi extraído delas — o desenho final é apresentado na primeira versão e ajustado nas
+    rodadas de revisão.</p>
+    <div class="quote">
+      <p>"Eu gosto de cores neutras, preto e branco. Talvez colocar um azul igual está no
+      site do Chad não ficaria tão ruim."</p>
+    </div>
+  </section>
+  <section class="stack">
+    <h4>Referências indicadas</h4>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:34%">Site</th><th>O que aproveitar</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">braxtoncook.com</span></td><td>Estrutura de menu — indicada como a mais próxima do ideal, sem a aba de tour</td></tr>
+          <tr><td><span class="mono">chadlb.com</span></td><td>Origem do azul de acento e do equilíbrio entre foto grande e texto contido</td></tr>
+          <tr><td><span class="mono">gracekellymusic.com</span></td><td>Densidade de informação sem poluição; agenda e imprensa bem resolvidas</td></tr>
+          <tr><td><span class="mono">kennyg.com</span></td><td>Presença de artista consolidado — o registro de autoridade</td></tr>
+          <tr><td><span class="mono">mateusasato.com</span></td><td>Minimalismo com peso; tipografia como elemento principal</td></tr>
+          <tr><td><span class="mono">alexhahnmusic.com</span></td><td>A referência de simplicidade que ele levantou como possibilidade</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="stack">
+    <h4>Direção proposta</h4>
+    <ul class="b">
+      <li><strong>Base neutra</strong> — preto, branco e uma escala de cinzas</li>
+      <li><strong>Um único azul de acento</strong>, na linha do usado por Chad LB, reservado a links, botões e destaques — nunca como fundo de página</li>
+      <li><strong>Fotografia como elemento principal</strong>, já que vídeo e áudio ainda não estão disponíveis</li>
+      <li><strong>Tipografia com hierarquia forte</strong>, de modo que a credencial se leia antes do texto corrido</li>
+      <li><strong>A loja herda a mesma linguagem</strong> — sem cara de e-commerce genérico, com a capa do produto tratada como capa de disco</li>
+    </ul>
+  </section>
+  <div class="foot"><span>Página 14</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 15 · ARQUITETURA ══════ -->
+<div class="page">
+  <h2>Arquitetura técnica</h2>
+  <p>Esta seção existe para que qualquer desenvolvedor que venha a assumir o projeto saiba o
+  que vai encontrar. Não é necessário compreendê-la para aprovar a proposta.</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:28%">Camada</th><th>Tecnologia</th></tr></thead>
+      <tbody>
+        <tr><td>Aplicação</td><td>Next.js 16 (App Router) com React 19 e TypeScript, renderização no servidor</td></tr>
+        <tr><td>Estilo</td><td>Tailwind CSS v4, com sistema de design próprio</td></tr>
+        <tr><td>Banco de dados</td><td>PostgreSQL, via Prisma ORM com migrações versionadas</td></tr>
+        <tr><td>Acesso do administrador</td><td>Auth.js (NextAuth v5), sessão por cookie, senha com hash <span class="mono">bcrypt</span></td></tr>
+        <tr><td>Acesso do cliente</td><td>Sessão própria por cookie assinado com HMAC-SHA256, <span class="mono">httpOnly</span>, totalmente separada da do administrador — mesmo padrão da <span class="mono">bydap.com.br</span></td></tr>
+        <tr><td>Cobrança Pix</td><td>Geração do payload EMV (BR Code) a partir da chave cadastrada, com valor, identificador do pedido e dígito verificador CRC16. Sem dependência de API externa.</td></tr>
+        <tr><td>Arquivos de produto</td><td>Bucket privado, sem leitura pública; download por link assinado e temporário</td></tr>
+        <tr><td>Imagens</td><td>Processamento com <span class="mono">sharp</span>, entrega em formato moderno</td></tr>
+        <tr><td>E-mail</td><td>SMTP autenticado a partir de caixa no domínio próprio</td></tr>
+        <tr><td>Servidor</td><td>VPS dedicado na Alemanha, contêineres Docker orquestrados por Coolify</td></tr>
+        <tr><td>Roteamento e HTTPS</td><td>Traefik como proxy reverso, Let's Encrypt com renovação automática</td></tr>
+        <tr><td>Publicação</td><td>Repositório privado no GitHub; envio à branch principal dispara build e publicação</td></tr>
+        <tr><td>Backup</td><td>Cópia diária do banco e dos arquivos de produto, com restauração testada</td></tr>
+        <tr><td>Repositório</td><td><span class="mono">Persimmon-Automation-Labs/pedrohenriquesax</span> (privado)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <p><strong>Sobre a hospedagem.</strong> O site será publicado em servidor dedicado que eu
+    já mantenho e onde operam outros projetos meus e de clientes. Incluir mais um não gera
+    custo adicional — por isso não há mensalidade. A contrapartida honesta é que, enquanto o
+    site estiver ali, depende desse servidor permanecer em operação. Prazo e forma de migração
+    estão no item 5 dos Termos.</p>
+  </div>
+  <div class="foot"><span>Página 15</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 16 · CONSIDERAÇÕES 1 ══════ -->
+<div class="page">
+  <h2>Considerações importantes</h2>
+  <ol class="n">
+    <li><div class="stack tight">
+      <h4>A loja passou a ser um segundo projeto dentro do projeto</h4>
+      <p>Na revisão anterior, a venda dos e-books aconteceria em plataforma externa e o site
+      apenas encaminharia. Pedro optou por <strong>fazer tudo internamente</strong>, no padrão
+      da <span class="mono">bydap.com.br</span>, com conta de cliente e Pix próprio.</p>
+      <p>Isso é substancialmente mais trabalho: carrinho, autenticação de comprador, checkout,
+      pedidos, geração de cobrança, entrega protegida de arquivo e seis e-mails automáticos.
+      É, na prática, um sistema de vendas completo somado ao site — e <strong>está incluído no
+      valor combinado, sem acréscimo</strong>.</p>
+      <p>Em compensação, elimina a comissão de 10% a 20% que uma plataforma cobraria em toda
+      venda futura, e mantém o cliente e o dado da venda com o Pedro.</p>
+      <p>O que isso exige em troca é <strong>agilidade no envio do material</strong>. São dois
+      sistemas em 30 dias; cada dia de atraso nas fotos, nos textos ou nos arquivos dos
+      produtos desloca a entrega na mesma medida.</p>
+    </div></li>
+    <li><div class="stack tight">
+      <h4>A confirmação do Pix é manual</h4>
+      <p>Repito aqui o que está na página 10, porque é a característica mais importante da
+      loja: uma chave Pix comum não notifica o site quando o pagamento entra. O Pedro confirma
+      no painel, em dois cliques, e a entrega é automática a partir daí. Confirmação
+      automática exige integração com provedor de pagamento — escopo adicional.</p>
+    </div></li>
+    <li><div class="stack tight">
+      <h4>Nota fiscal e tributação são responsabilidade do Pedro</h4>
+      <p>Como o dinheiro vai direto para a conta dele, sem intermediário, também é dele a
+      obrigação de emitir nota e recolher tributos sobre as vendas. Uma plataforma de
+      infoproduto faria isso automaticamente; vendendo direto, não. Vale conversar com um
+      contador antes da primeira venda — provavelmente um MEI resolve.</p>
+    </div></li>
+    <li><div class="stack tight">
+      <h4>Vídeo e áudio continuam sendo as lacunas</h4>
+      <p>Pedro considera os vídeos atuais genéricos, não indicou áudio gravado e o Spotify
+      ainda está em desenvolvimento. O site se sustenta em <strong>fotografia e
+      credenciais</strong>, com as áreas de mídia estruturadas no painel para receber material
+      depois, sem redesenho e sem custo adicional.</p>
+    </div></li>
+  </ol>
+  <div class="foot"><span>Página 16</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 17 · CONSIDERAÇÕES 2 ══════ -->
+<div class="page">
+  <ol class="n" style="counter-reset: n 4">
+    <li><div class="stack tight">
+      <h4>Fotografia é o material crítico</h4>
+      <p>Como a fotografia carrega o site, a qualidade dela determina o resultado. Preciso de
+      <strong>um retrato vertical forte</strong> para a abertura, <strong>4 a 6 horizontais
+      tocando</strong> (palco, big band, estúdio) e <strong>8 a 12 livres</strong> para a
+      galeria. Máxima resolução, sem filtro pesado e sem texto sobreposto. Se o material atual
+      não sustentar, vale considerar um ensaio — não está incluso, mas é o investimento de
+      maior retorno neste projeto.</p>
+    </div></li>
+    <li><div class="stack tight">
+      <h4>Domínio: registrar dois</h4>
+      <p>Verifiquei em 01/09/2026: <span class="mono">pedrolucenasax.com.br</span>, a primeira
+      opção, <strong>está livre</strong>. A terceira opção da lista
+      (<span class="mono">pedrolucesax.com</span>) parece ter um erro de digitação — falta o
+      "na". O correto, <span class="mono">pedrolucenasax.com</span>, também está livre.
+      Recomendo registrar os dois, apontando o segundo para o primeiro. Protege o nome por
+      cerca de R$ 40 adicionais por ano, pagos por você a partir do segundo ano.</p>
+    </div></li>
+    <li><div class="stack tight">
+      <h4>Conteúdo pendente de envio</h4>
+      <p>Para começar preciso de: fotos conforme o item 5, a logo que ele já usa, o texto do
+      currículo, os links de YouTube e TikTok, a confirmação do WhatsApp — o número informado
+      veio sem o DDD — e, para a loja, <strong>os arquivos dos e-books ou métodos, com título,
+      descrição, capa e preço</strong>. A loja pode ser entregue vazia e ser abastecida por
+      ele depois, mas ao menos um produto real ajuda a validar o fluxo antes da entrega.</p>
+    </div></li>
+    <li><div class="stack tight">
+      <h4>Não há garantia de tempo de resposta</h4>
+      <p>Na prática, ajustes costumam ser resolvidos em menos de 24 horas. Ainda assim, dado o
+      valor e o formato deste trabalho, <strong>não há compromisso contratual de
+      disponibilidade</strong> nem plantão fora do horário comercial.</p>
+    </div></li>
+  </ol>
+  <div class="foot"><span>Página 17</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 18 · FORA DO ESCOPO + ACEITE ══════ -->
+<div class="page">
+  <section class="stack">
+    <h4>Fora do escopo</h4>
+    <p>Contratáveis à parte, mediante orçamento acordado por escrito antes da execução.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:36%">Item</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td>Confirmação automática de pagamento</td><td>Exige integração com provedor de Pix. Ver considerações, item 2.</td></tr>
+          <tr><td>Cartão, parcelamento e assinatura</td><td>O pagamento é por Pix à vista, em venda avulsa por produto.</td></tr>
+          <tr><td>Produto físico, estoque e frete</td><td>A loja é de produtos digitais.</td></tr>
+          <tr><td>Emissão automática de nota fiscal</td><td>Responsabilidade do Pedro. Ver considerações, item 3.</td></tr>
+          <tr><td>Cupons de desconto e afiliados</td><td>Fora do escopo desta entrega.</td></tr>
+          <tr><td>Produção de áudio, foto e vídeo</td><td>O site apresenta o material existente.</td></tr>
+          <tr><td>Redação de textos e do currículo</td><td>Fornecidos pelo Pedro; posso gerar rascunho para ele editar.</td></tr>
+          <tr><td>Criação de logo e identidade visual</td><td>Será usada a logo que ele já possui.</td></tr>
+          <tr><td>Versão do site em inglês</td><td>Entrega em português.</td></tr>
+          <tr><td>Plataforma de ensino</td><td>Área de aluno, curso em vídeo e agendamento de mentoria.</td></tr>
+          <tr><td>Aplicativo de celular</td><td>O site é responsivo, mas não é aplicativo instalável.</td></tr>
+          <tr><td>Renovação de domínio a partir do 2º ano</td><td>Cerca de R$ 40/ano por domínio.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="stack">
+    <h4>Critérios de aceite</h4>
+    <ul class="b">
+      <li>O site responde em <span class="mono">pedrolucenasax.com.br</span> com HTTPS válido, em celular e computador</li>
+      <li>Pedro edita um texto, troca uma foto e publica uma apresentação sem auxílio técnico</li>
+      <li>O formulário de eventos abre o WhatsApp com a mensagem preenchida, e a cópia chega ao e-mail e ao painel</li>
+      <li><strong>Uma compra de teste percorre todo o fluxo</strong>: produto, carrinho, cadastro, checkout, código Pix válido lido pelo aplicativo do banco, confirmação no painel, liberação do download e e-mail de acesso</li>
+      <li>O arquivo do produto não é acessível sem pedido pago</li>
+      <li>Pedro altera a chave Pix no painel e o novo código é gerado corretamente</li>
+      <li>O site é localizado no Google em busca por "Pedro Lucena saxofonista"</li>
+      <li>Um backup foi gerado e restaurado com sucesso ao menos uma vez</li>
+    </ul>
+  </section>
+  <div class="foot"><span>Página 18</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 19 · INVESTIMENTO ══════ -->
+<div class="page">
+  <h2>Investimento</h2>
+  <section class="stack">
+    <div class="leader price">
+      <span class="l-name">Site profissional, loja e painel administrativo</span>
+      <span class="l-dots"></span><span class="l-val">R$ 800,00</span>
+    </div>
+    <p class="small">Conforme o escopo descrito nas páginas 4 a 18. Valor único e total, sem
+    mensalidade e sem cobrança recorrente. <strong>Não há comissão sobre as vendas da
+    loja</strong> — nem para mim, nem para terceiros.</p>
+  </section>
+  <div class="note">
+    <p><strong>O que está dentro deste valor.</strong> Os R$ 800 cobrem o site, o painel
+    <em>e</em> a loja completa — catálogo, conta de comprador, carrinho, checkout, cobrança
+    por Pix, entrega protegida do arquivo e os e-mails automáticos. São, na prática, dois
+    sistemas: um site profissional e um sistema de vendas.</p>
+    <p>Registro isso para que fique claro o que está sendo entregue, não para renegociar. O
+    valor é o que combinamos no início e é o que vale.</p>
+  </div>
+  <div class="foot"><span>Página 19</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 20 · COMO FUNCIONA ══════ -->
+<div class="page">
+  <section class="stack">
+    <h4>Como funciona um projeto de site</h4>
+    <p>Pedro comentou não ter referência de quanto custa um trabalho desses. Esta seção existe
+    para dar essa referência — e serve para avaliar qualquer proposta, não apenas esta.</p>
+    <p>Um site profissional não é um produto único. São componentes distintos, com formas de
+    cobrança diferentes, e é comum que uma proposta inclua alguns e omita outros sem deixar
+    isso claro.</p>
+  </section>
+  <section class="stack">
+    <ol class="n">
+      <li><div class="stack tight">
+        <h4>Desenvolvimento — cobrado uma única vez</h4>
+        <p>Desenhar e programar o site, a loja e o painel. É a maior parte do custo e acontece
+        uma vez só. O que mais pesa não é a parte pública, e sim <strong>o que fica por
+        trás</strong>: o painel e, agora, todo o sistema de vendas.</p>
+      </div></li>
+      <li><div class="stack tight">
+        <h4>Domínio — cobrado por ano</h4>
+        <p>Um <span class="mono">.com.br</span> custa cerca de R$ 40 por ano no registro.br. É
+        o único item com preço tabelado e público.</p>
+      </div></li>
+      <li><div class="stack tight">
+        <h4>Hospedagem e infraestrutura — cobrado por mês</h4>
+        <p>Servidor, banco de dados e armazenamento. Os planos de R$ 15 a R$ 30 por mês
+        anunciados por aí <strong>não rodam um site como este</strong>: servem páginas
+        prontas, e uma loja com contas e pedidos precisa de banco de dados e de um servidor
+        que execute a aplicação. Somam-se backup e monitoramento, cobrados à parte.</p>
+      </div></li>
+      <li><div class="stack tight">
+        <h4>Comissão sobre vendas — percentual, para sempre</h4>
+        <p>É o custo invisível de quem vende por plataforma: 10% a 20% de <em>cada</em> venda,
+        enquanto a loja existir. <strong>Aqui é zero</strong>, e essa economia cresce
+        exatamente na proporção em que o Pedro vender mais.</p>
+      </div></li>
+      <li><div class="stack tight">
+        <h4>Manutenção e suporte — por mês ou por hora</h4>
+        <p>As alterações depois da entrega, como mensalidade fixa ou hora avulsa.</p>
+      </div></li>
+    </ol>
+  </section>
+  <div class="foot"><span>Página 20</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 21 · REFERÊNCIA DE MERCADO ══════ -->
+<div class="page">
+  <section class="stack">
+    <h4>Referência de mercado</h4>
+    <p>Faixas para cada componente contratado separadamente de um profissional autônomo no
+    Brasil. Servem para comparação e ordem de grandeza — não são cotações.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:33%">Componente</th><th style="width:14%">Cobrança</th><th style="width:27%">Faixa de mercado</th><th>Nesta proposta</th></tr></thead>
+        <tbody>
+          <tr><td>Site e painel sob medida</td><td>uma vez</td><td class="num">R$ 5.000 – 12.000</td><td class="num">Incluso</td></tr>
+          <tr><td>Loja com conta, checkout e entrega digital</td><td>uma vez</td><td class="num">R$ 4.000 – 10.000</td><td class="num">Incluso</td></tr>
+          <tr><td>Domínio <span class="mono">.com.br</span></td><td>por ano</td><td class="num">R$ 40</td><td class="num">1º ano incluso</td></tr>
+          <tr><td>Hospedagem, banco e armazenamento</td><td>por mês</td><td class="num">R$ 60 – 180</td><td class="num">Incluso</td></tr>
+          <tr><td>Certificado HTTPS</td><td>por ano</td><td class="num">R$ 0 – 200</td><td class="num">Incluso</td></tr>
+          <tr><td>Backup diário</td><td>por mês</td><td class="num">R$ 20 – 50</td><td class="num">Incluso</td></tr>
+          <tr><td>Monitoramento</td><td>por mês</td><td class="num">R$ 0 – 30</td><td class="num">Incluso</td></tr>
+          <tr><td>Suporte para alterações pequenas</td><td>por mês</td><td class="num">R$ 150 – 300</td><td class="num">12 meses inclusos</td></tr>
+          <tr><td><strong>Comissão sobre cada venda</strong></td><td>por venda</td><td class="num">10% – 20%</td><td class="num">Zero</td></tr>
+          <tr><td>Cópia do código-fonte</td><td>—</td><td class="num">Raro no mercado</td><td class="num">Incluso</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="stack">
+    <h4>Custo estimado no primeiro ano</h4>
+    <div class="tw">
+      <table>
+        <tbody>
+          <tr><td>Contratando cada componente separadamente, na faixa intermediária</td><td class="num">≈ R$ 15.000</td></tr>
+          <tr class="total"><td>Esta proposta — valor único, sem recorrência e sem comissão</td><td class="num">R$ 800,00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <div class="foot"><span>Página 21</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 22 · RESSALVA + PAGAMENTO ══════ -->
+<div class="page">
+  <div class="note">
+    <p><strong>Uma ressalva honesta.</strong> Com R$ 800 é possível, sim, contratar um site no
+    Brasil — mas de outra natureza: montado sobre tema pronto de WordPress ou construtor como
+    Wix, com painel genérico, hospedagem por conta do cliente, sem backup e sem código
+    próprio. É um produto legítimo e atende bem a muita gente.</p>
+    <p>A diferença desta proposta não está no preço, e sim no que ele entrega: código escrito
+    do zero, painel e loja feitos para o seu conteúdo, infraestrutura inclusa e a cópia do
+    código na sua mão. <strong>O valor reflete a indicação do Fran e o momento em que este
+    trabalho chega até mim — não o tamanho do escopo.</strong> Prefiro deixar isso registrado
+    a fingir que é o preço normal deste serviço.</p>
+  </div>
+  <section class="stack">
+    <h4>Condições de pagamento</h4>
+    <p>Pagamento integral por <strong>Pix</strong>, em três parcelas vinculadas a entregas.
+    Cada parcela é devida somente após a etapa correspondente estar concluída e verificável.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:12%">Parcela</th><th>Marco</th><th style="width:24%">Valor</th></tr></thead>
+        <tbody>
+          <tr><td class="num">50%</td><td>Na aceitação desta proposta. Os trabalhos têm início no mesmo dia da confirmação do pagamento.</td><td class="num">R$ 400,00</td></tr>
+          <tr><td class="num">25%</td><td>No marco do dia 15, com a primeira versão do site publicada e a primeira rodada de ajustes iniciada.</td><td class="num">R$ 200,00</td></tr>
+          <tr><td class="num">25%</td><td>Na conclusão, com site e loja no ar em domínio definitivo, venda de teste validada e credenciais entregues.</td><td class="num">R$ 200,00</td></tr>
+          <tr class="total"><td></td><td>Total</td><td class="num">R$ 800,00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <div class="foot"><span>Página 22</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 23 · PRAZOS ══════ -->
+<div class="page">
+  <h2>Prazos e próximos passos</h2>
+  <section class="stack">
+    <h4>Cronograma</h4>
+    <p>Prazo estimado de <strong>30 dias</strong> a partir da confirmação do pagamento
+    inicial. Pressupõe o recebimento das fotos, da logo, do texto do currículo e do material
+    dos produtos; atraso nessa entrega desloca as datas correspondentes.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:26%">Período</th><th>Atividade</th></tr></thead>
+        <tbody>
+          <tr><td class="num">Dia 0</td><td>Aceitação e Pix de R$ 400. Registro do domínio e início dos trabalhos.</td></tr>
+          <tr><td class="num">Dias 1 a 8</td><td>Direção visual, modelagem de dados, site público e painel de conteúdo.</td></tr>
+          <tr><td class="num">Dia 8</td><td><strong>Primeira versão do site publicada</strong>, em endereço de pré-visualização.</td></tr>
+          <tr><td class="num">Dias 9 a 15</td><td>Primeira rodada de ajustes. Carga do conteúdo real. Início da loja.</td></tr>
+          <tr><td class="num">Dia 15</td><td>Marco da segunda parcela.</td></tr>
+          <tr><td class="num">Dias 16 a 25</td><td>Loja completa: catálogo, carrinho, conta de cliente, checkout, Pix, entrega e e-mails.</td></tr>
+          <tr><td class="num">Dias 26 a 28</td><td>Segunda e terceira rodadas. Venda de teste de ponta a ponta. Domínio definitivo.</td></tr>
+          <tr><td class="num">Dia 30</td><td>Entrega final: credenciais, guia de uso e acompanhamento. Terceira parcela.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="stack">
+    <h4>Próximos passos</h4>
+    <ol class="n">
+      <li><div><h4>Você aprova esta proposta</h4><p class="small">Confirmação por WhatsApp basta. Não é necessária assinatura.</p></div></li>
+      <li><div><h4>Pix de R$ 400,00</h4><p class="small">Eu registro o domínio e começo no mesmo dia.</p></div></li>
+      <li><div><h4>Você me envia o material</h4><p class="small">Fotos, logo, currículo, links, WhatsApp com DDD e, para a loja, ao menos um produto real com arquivo, capa, descrição e preço.</p></div></li>
+      <li><div><h4>Primeira versão do site em 8 dias</h4><p class="small">Link no ar para você abrir, navegar e apontar o que mudar.</p></div></li>
+    </ol>
+  </section>
+  <div class="foot"><span>Página 23</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 24 · TERMOS 1 ══════ -->
+<div class="page">
+  <h2>Termos e condições</h2>
+  <p class="small">Estes termos regem a prestação de serviço entre Renato do Prado
+  ("o Desenvolvedor") e Pedro Henrique da Silva Lucena ("o Cliente"). A aceitação da proposta
+  implica concordância com todos os itens abaixo.</p>
+  <ol class="n">
+    <li><div class="stack tight"><h4>Aceitação e início</h4>
+      <p>A contratação inicia com a confirmação por escrito da aceitação e a compensação da
+      primeira parcela. Não é exigida assinatura formal; a confirmação por mensagem eletrônica
+      tem validade de aceite.</p></div></li>
+    <li><div class="stack tight"><h4>Escopo e alterações</h4>
+      <p>O Desenvolvedor executará o escopo descrito nas páginas 4 a 18. Qualquer alteração
+      deverá ser acordada por escrito antes da execução. Alterações significativas podem
+      implicar ajuste de prazo ou valor, sempre informado e aceito previamente — nunca cobrado
+      após a execução.</p></div></li>
+    <li><div class="stack tight"><h4>Rodadas de ajuste e suporte</h4>
+      <p>Estão inclusas três rodadas de ajustes após a primeira versão.</p>
+      <p>Após a entrega, o Desenvolvedor prestará <strong>suporte gratuito por 12 meses para
+      alterações pequenas</strong>: correção de texto, troca de imagem, ajuste de cor ou
+      espaçamento, correção de defeito e auxílio no uso do painel. Entende-se por alteração
+      pequena aquela resolvível em até cerca de uma hora, com volume de até aproximadamente
+      uma hora por mês. Findo o período, o suporte pode ser renovado de comum acordo.</p>
+      <p>Alterações que constituam <strong>escopo novo</strong> — seção inédita,
+      funcionalidade adicional, redesenho, integração com terceiros, versão em outro idioma —
+      serão orçadas à parte e executadas apenas após aceite por escrito. Não há garantia de
+      tempo de resposta para o suporte gratuito.</p></div></li>
+    <li><div class="stack tight"><h4>Hospedagem</h4>
+      <p>Inclusa por <strong>12 meses</strong> a contar da entrega final, renovando-se
+      automaticamente e sem custo, salvo manifestação em contrário. Caso o Desenvolvedor
+      precise encerrá-la, comunicará com <strong>antecedência mínima de 60 dias</strong> e
+      prestará auxílio na migração, fornecendo código-fonte, cópia do banco de dados e dos
+      arquivos.</p>
+      <p>Serviço prestado em regime de melhor esforço. Mantêm-se backup diário e
+      monitoramento, mas <strong>não há garantia contratual de disponibilidade (SLA)</strong>
+      nem responsabilidade por interrupções de provedor, infraestrutura ou terceiros.</p></div></li>
+  </ol>
+  <div class="foot"><span>Página 24</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 25 · TERMOS 2 ══════ -->
+<div class="page">
+  <ol class="n" style="counter-reset: n 4">
+    <li><div class="stack tight"><h4>Domínio</h4>
+      <p>Registrado em nome do Cliente, que figura como titular. O primeiro ano de
+      <span class="mono">pedrolucenasax.com.br</span> está incluso. A partir do segundo ano, a
+      renovação — cerca de R$ 40 por ano, por domínio — é de responsabilidade do Cliente. A
+      não renovação implica perda do domínio, sem responsabilidade do Desenvolvedor.</p></div></li>
+    <li><div class="stack tight"><h4>Propriedade intelectual e código-fonte</h4>
+      <p>Concluído o pagamento integral, <strong>todo o código-fonte desenvolvido para este
+      projeto passa a ser de propriedade do Cliente</strong>, que pode modificá-lo,
+      transferi-lo ou contratar terceiros para mantê-lo, sem restrição.</p>
+      <p>O Desenvolvedor fornecerá cópia completa em <span class="mono">.zip</span> sempre que
+      solicitado, sem custo e sem necessidade de justificativa. Bibliotecas de código aberto
+      permanecem sob suas licenças. O Desenvolvedor mantém o direito de citar o projeto em seu
+      portfólio, salvo manifestação em contrário.</p></div></li>
+    <li><div class="stack tight"><h4>Operação da loja e recebimentos</h4>
+      <p>O Cliente é o <strong>único titular e operador comercial da loja</strong>. Os
+      pagamentos são feitos por Pix diretamente à conta bancária indicada por ele; o
+      Desenvolvedor <strong>não recebe, não intermedeia, não custodia e não tem acesso</strong>
+      a qualquer valor das vendas, nem cobra comissão sobre elas.</p>
+      <p>São de responsabilidade exclusiva do Cliente: a conferência e a confirmação dos
+      pagamentos recebidos, a emissão de nota fiscal, o recolhimento de tributos, a definição
+      de preços, a política de reembolso, o atendimento ao comprador e o cumprimento do Código
+      de Defesa do Consumidor, incluindo o direito de arrependimento em compras pela internet.</p>
+      <p>O Desenvolvedor responde pelo funcionamento técnico das ferramentas — geração correta
+      do código Pix a partir da chave cadastrada, registro dos pedidos e liberação do arquivo
+      após a confirmação — e não por transações, inadimplência, fraude de terceiros ou uso
+      indevido da chave cadastrada pelo Cliente.</p></div></li>
+    <li><div class="stack tight"><h4>Conteúdo e responsabilidades do Cliente</h4>
+      <p>O Cliente fornece textos, imagens, vídeos, logo e os arquivos dos produtos vendidos, e
+      declara possuir os direitos de uso e comercialização sobre todos eles. O Desenvolvedor
+      não responde por violação de direitos autorais, de imagem ou de marca decorrente de
+      material fornecido pelo Cliente, incluindo fotografias de terceiros, menções a artistas
+      acompanhados e conteúdo dos e-books e métodos. O Cliente é responsável pela guarda de
+      suas credenciais.</p></div></li>
+    <li><div class="stack tight"><h4>Dados pessoais</h4>
+      <p>O site coletará dados de visitantes e compradores — nome, contato, informações do
+      evento ou da mentoria e histórico de pedidos. O Desenvolvedor atua como operador e o
+      Cliente como controlador, nos termos da Lei nº 13.709/2018 (LGPD). Serão implementados
+      aviso de privacidade, termos de compra, coleta limitada ao necessário, senha armazenada
+      de forma criptografada e transmissão cifrada. O Cliente responde pelo uso que fizer dos
+      dados e por atender às solicitações dos titulares.</p></div></li>
+  </ol>
+  <div class="foot"><span>Página 25</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>
+
+<!-- ══════ 26 · TERMOS 3 + ACEITE ══════ -->
+<div class="page">
+  <ol class="n" style="counter-reset: n 9">
+    <li><div class="stack tight"><h4>Limitação de responsabilidade</h4>
+      <p>A responsabilidade total do Desenvolvedor limita-se ao valor efetivamente pago pelo
+      Cliente neste projeto. Não responde por danos indiretos, lucros cessantes, perda de
+      oportunidade de negócio, nem por falhas de terceiros — provedor de infraestrutura,
+      registrador, instituições bancárias, redes sociais ou serviços de streaming.</p></div></li>
+    <li><div class="stack tight"><h4>Rescisão</h4>
+      <p>Qualquer das partes pode encerrar a contratação por escrito. Havendo rescisão pelo
+      Cliente, valores já pagos referentes a etapas concluídas não são restituídos, e o
+      trabalho executado e não faturado será cobrado proporcionalmente. Em qualquer hipótese,
+      <strong>o Cliente receberá o código-fonte e uma cópia dos dados existentes</strong>,
+      incluindo cadastro de clientes e histórico de pedidos.</p></div></li>
+    <li><div class="stack tight"><h4>Prazos e força maior</h4>
+      <p>Os prazos pressupõem fornecimento tempestivo de conteúdo e retorno pelo Cliente.
+      Nenhuma das partes responde por descumprimento decorrente de eventos fora de seu
+      controle razoável.</p></div></li>
+    <li><div class="stack tight"><h4>Foro e lei aplicável</h4>
+      <p>Rege-se pelas leis da República Federativa do Brasil. Divergências serão resolvidas
+      prioritariamente por negociação direta e de boa-fé.</p></div></li>
+    <li><div class="stack tight"><h4>Acordo integral</h4>
+      <p>Esta proposta, incluindo escopo, prazos, condições de pagamento e estes termos,
+      constitui o acordo integral entre as partes e substitui entendimentos anteriores,
+      inclusive as revisões 1 e 2. Alterações só valem se acordadas por escrito.</p></div></li>
+  </ol>
+  <section class="stack">
+    <h4>Aceite</h4>
+    <p>Proposta válida por <strong>30 dias</strong> a contar de 02/09/2026. A aceitação pode
+    ser formalizada por confirmação escrita em mensagem eletrônica, dispensada a assinatura
+    abaixo — que fica disponível caso o Cliente prefira o registro formal.</p>
+    <div class="sig">
+      <div class="sig-line"></div>
+      <div class="sig-lbl">Assinatura</div>
+      <div class="sig-fields">
+        <div class="sig-field"><span class="k">Nome</span><span class="v"></span></div>
+        <div class="sig-field"><span class="k">CPF</span><span class="v"></span></div>
+        <div class="sig-field"><span class="k">Data</span><span class="v"></span></div>
+      </div>
+    </div>
+  </section>
+  <div class="foot"><span>Página 26</span><span>260901 Pedro Lucena</span><span>02/09/2026</span></div>
+</div>

@@ -1,0 +1,1060 @@
+<title>Proposta Pedro Henrique Sax</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   Proposta #260901 — Pedro Henrique
+   Estrutura e registro formal seguindo o padrão de SOW.
+   Monocromático e contido; o latão aparece só como fio,
+   uma referência ao instrumento, nunca como enfeite.
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --paper:  #FFFFFF;
+  --ground: #F2F5F6;
+  --ink:    #12171B;
+  --body:   #333A40;
+  --muted:  #69727A;
+  --faint:  #98A1A8;
+  --rule:   #C4CCD1;
+  --hair:   #E3E8EB;
+  --sunken: #F6F8F9;
+  --brass:  #8A6A28;
+  --ok:     #1D6647;
+  --shadow: 0 1px 2px rgba(18,23,27,.05), 0 14px 34px rgba(18,23,27,.07);
+
+  --f-head: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #12171B; --ground: #0A0E11; --ink: #EEF2F4; --body: #C4CDD3;
+    --muted: #8C979F; --faint: #6C767E; --rule: #333D45; --hair: #232C33;
+    --sunken: #182027; --brass: #C9A05A; --ok: #5CBE92;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 34px rgba(0,0,0,.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #12171B; --ground: #0A0E11; --ink: #EEF2F4; --body: #C4CDD3;
+  --muted: #8C979F; --faint: #6C767E; --rule: #333D45; --hair: #232C33;
+  --sunken: #182027; --brass: #C9A05A; --ok: #5CBE92;
+  --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 34px rgba(0,0,0,.4);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--ground); color: var(--body);
+  font-family: var(--f-body); font-size: 15px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; padding: 0 0 3rem;
+}
+
+@page { size: A4; margin: 16mm 18mm; }
+
+.page {
+  width: min(210mm, 100%); margin: 0 auto; background: var(--paper);
+  padding: clamp(1.6rem, 5.5vw, 22mm) clamp(1.2rem, 5vw, 20mm) clamp(1.4rem, 4vw, 14mm);
+  min-height: 0; display: flex; flex-direction: column; gap: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.page + .page { margin-top: 1.25rem; }
+
+/* ── Headings ───────────────────────────────────────────── */
+h1, h2, h3, h4 { font-family: var(--f-head); color: var(--ink); margin: 0; text-wrap: balance; break-after: avoid; }
+
+/* Section title — wide-tracked caps over a rule, brass hairline beneath */
+h2 {
+  font-size: 1.0625rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .16em; padding-bottom: .5rem;
+  border-bottom: 1.5px solid var(--ink); position: relative;
+}
+h2::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px;
+  height: 1px; background: var(--brass);
+}
+h3 { font-size: .9375rem; font-weight: 700; letter-spacing: .01em; margin-top: .35rem; }
+h4 { font-size: .875rem; font-weight: 600; color: var(--ink); }
+
+p { margin: 0; max-width: 74ch; orphans: 3; widows: 3; }
+strong { color: var(--ink); font-weight: 600; }
+em { font-style: italic; }
+
+section { display: flex; flex-direction: column; gap: .85rem; }
+.stack { display: flex; flex-direction: column; gap: .7rem; }
+.tight { gap: .45rem; }
+
+/* ── Lists ──────────────────────────────────────────────── */
+ul.b { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .42rem; }
+ul.b > li { position: relative; padding-left: 1.15rem; max-width: 72ch; font-size: .9375rem; }
+ul.b > li::before {
+  content: "•"; position: absolute; left: .2rem; top: -.04em;
+  color: var(--muted); font-size: 1rem;
+}
+ul.b ul.b { margin-top: .42rem; }
+ul.b ul.b > li::before { content: "–"; color: var(--faint); font-size: .875rem; top: 0; }
+
+ol.n { margin: 0; padding: 0; list-style: none; counter-reset: n; display: flex; flex-direction: column; gap: 1rem; }
+ol.n > li { counter-increment: n; display: grid; grid-template-columns: 1.9rem 1fr; gap: .7rem; break-inside: avoid; }
+ol.n > li::before {
+  content: counter(n) "."; font-family: var(--f-mono); font-size: .8125rem;
+  color: var(--brass); font-weight: 500; padding-top: .12em;
+}
+
+/* ── Cover ──────────────────────────────────────────────── */
+.cover { min-height: 60vh; justify-content: center; gap: 0; }
+.cover-mark {
+  font-family: var(--f-head); font-size: clamp(1.6rem, 5vw, 2.1rem); font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--ink); line-height: 1;
+}
+.cover-tag {
+  font-family: var(--f-head); font-size: .625rem; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--muted); margin-top: .7rem;
+}
+.cover-rule { height: 2px; background: var(--ink); margin: 2.5rem 0 .18rem; }
+.cover-rule-b { height: 1px; background: var(--brass); margin-bottom: 3rem; }
+.cover-client {
+  font-family: var(--f-head); font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 600;
+  letter-spacing: .17em; text-transform: uppercase; color: var(--ink); line-height: 1.15;
+}
+.cover-no {
+  font-family: var(--f-mono); font-size: .875rem; letter-spacing: .1em;
+  color: var(--muted); margin-top: .65rem;
+}
+.cover-foot {
+  margin-top: 3.25rem; padding-top: .9rem; border-top: 1px solid var(--rule);
+  display: flex; flex-direction: column; gap: .6rem;
+}
+.cover-addr {
+  font-family: var(--f-head); font-size: .6875rem; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--ink);
+}
+.cover-conf { font-size: .6875rem; line-height: 1.5; color: var(--muted); max-width: none; }
+
+/* ── Contents ───────────────────────────────────────────── */
+.toc { display: flex; flex-direction: column; gap: 1.5rem; }
+.leader { display: flex; align-items: baseline; gap: .55rem; }
+.leader .l-name {
+  font-family: var(--f-head); font-size: .8125rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink); white-space: nowrap;
+}
+.leader .l-dots { flex: 1 1 auto; border-bottom: 1px dotted var(--rule); transform: translateY(-.22em); min-width: 1.5rem; }
+.leader .l-val { font-family: var(--f-mono); font-size: .8125rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* pricing leader — heavier */
+.leader.price .l-name { font-family: var(--f-body); font-weight: 700; font-size: .9375rem; letter-spacing: 0; text-transform: none; white-space: normal; }
+.leader.price .l-val { font-size: 1.0625rem; font-weight: 500; }
+
+/* ── Tables ─────────────────────────────────────────────── */
+.tw { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+thead { display: table-header-group; }
+th {
+  text-align: left; font-family: var(--f-head); font-weight: 600; font-size: .625rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+  padding: 0 .75rem .45rem 0; border-bottom: 1.5px solid var(--rule);
+}
+td { padding: .6rem .75rem .6rem 0; border-bottom: 1px solid var(--hair); vertical-align: top; }
+th:last-child, td:last-child { padding-right: 0; }
+tr { break-inside: avoid; }
+tbody tr:last-child td { border-bottom: none; }
+td.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
+.total td { border-top: 1.5px solid var(--ink); border-bottom: none; font-weight: 700; color: var(--ink); padding-top: .7rem; }
+
+/* ── Utility ────────────────────────────────────────────── */
+.note {
+  background: var(--sunken); border-left: 2px solid var(--brass);
+  padding: .85rem 1.05rem; font-size: .875rem;
+  display: flex; flex-direction: column; gap: .5rem; break-inside: avoid;
+}
+.note p { max-width: none; }
+.lede { font-size: 1rem; }
+.small { font-size: .8125rem; color: var(--muted); }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.kicker {
+  font-family: var(--f-head); font-size: .6875rem; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--brass);
+}
+.fill {
+  font-family: var(--f-mono); font-size: .82em; color: var(--brass);
+  border-bottom: 1px dashed var(--brass); padding: 0 .15em; white-space: nowrap;
+}
+.pill {
+  display: inline-block; font-family: var(--f-mono); font-size: .625rem;
+  letter-spacing: .06em; text-transform: uppercase; padding: .16em .45em;
+  border: 1px solid currentColor; white-space: nowrap;
+}
+.pill.ok { color: var(--ok); }
+.pill.tbd { color: var(--brass); }
+a { color: var(--brass); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+/* signature block */
+.sig { margin-top: 2rem; display: flex; flex-direction: column; gap: .3rem; max-width: 340px; }
+.sig-line { border-bottom: 1px solid var(--ink); height: 2.6rem; }
+.sig-lbl { font-family: var(--f-head); font-size: .625rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-align: center; }
+.sig-fields { margin-top: 1.4rem; display: flex; flex-direction: column; gap: .85rem; }
+.sig-field { display: flex; align-items: baseline; gap: .6rem; }
+.sig-field .k { font-family: var(--f-head); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); width: 4.5rem; }
+.sig-field .v { flex: 1; border-bottom: 1px solid var(--rule); height: 1.15rem; }
+
+/* ── Page footer ────────────────────────────────────────── */
+.foot {
+  margin-top: auto; padding-top: .8rem; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; gap: 1rem;
+  font-family: var(--f-head); font-size: .625rem; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--faint);
+}
+
+/* ── Print ──────────────────────────────────────────────── */
+@media print {
+  body { background: #fff; padding: 0; margin: 0; font-size: 9.4pt; line-height: 1.5; }
+  .page {
+    box-shadow: none; margin: 0; width: auto; min-height: auto;
+    padding: 0 0 3mm; overflow: visible; gap: 4.5mm; background: #fff;
+    break-after: page;
+  }
+  section { gap: .6rem; }
+  .stack { gap: .5rem; }
+  ul.b { gap: .3rem; }
+  ol.n { gap: .7rem; }
+  td, th { padding-top: .42rem; padding-bottom: .42rem; }
+  h2 { font-size: .95rem; padding-bottom: .4rem; }
+  h3 { font-size: .875rem; }
+  h4 { font-size: .8125rem; }
+  .page:last-child { break-after: auto; }
+  .cover { min-height: 200mm; }
+  .note, .pill, .kicker, h2::after, .cover-rule-b, ol.n > li::before, .fill {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .note, .leader, .sig, .toc { break-inside: avoid; }
+  ol.n > li, ul.b > li, tr { break-inside: avoid; }
+  h2, h3, h4 { break-after: avoid; }
+}
+</style>
+
+<!-- ═════════════ 1 · CAPA ═════════════ -->
+<div class="page cover">
+  <div>
+    <div class="cover-mark">Renato do Prado</div>
+    <div class="cover-tag">Desenvolvimento de software sob medida</div>
+  </div>
+  <div class="cover-rule"></div><div class="cover-rule-b"></div>
+  <div>
+    <div class="cover-client">Pedro Henrique</div>
+    <div class="cover-no">Proposta #260901 &nbsp;·&nbsp; 30 dias</div>
+  </div>
+  <div class="cover-foot">
+    <div class="cover-addr">Renato do Prado &nbsp;·&nbsp; <span class="fill">e-mail</span> &nbsp;·&nbsp; <span class="fill">WhatsApp</span></div>
+    <p class="cover-conf">Este documento contém informações confidenciais destinadas exclusivamente ao
+    destinatário indicado. A divulgação, reprodução ou distribuição do seu conteúdo sem autorização
+    prévia por escrito não é permitida. Proposta válida por 30 dias a partir de 01/09/2026.</p>
+  </div>
+</div>
+
+<!-- ═════════════ 2 · ÍNDICE ═════════════ -->
+<div class="page">
+  <h2>Conteúdo</h2>
+  <div class="toc">
+    <div class="leader"><span class="l-name">Como eu trabalho</span><span class="l-dots"></span><span class="l-val">3</span></div>
+    <div class="leader"><span class="l-name">Desenho do projeto</span><span class="l-dots"></span><span class="l-val">4</span></div>
+    <div class="leader"><span class="l-name">Arquitetura técnica</span><span class="l-dots"></span><span class="l-val">10</span></div>
+    <div class="leader"><span class="l-name">Considerações importantes</span><span class="l-dots"></span><span class="l-val">11</span></div>
+    <div class="leader"><span class="l-name">Investimento</span><span class="l-dots"></span><span class="l-val">12</span></div>
+    <div class="leader"><span class="l-name">Prazos e próximos passos</span><span class="l-dots"></span><span class="l-val">15</span></div>
+    <div class="leader"><span class="l-name">Termos e condições</span><span class="l-dots"></span><span class="l-val">16</span></div>
+    <div class="leader"><span class="l-name">Anexo · O que preciso de você</span><span class="l-dots"></span><span class="l-val">19</span></div>
+  </div>
+  <div class="foot"><span>Página 2</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 3 · COMO EU TRABALHO ═════════════ -->
+<div class="page">
+  <h2>Como eu trabalho</h2>
+
+  <section class="stack">
+    <h3>Código do zero, e a propriedade é sua</h3>
+    <p>Eu construo sistemas web sob medida. Não uso template, WordPress ou construtor de
+    site: cada página é programada especificamente para o seu caso, o que significa que
+    qualquer coisa — uma fonte, uma cor, um espaçamento, o comportamento de um botão —
+    pode ser mudada, porque não existe um tema de terceiro no caminho.</p>
+    <p>O que eu entrego é seu de forma permanente. <strong>O código-fonte completo fica
+    disponível para você a qualquer momento</strong>, e o site pode ser levado para qualquer
+    outro servidor ou desenvolvedor sem depender de mim. Não há mensalidade, assinatura
+    nem trava de fornecedor.</p>
+  </section>
+
+  <section class="stack">
+    <h3>Ciclo de feedback curto</h3>
+    <p>A forma como eu trabalho é conversando: você aponta o que incomodou, eu resolvo,
+    normalmente em menos de 24 horas. Em projetos anteriores, listas inteiras de ajustes
+    levantadas numa ligação estavam no ar antes da conversa seguinte. Você não precisa saber
+    descrever o problema em termos técnicos — descreve o incômodo, e a tradução é comigo.</p>
+  </section>
+
+  <section class="stack">
+    <h3>Contexto — e por que este valor</h3>
+    <p>Eu trabalho com programação nos Estados Unidos, onde construo sistemas web sob medida
+    para empresas americanas. Este projeto chega até mim pela indicação do Fran, e o valor
+    proposto reflete isso: <strong>é um preço de parceria, não de mercado.</strong></p>
+    <p>Digo isso com clareza porque muda o que você pode esperar. Você recebe o mesmo padrão
+    técnico dos meus outros projetos e a mesma atenção nos ajustes. O que não existe aqui é
+    a estrutura formal de uma agência: não há equipe de suporte, contrato com garantia de
+    tempo de resposta, nem plantão. Sou eu, direto com você, e é assim que o preço fecha.</p>
+  </section>
+
+  <section class="stack">
+    <h3>Projetos entregues e no ar</h3>
+    <ul class="b">
+      <li><span class="mono">fran-nogueira.com.br</span> — portfólio de músico, produtor e baixista</li>
+      <li><span class="mono">decofaria.com.br</span> — portfólio + sistema de gestão de produção audiovisual</li>
+      <li><span class="mono">bydap.com.br</span> — loja e portfólio com catálogo e pedidos</li>
+      <li><span class="mono">piccino.com.br</span> — site institucional</li>
+    </ul>
+  </section>
+
+  <div class="foot"><span>Página 3</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 4 · DESENHO DO PROJETO — visão geral ═════════════ -->
+<div class="page">
+  <h2>Desenho do projeto</h2>
+
+  <section class="stack tight">
+    <div class="kicker">Escopo do trabalho</div>
+    <h3>Pedro Henrique — Site profissional e painel de gestão de conteúdo</h3>
+  </section>
+
+  <section class="stack">
+    <h4>Visão geral</h4>
+    <p>Pedro Henrique é saxofonista, flautista e professor. Hoje, toda a sua presença
+    profissional está concentrada no Instagram: é por lá que alunos chegam para a
+    consultoria online, e é por lá que contratantes precisam encontrá-lo. Isso cria dois
+    problemas. Pedidos de aula, propostas de evento e conversas de trabalho chegam misturados
+    no mesmo direct, sem registro e sem ordem; e não existe nenhum lugar sob seu controle
+    onde a trajetória, o repertório e as formas de contratação estejam apresentados de forma
+    organizada e permanente.</p>
+    <p>Este projeto entrega dois sistemas conectados: um <strong>site público</strong> que
+    apresenta o trabalho do Pedro e separa os dois públicos que hoje se confundem — quem quer
+    contratar para um evento e quem quer estudar com ele — e um <strong>painel administrativo
+    privado</strong>, onde ele mesmo publica shows, troca fotos, edita textos e lê as
+    mensagens recebidas, sem depender do desenvolvedor para nenhuma alteração de conteúdo.</p>
+    <p>O resultado é uma presença profissional própria, em domínio próprio, que funciona como
+    porta de entrada para contratação e para aulas — e uma camada de operação por trás dela
+    que o Pedro administra sozinho. O site é desenhado para receber o material gravado que
+    ainda está em produção, sem exigir retrabalho quando ele existir.</p>
+  </section>
+
+  <section class="stack">
+    <h4>Objetivos</h4>
+    <ul class="b">
+      <li>Estabelecer uma presença profissional em domínio próprio, sob controle do Pedro, independente de qualquer rede social</li>
+      <li>Separar claramente os dois caminhos de conversão — contratação para eventos e inscrição em aulas/consultoria — para que cada visitante encontre o seu</li>
+      <li>Substituir o direct do Instagram por um canal de contato estruturado, com registro de toda mensagem recebida</li>
+      <li>Capturar, no momento do contato, as informações necessárias para responder um orçamento de evento sem uma segunda rodada de perguntas</li>
+      <li>Dar ao Pedro autonomia total sobre o conteúdo — textos, fotos, vídeos, shows e novidades — sem intervenção técnica</li>
+      <li>Apresentar a trajetória, a formação e o repertório de forma organizada e permanente</li>
+      <li>Tornar o trabalho localizável por busca no Google e por assistentes de IA</li>
+      <li>Preparar a estrutura para receber gravações, lançamentos e a futura frente de vendas sem redesenho</li>
+    </ul>
+  </section>
+
+  <div class="foot"><span>Página 4</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 5 · ESCOPO — site público ═════════════ -->
+<div class="page">
+  <section class="stack">
+    <h4>Escopo</h4>
+    <p>O projeto está organizado em dois componentes principais — o site público e o painel
+    administrativo — além da infraestrutura de publicação e da transferência final. Cada um
+    está descrito em detalhe a seguir.</p>
+  </section>
+
+  <section class="stack">
+    <h3>Site público</h3>
+    <p>O site público é o principal ponto de contato entre o Pedro e quem quer contratá-lo ou
+    estudar com ele. Será desenhado sob medida, a partir das referências visuais fornecidas
+    por ele, e projetado com o celular como tela principal — a maior parte das visitas virá do
+    link da bio no Instagram.</p>
+    <p>A estrutura de seções abaixo é a base de trabalho, montada a partir do menu do site do
+    Braxton Cook (referência indicada pelo Pedro) e das seções do site do Fran. A lista
+    definitiva será fechada a partir do documento de requisitos.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:24%">Seção</th><th>Conteúdo e função</th><th style="width:19%">Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Início</strong></td><td>Abertura com nome, posicionamento em uma frase, imagem ou vídeo de destaque e dois caminhos explícitos: contratar e estudar.</td><td><span class="pill ok">Confirmado</span></td></tr>
+          <tr><td><strong>Sobre</strong></td><td>Trajetória, formação, influências e instrumentos. Currículo em PDF para download, se desejado.</td><td><span class="pill ok">Confirmado</span></td></tr>
+          <tr><td><strong>Trabalho</strong></td><td>Onde já tocou, com quem, projetos e credenciais, apresentados em formato de cartões.</td><td><span class="pill ok">Confirmado</span></td></tr>
+          <tr><td><strong>Vídeos e áudio</strong></td><td>Vídeos do YouTube e Instagram tocando dentro da página; espaço estruturado para as gravações futuras.</td><td><span class="pill ok">Confirmado</span></td></tr>
+          <tr><td><strong>Eventos</strong></td><td>Formatos oferecidos (solo, duo, com banda, com playback), tipos de evento atendidos e formulário de orçamento.</td><td><span class="pill ok">Confirmado</span></td></tr>
+          <tr><td><strong>Aulas e consultoria</strong></td><td>Como funciona a consultoria online, para quem se destina, o que o aluno recebe, e captação de interessados.</td><td><span class="pill ok">Confirmado</span></td></tr>
+          <tr><td><strong>Loja</strong></td><td>Apresentação da frente de vendas em planejamento. Ver "Considerações importantes", item 1.</td><td><span class="pill tbd">A definir</span></td></tr>
+          <tr><td><strong>Galeria</strong></td><td>Fotos de shows, estúdio e bastidores, administradas pelo Pedro.</td><td><span class="pill ok">Confirmado</span></td></tr>
+          <tr><td><strong>Agenda</strong></td><td>Próximas apresentações, com data, local e link, publicáveis pelo painel.</td><td><span class="pill ok">Confirmado</span></td></tr>
+          <tr><td><strong>Contato</strong></td><td>Formulário, WhatsApp, e-mail e redes sociais.</td><td><span class="pill ok">Confirmado</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot"><span>Página 5</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<div class="page">
+  <section class="stack">
+    <h3>Formulários e captação de contatos</h3>
+    <p>Os formulários são a peça operacional do site. Em vez de um campo genérico de mensagem,
+    o formulário de eventos coleta o que é necessário para responder um orçamento com precisão.</p>
+    <ul class="b">
+      <li>Formulário de contratação de evento, com nome, e-mail, telefone, data pretendida, tipo de evento, cidade, duração e observações</li>
+      <li>Formulário de interesse em aulas e consultoria, com os campos definidos a partir de como o Pedro conduz a triagem hoje</li>
+      <li>Formulário de contato geral para os demais casos</li>
+      <li>Notificação por e-mail a cada mensagem recebida, com todos os dados do envio</li>
+      <li>Registro de toda mensagem no painel administrativo, com data, origem e marcação de lida</li>
+      <li>Mensagem de confirmação ao visitante após o envio, informando que a mensagem foi recebida</li>
+      <li>Proteção contra envio automatizado de spam</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h3>Painel administrativo</h3>
+    <p>O painel é uma aplicação web privada, acessível apenas por login, e não indexada por
+    buscadores. É por meio dele que o Pedro administra todo o conteúdo do site, sem qualquer
+    intervenção técnica. Toda a interface é em português.</p>
+    <ul class="b">
+      <li>Acesso por usuário e senha individuais, com senha armazenada de forma criptografada</li>
+      <li>Edição de todos os textos do site — biografia em versão curta, média e longa, descrições de seção e chamadas</li>
+      <li>Envio e substituição de fotos, com recorte e otimização automática de imagem</li>
+      <li>Cadastro e edição de itens de portfólio e trabalhos realizados, com reordenação</li>
+      <li>Cadastro de apresentações na agenda, com data, local, horário e link</li>
+      <li>Gestão da galeria de fotos, com ordenação e legendas</li>
+      <li>Cadastro de vídeos e faixas de áudio por link ou upload</li>
+      <li>Caixa de mensagens recebidas pelos formulários, com marcação de lida e resposta direta</li>
+      <li>Configurações gerais: dados de contato, links de redes sociais, imagens de destaque</li>
+      <li>Ajuste de aparência — cores e fontes principais — dentro do sistema de design definido</li>
+    </ul>
+  </section>
+
+  <div class="foot"><span>Página 6</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<div class="page">
+  <section class="stack">
+    <h3>Integrações e descoberta</h3>
+    <ul class="b">
+      <li>Instagram, YouTube, Spotify, TikTok e WhatsApp conectados ao site, com botão de conversa direta</li>
+      <li>Reprodução de vídeos e áudios dentro da própria página, sem enviar o visitante para fora</li>
+      <li>Otimização para busca (SEO): títulos, descrições, endereços de página legíveis e mapa do site</li>
+      <li>Dados estruturados no padrão <span class="mono">schema.org</span>, para que buscadores e assistentes de IA identifiquem corretamente a atividade, a localização e as formas de contratação</li>
+      <li>Imagens de pré-visualização ao compartilhar o link em WhatsApp, Instagram e redes</li>
+      <li>Otimização de desempenho e tempo de carregamento, com imagens servidas em formato moderno</li>
+      <li>Estrutura acessível: contraste verificado, navegação por teclado e alvos de toque adequados no celular</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h3>Infraestrutura e publicação</h3>
+    <p>A publicação e a hospedagem estão inclusas e são executadas por mim, sem custo adicional
+    para o Pedro nos termos descritos na seção "Termos e condições".</p>
+    <ul class="b">
+      <li>Registro do domínio <span class="mono">.com.br</span>, com titularidade em nome do Pedro — primeiro ano incluso</li>
+      <li>Configuração de DNS e apontamento do domínio para o servidor</li>
+      <li>Certificado HTTPS com renovação automática</li>
+      <li>Provisionamento do banco de dados e do armazenamento de imagens e arquivos</li>
+      <li>Publicação em servidor dedicado, com reinício automático dos serviços</li>
+      <li>Pipeline de publicação automatizado: cada alteração aprovada vai ao ar sem intervenção manual</li>
+      <li>Ambiente de pré-visualização durante o desenvolvimento, para o Pedro acompanhar antes de estar no ar</li>
+      <li>Rotina de backup diário do banco de dados, com retenção</li>
+      <li>Monitoramento de disponibilidade, com alerta em caso de indisponibilidade</li>
+    </ul>
+  </section>
+
+  <div class="foot"><span>Página 7</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 7 · ESCOPO — entrega + entregáveis ═════════════ -->
+<div class="page">
+  <section class="stack">
+    <h3>Entrega e transferência</h3>
+    <ul class="b">
+      <li>Entrega das credenciais de acesso ao painel administrativo</li>
+      <li>Transferência da titularidade do domínio para o Pedro</li>
+      <li><strong>Cópia completa do código-fonte em arquivo <span class="mono">.zip</span>, entregue sempre que solicitada</strong>, permitindo que qualquer outro desenvolvedor assuma a manutenção do site</li>
+      <li>Repositório privado de código, com histórico completo de alterações</li>
+      <li>Guia de uso do painel administrativo, em português, cobrindo as tarefas do dia a dia</li>
+      <li>Documentação técnica de publicação e configuração, para uso de outro desenvolvedor</li>
+      <li>Sessão de acompanhamento para percorrer o painel junto com o Pedro</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h4>Entregáveis</h4>
+    <ul class="b">
+      <li>Site público completo, responsivo, no ar em domínio próprio com HTTPS</li>
+      <li>Dez seções de conteúdo conforme a tabela de escopo, com a estrutura final fechada no documento de requisitos</li>
+      <li>Painel administrativo com autenticação individual e gestão completa de conteúdo</li>
+      <li>Três formulários de captação — eventos, aulas e contato geral — com notificação por e-mail e registro no painel</li>
+      <li>Integrações com Instagram, YouTube, Spotify, TikTok e WhatsApp</li>
+      <li>Otimização para busca e dados estruturados para assistentes de IA</li>
+      <li>Domínio <span class="mono">.com.br</span> registrado em nome do Pedro, com o primeiro ano pago</li>
+      <li>Hospedagem, banco de dados, armazenamento de arquivos e certificado HTTPS em operação</li>
+      <li>Backup diário automatizado e monitoramento de disponibilidade configurados</li>
+      <li>Código-fonte em <span class="mono">.zip</span> mediante solicitação, a qualquer momento</li>
+      <li>Guia de uso do painel e documentação técnica de publicação</li>
+      <li>Três rodadas de ajustes após a primeira versão</li>
+    </ul>
+  </section>
+
+  <div class="foot"><span>Página 8</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<div class="page">
+  <section class="stack">
+    <h4>Critérios de aceite</h4>
+    <p>O projeto é considerado concluído quando todos os itens abaixo forem verificados em conjunto.</p>
+    <ul class="b">
+      <li>O site responde no domínio definitivo, com HTTPS válido, em celular e computador</li>
+      <li>Todas as seções acordadas estão publicadas e com conteúdo real, não de exemplo</li>
+      <li>O Pedro acessa o painel com as próprias credenciais e consegue, sem auxílio técnico, editar um texto, trocar uma foto e publicar uma apresentação na agenda</li>
+      <li>Uma mensagem enviada por cada um dos três formulários chega ao e-mail e aparece registrada no painel</li>
+      <li>O site é localizado no Google em busca pelo nome do Pedro</li>
+      <li>Compartilhar o link no WhatsApp exibe a imagem e o título corretos</li>
+      <li>Um backup do banco de dados foi gerado e restaurado com sucesso ao menos uma vez</li>
+      <li>O código-fonte foi entregue em <span class="mono">.zip</span>, ou está disponível mediante solicitação</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h4>Fora do escopo</h4>
+    <p>Os itens abaixo não estão incluídos nesta proposta. Qualquer um deles pode ser
+    contratado à parte, mediante orçamento específico acordado por escrito antes da execução.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:38%">Item</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td>Loja com carrinho e pagamento online</td><td>Checkout, cartão, Pix automático, controle de pedidos e entrega de arquivo digital. Ver "Considerações importantes", item 1.</td></tr>
+          <tr><td>Produção de áudio, foto e vídeo</td><td>Gravação, masterização e captação de material novo. O site apresenta o material existente; a produção é contratação separada.</td></tr>
+          <tr><td>Versão do site em inglês</td><td>O site é entregue em português. Uma segunda versão em inglês é escopo adicional.</td></tr>
+          <tr><td>Aplicativo de celular</td><td>O site é responsivo e funciona bem no celular, mas não é um aplicativo instalável.</td></tr>
+          <tr><td>Gestão de redes sociais e tráfego pago</td><td>Fora do escopo.</td></tr>
+          <tr><td>Plataforma de ensino</td><td>Área de aluno, curso em vídeo, agendamento e pagamento de aulas. O site capta o interessado; a aula acontece fora dele.</td></tr>
+          <tr><td>Redação final dos textos</td><td>O conteúdo é fornecido pelo Pedro. Posso gerar um rascunho inicial para ele editar no painel.</td></tr>
+          <tr><td>Renovação de domínio a partir do segundo ano</td><td>Aproximadamente R$ 40/ano, pagos diretamente pelo Pedro ao registrador.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot"><span>Página 9</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 9 · ARQUITETURA TÉCNICA ═════════════ -->
+<div class="page">
+  <h2>Arquitetura técnica</h2>
+  <p>Esta seção descreve as tecnologias empregadas. Ela existe para que qualquer
+  desenvolvedor que venha a assumir o projeto saiba exatamente o que vai encontrar — não é
+  necessário compreendê-la para aprovar a proposta.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:30%">Camada</th><th>Tecnologia</th></tr></thead>
+      <tbody>
+        <tr><td>Aplicação</td><td>Next.js 16 (App Router) com React 19 e TypeScript, renderização no servidor</td></tr>
+        <tr><td>Estilo</td><td>Tailwind CSS v4, com sistema de design próprio do projeto</td></tr>
+        <tr><td>Banco de dados</td><td>PostgreSQL, acessado via Prisma ORM com migrações versionadas</td></tr>
+        <tr><td>Autenticação</td><td>Auth.js (NextAuth v5), sessão por cookie assinado, senha com hash <span class="mono">bcrypt</span></td></tr>
+        <tr><td>Imagens</td><td>Processamento com <span class="mono">sharp</span>; entrega em formato moderno e dimensões múltiplas</td></tr>
+        <tr><td>Arquivos e mídia</td><td>Armazenamento de objetos compatível com S3, em bucket dedicado ao projeto com credencial de acesso restrita</td></tr>
+        <tr><td>Servidor</td><td>Servidor dedicado (VPS) na Alemanha, com contêineres Docker orquestrados por Coolify</td></tr>
+        <tr><td>Roteamento e HTTPS</td><td>Traefik como proxy reverso, certificado Let's Encrypt com renovação automática</td></tr>
+        <tr><td>Publicação</td><td>Repositório privado no GitHub; cada envio à branch principal dispara build e publicação automáticos</td></tr>
+        <tr><td>Backup</td><td>Cópia diária automatizada do banco de dados, com política de retenção e restauração testada</td></tr>
+        <tr><td>Monitoramento</td><td>Verificação externa de disponibilidade, com alerta em caso de indisponibilidade</td></tr>
+        <tr><td>Repositório</td><td><span class="mono">Persimmon-Automation-Labs/pedrohenriquesax</span> (privado)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <p><strong>Sobre a hospedagem.</strong> O site será publicado em um servidor dedicado que eu
+    já mantenho e onde operam outros projetos meus e de clientes. Incluir mais um projeto não
+    gera custo adicional para mim — por isso não há mensalidade para o Pedro. A contrapartida
+    honesta é que, enquanto o site estiver ali, ele depende desse servidor permanecer em
+    operação. As condições, o prazo e a forma de migração estão descritos no item 5 dos
+    Termos e Condições.</p>
+  </div>
+
+  <div class="foot"><span>Página 10</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 10 · CONSIDERAÇÕES ═════════════ -->
+<div class="page">
+  <h2>Considerações importantes</h2>
+
+  <ol class="n">
+    <li><div class="stack tight">
+      <h4>A loja é o único ponto que pode alterar o valor</h4>
+      <p>Pedro indicou que a frente de vendas ainda está em planejamento. Para evitar
+      qualquer surpresa no meio do projeto, a divisão é a seguinte:</p>
+      <p><strong>Incluso nesta proposta:</strong> uma seção que apresenta o que é vendido —
+      método, partituras, playalongs, mentoria — e conduz o interessado ao contato: WhatsApp,
+      formulário, ou link de pagamento avulso gerado por fora do site.</p>
+      <p><strong>Não incluso:</strong> carrinho de compras, checkout, processamento de
+      pagamento, controle de pedidos e entrega automática de arquivo digital. Isso constitui
+      um segundo projeto, com orçamento próprio, acordado por escrito antes de qualquer
+      execução.</p>
+    </div></li>
+
+    <li><div class="stack tight">
+      <h4>O portfólio gravado ainda não existe — e o site é desenhado para isso</h4>
+      <p>Pedro relatou que EP e faixas gravadas ainda estão em produção, dado o custo de
+      estúdio no Brasil. O site será construído a partir do material que já existe — vídeos,
+      fotos e redes — com as áreas de áudio e lançamentos já estruturadas no banco de dados e
+      no painel. Quando as gravações existirem, o Pedro as publica sozinho, sem redesenho e
+      sem custo adicional.</p>
+    </div></li>
+
+    <li><div class="stack tight">
+      <h4>O conteúdo é fornecido pelo Pedro</h4>
+      <p>Textos, fotos, vídeos e links são de responsabilidade dele, e o prazo depende
+      diretamente da entrega desse material. Posso gerar um rascunho inicial dos textos para
+      que ele edite no painel até ficar com a própria voz. Pedro declara ter direito de uso
+      sobre todo o material fornecido.</p>
+    </div></li>
+
+    <li><div class="stack tight">
+      <h4>A definição de escopo depende do documento de requisitos</h4>
+      <p>Pedro se comprometeu a enviar um documento com objetivos e referências. A lista final
+      de seções, os campos dos formulários e a direção visual serão fechados a partir dele.
+      Qualquer item que exceda o escopo aqui descrito será orçado separadamente antes de ser
+      executado.</p>
+    </div></li>
+
+    <li><div class="stack tight">
+      <h4>Não há garantia de tempo de resposta</h4>
+      <p>Na prática, ajustes costumam ser resolvidos em menos de 24 horas, e essa é a intenção.
+      Ainda assim, dado o valor e o formato deste trabalho, <strong>não há compromisso
+      contratual de disponibilidade ou de tempo de resposta</strong>, nem plantão fora do
+      horário comercial. Prefiro deixar isso explícito a criar uma expectativa que eu não possa
+      sustentar.</p>
+    </div></li>
+
+    <li><div class="stack tight">
+      <h4>Uma ligação encurta o caminho</h4>
+      <p>Pedro se colocou à disposição para uma conversa por telefone. Recomendo uma ligação de
+      cerca de trinta minutos após o envio do documento: ela resolve, em minutos, ambiguidades
+      que levariam várias trocas de mensagem — especialmente sobre direção visual e sobre a
+      definição da loja.</p>
+    </div></li>
+  </ol>
+
+  <div class="foot"><span>Página 11</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 11 · INVESTIMENTO ═════════════ -->
+<div class="page">
+  <h2>Investimento</h2>
+
+  <section class="stack">
+    <div class="leader price">
+      <span class="l-name">Desenvolvimento do site e do painel administrativo</span>
+      <span class="l-dots"></span>
+      <span class="l-val">R$ 800,00</span>
+    </div>
+    <p class="small">Conforme o escopo descrito nas páginas 4 a 9. Valor único e total do
+    projeto, sem mensalidade e sem cobrança recorrente.</p>
+  </section>
+
+  <section class="stack">
+    <h4>Como funciona um projeto de site</h4>
+    <p>Pedro comentou não ter referência de quanto custa um trabalho desses. Esta seção
+    existe para dar essa referência — e serve para avaliar qualquer proposta, não apenas
+    esta.</p>
+    <p>Um site profissional não é um produto único. São quatro componentes distintos, com
+    formas de cobrança diferentes, e é comum que uma proposta inclua alguns e omita outros
+    sem deixar isso claro.</p>
+  </section>
+
+  <section class="stack">
+    <ol class="n">
+      <li><div class="stack tight">
+        <h4>Desenvolvimento — cobrado uma única vez</h4>
+        <p>O trabalho de desenhar e programar o site e o painel. É a maior parte do custo e
+        acontece uma vez só.</p>
+        <p>O que mais pesa aqui não é o site público, e sim <strong>o painel
+        administrativo</strong>. Dez seções de conteúdo são trabalho conhecido; um painel em
+        que você mesmo envia fotos, reordena a galeria, publica apresentações e lê mensagens
+        costuma representar de 40% a 50% do esforço total do projeto. É também o item que
+        determina se você vai depender de um desenvolvedor a cada vírgula alterada, pelo
+        resto da vida do site.</p>
+      </div></li>
+
+      <li><div class="stack tight">
+        <h4>Domínio — cobrado por ano</h4>
+        <p>O endereço do site. Um <span class="mono">.com.br</span> é registrado no
+        registro.br e custa cerca de R$ 40 por ano. É o único item desta lista com preço
+        tabelado e público.</p>
+      </div></li>
+
+      <li><div class="stack tight">
+        <h4>Hospedagem e infraestrutura — cobrado por mês</h4>
+        <p>O servidor que mantém o site no ar, o banco de dados — onde ficam seus textos,
+        apresentações e mensagens recebidas — e o armazenamento das imagens e vídeos.</p>
+        <p>Há uma armadilha comum aqui: os planos de hospedagem de R$ 15 a R$ 30 por mês que
+        se vê anunciados <strong>não rodam um site como este</strong>. Eles servem páginas
+        prontas, e um site com painel administrativo precisa de banco de dados e de um
+        servidor capaz de executar a aplicação. Somam-se ainda o backup — cópia diária dos
+        dados, para o caso de perda — e o monitoramento, que avisa automaticamente se o site
+        sair do ar. Ambos costumam ser cobrados à parte.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <div class="foot"><span>Página 12</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<div class="page">
+  <section class="stack">
+    <ol class="n" style="counter-reset: n 3">
+      <li><div class="stack tight">
+        <h4>Manutenção e suporte — por mês ou por hora</h4>
+        <p>As alterações depois da entrega. Normalmente contratado como mensalidade fixa ou
+        cobrado por hora avulsa, a cada pedido.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <section class="stack">
+    <h4>Referência de mercado</h4>
+    <p>As faixas abaixo são referências para cada componente contratado separadamente de um
+    profissional autônomo no Brasil. Servem para comparação e ordem de grandeza — não são
+    cotações, e variam bastante conforme o profissional e a região.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:33%">Componente</th><th style="width:14%">Cobrança</th><th style="width:27%">Faixa de mercado</th><th>Nesta proposta</th></tr></thead>
+        <tbody>
+          <tr><td>Desenvolvimento do site e do painel sob medida</td><td>uma vez</td><td class="num">R$ 5.000 – 12.000</td><td class="num">Incluso</td></tr>
+          <tr><td>Domínio <span class="mono">.com.br</span></td><td>por ano</td><td class="num">R$ 40</td><td class="num">1º ano incluso</td></tr>
+          <tr><td>Hospedagem, banco de dados e armazenamento</td><td>por mês</td><td class="num">R$ 60 – 180</td><td class="num">Incluso</td></tr>
+          <tr><td>Certificado HTTPS</td><td>por ano</td><td class="num">R$ 0 – 200</td><td class="num">Incluso</td></tr>
+          <tr><td>Backup diário dos dados</td><td>por mês</td><td class="num">R$ 20 – 50</td><td class="num">Incluso</td></tr>
+          <tr><td>Monitoramento de disponibilidade</td><td>por mês</td><td class="num">R$ 0 – 30</td><td class="num">Incluso</td></tr>
+          <tr><td>Suporte para alterações pequenas</td><td>por mês</td><td class="num">R$ 150 – 300</td><td class="num">Incluso</td></tr>
+          <tr><td>Cópia do código-fonte</td><td>—</td><td class="num">Raro no mercado</td><td class="num">Incluso</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h4>Custo estimado no primeiro ano</h4>
+    <div class="tw">
+      <table>
+        <tbody>
+          <tr><td>Contratando cada componente separadamente, na faixa intermediária</td><td class="num">≈ R$ 9.000</td></tr>
+          <tr class="total"><td>Esta proposta — valor único, sem recorrência</td><td class="num">R$ 800,00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot"><span>Página 13</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<div class="page">
+  <div class="note">
+    <p><strong>Uma ressalva honesta.</strong> Com R$ 800 é possível, sim, contratar um site
+    no Brasil — mas de outra natureza: montado sobre um tema pronto de WordPress ou num
+    construtor como Wix, com painel genérico, hospedagem por conta do cliente, sem backup e
+    sem código próprio. É um produto legítimo e atende bem a muita gente.</p>
+    <p>A diferença desta proposta não está no preço, e sim no que ele entrega: código escrito
+    do zero, painel feito para o seu conteúdo, infraestrutura inclusa e a cópia do código na
+    sua mão. <strong>O valor reflete a indicação do Fran e o momento em que este trabalho
+    chega até mim — não o tamanho do escopo.</strong> Prefiro deixar isso registrado a fingir
+    que é o preço normal deste serviço.</p>
+  </div>
+
+  <section class="stack">
+    <h4>Condições de pagamento</h4>
+    <p>Pagamento integral por <strong>Pix</strong>, em três parcelas vinculadas a entregas.
+    Cada parcela é devida somente após a etapa correspondente estar concluída e verificável.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:12%">Parcela</th><th>Marco</th><th style="width:24%">Valor</th></tr></thead>
+        <tbody>
+          <tr><td class="num">50%</td><td>Na aceitação desta proposta. Os trabalhos têm início no mesmo dia da confirmação do pagamento.</td><td class="num">R$ 400,00</td></tr>
+          <tr><td class="num">25%</td><td>No marco do dia 15, com a primeira versão publicada e a primeira rodada de ajustes iniciada.</td><td class="num">R$ 200,00</td></tr>
+          <tr><td class="num">25%</td><td>Na conclusão do projeto, com o site no ar em domínio definitivo e as credenciais entregues.</td><td class="num">R$ 200,00</td></tr>
+          <tr class="total"><td></td><td>Total</td><td class="num">R$ 800,00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot"><span>Página 14</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 12 · PRAZOS + PRÓXIMOS PASSOS ═════════════ -->
+<div class="page">
+  <h2>Prazos e próximos passos</h2>
+
+  <section class="stack">
+    <h4>Cronograma</h4>
+    <p>Prazo estimado de <strong>30 dias</strong> a partir da confirmação do pagamento inicial.
+    O cronograma pressupõe o recebimento do documento de requisitos e do material de conteúdo;
+    atrasos nessa entrega deslocam as datas correspondentes.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:26%">Período</th><th>Atividade</th></tr></thead>
+        <tbody>
+          <tr><td class="num">Dia 0</td><td>Aceitação da proposta e pagamento da primeira parcela. Início dos trabalhos.</td></tr>
+          <tr><td class="num">Dias 1 a 7</td><td>Definição da direção visual, modelagem de dados e construção do site e do painel.</td></tr>
+          <tr><td class="num">Dia 7</td><td><strong>Primeira versão publicada</strong>, em endereço de pré-visualização acessível ao Pedro.</td></tr>
+          <tr><td class="num">Dias 8 a 15</td><td>Primeira rodada de ajustes. Carga do conteúdo real no painel.</td></tr>
+          <tr><td class="num">Dia 15</td><td>Marco da segunda parcela.</td></tr>
+          <tr><td class="num">Dias 16 a 28</td><td>Segunda e terceira rodadas de ajustes. Registro e apontamento do domínio definitivo.</td></tr>
+          <tr><td class="num">Dia 30</td><td>Entrega final: site no ar, credenciais transferidas, guia de uso entregue. Terceira parcela.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h4>Próximos passos</h4>
+    <ol class="n">
+      <li><div><h4>Documento de requisitos</h4><p class="small">Pedro envia o documento com objetivos, referências e material disponível. O anexo na página 19 lista exatamente o que precisa ser respondido.</p></div></li>
+      <li><div><h4>Ligação de alinhamento — opcional</h4><p class="small">Cerca de trinta minutos para fechar direção visual, definição da loja e o que o documento deixar em aberto.</p></div></li>
+      <li><div><h4>Proposta revisada</h4><p class="small">Atualizo este documento com o escopo fechado, a lista final de seções e qualquer ajuste de valor decorrente da definição da loja.</p></div></li>
+      <li><div><h4>Aceitação e primeira parcela</h4><p class="small">Confirmação por escrito e Pix de R$ 400,00. Não é necessária assinatura formal — a confirmação por mensagem tem validade de aceite.</p></div></li>
+      <li><div><h4>Início e primeira versão</h4><p class="small">Trabalhos iniciados no mesmo dia; primeira versão publicada em até sete dias.</p></div></li>
+    </ol>
+  </section>
+
+  <div class="note">
+    <p><strong>Ação necessária:</strong> revisar esta proposta e confirmar a aceitação, ou
+    apontar o que deve ser ajustado antes. Qualquer item marcado como
+    <span class="pill tbd">A definir</span> será fechado antes do início dos trabalhos.</p>
+  </div>
+
+  <div class="foot"><span>Página 15</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 13 · TERMOS 1 ═════════════ -->
+<div class="page">
+  <h2>Termos e condições</h2>
+  <p class="small">Estes termos regem a prestação de serviço entre Renato do Prado
+  ("o Desenvolvedor") e Pedro Henrique ("o Cliente"). A aceitação da proposta implica
+  concordância com todos os itens abaixo.</p>
+
+  <ol class="n">
+    <li><div class="stack tight"><h4>Aceitação e início</h4>
+      <p>A contratação tem início com a confirmação por escrito da aceitação desta proposta e
+      a compensação do pagamento da primeira parcela. Não é exigida assinatura formal;
+      a confirmação por mensagem eletrônica tem validade de aceite.</p></div></li>
+
+    <li><div class="stack tight"><h4>Escopo e alterações</h4>
+      <p>O Desenvolvedor executará o escopo descrito nas páginas 4 a 8. Qualquer alteração de
+      escopo deverá ser acordada por escrito antes da execução. Alterações significativas
+      solicitadas pelo Cliente podem implicar ajuste de prazo ou de valor, sempre informado e
+      aceito previamente — nunca cobrado após a execução.</p></div></li>
+
+    <li><div class="stack tight"><h4>Rodadas de ajuste e suporte continuado</h4>
+      <p>Estão inclusas três rodadas de ajustes após a publicação da primeira versão.</p>
+      <p>Após a entrega, o Desenvolvedor prestará <strong>suporte gratuito e por prazo
+      indeterminado para alterações pequenas</strong>: correção de texto, troca de imagem,
+      ajuste de cor ou espaçamento, correção de defeito, e auxílio no uso do painel. Para
+      referência prática, entende-se por alteração pequena aquela resolvível em até
+      aproximadamente uma hora de trabalho, com um volume de até cerca de uma hora por mês.</p>
+      <p>Alterações que constituam <strong>escopo novo</strong> — seção inédita, funcionalidade
+      adicional, redesenho, integração com serviço de terceiro, versão em outro idioma — serão
+      orçadas à parte e executadas apenas após aceite por escrito. Não há garantia de tempo de
+      resposta para o suporte gratuito.</p></div></li>
+
+    <li><div class="stack tight"><h4>Hospedagem</h4>
+      <p>A hospedagem está inclusa por <strong>12 meses</strong> a contar da entrega final,
+      renovando-se automaticamente e sem custo por períodos iguais, salvo manifestação em
+      contrário.</p>
+      <p>Caso o Desenvolvedor precise encerrar a hospedagem, comunicará o Cliente com
+      <strong>antecedência mínima de 60 dias</strong> e prestará auxílio na migração para
+      outro provedor, fornecendo o código-fonte, uma cópia do banco de dados e dos arquivos.</p>
+      <p>O serviço é prestado em regime de melhor esforço. São mantidos backup diário do banco
+      de dados e monitoramento de disponibilidade, mas <strong>não há garantia contratual de
+      disponibilidade (SLA)</strong> nem responsabilidade por interrupções decorrentes de falha
+      de provedor, de infraestrutura ou de terceiros.</p></div></li>
+
+  </ol>
+  <div class="foot"><span>Página 16</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<div class="page">
+  <ol class="n" style="counter-reset: n 4">
+    <li><div class="stack tight"><h4>Domínio</h4>
+      <p>O domínio será registrado em nome do Cliente, que figura como titular. O primeiro ano
+      está incluso. A partir do segundo ano, a renovação — aproximadamente R$ 40 por ano — é de
+      responsabilidade do Cliente, pago diretamente ao registrador. A não renovação implica a
+      perda do domínio, sem responsabilidade do Desenvolvedor.</p></div></li>
+
+    <li><div class="stack tight"><h4>Propriedade intelectual e código-fonte</h4>
+      <p>Concluído o pagamento integral, <strong>todo o código-fonte desenvolvido
+      especificamente para este projeto passa a ser de propriedade do Cliente</strong>, que pode
+      modificá-lo, transferi-lo ou contratar terceiros para mantê-lo, sem qualquer restrição
+      ou autorização adicional.</p>
+      <p>O Desenvolvedor fornecerá cópia completa do código em arquivo <span class="mono">.zip</span>
+      sempre que solicitado, sem custo e sem necessidade de justificativa.</p>
+      <p>Bibliotecas de código aberto de terceiros permanecem sob suas respectivas licenças.
+      O Desenvolvedor mantém o direito de citar o projeto em seu portfólio, salvo manifestação
+      em contrário do Cliente.</p></div></li>
+
+    <li><div class="stack tight"><h4>Conteúdo e responsabilidades do Cliente</h4>
+      <p>O Cliente é responsável por fornecer textos, imagens, vídeos e demais materiais, e
+      declara possuir os direitos de uso sobre todo o material entregue. O Desenvolvedor não
+      responde por violação de direitos autorais, de imagem ou de marca decorrente de material
+      fornecido pelo Cliente. O Cliente é igualmente responsável pela guarda de suas
+      credenciais de acesso ao painel.</p></div></li>
+
+    <li><div class="stack tight"><h4>Dados pessoais</h4>
+      <p>O site coletará dados pessoais de visitantes por meio dos formulários — nome, e-mail,
+      telefone e informações do evento. O Desenvolvedor atua como operador desses dados, e o
+      Cliente como controlador, nos termos da Lei nº 13.709/2018 (LGPD).</p>
+      <p>Serão implementados aviso de privacidade no site, coleta limitada ao necessário e
+      transmissão criptografada. O Cliente é responsável pelo uso que fizer dos dados
+      coletados e por atender às solicitações dos titulares.</p></div></li>
+  </ol>
+
+  <div class="foot"><span>Página 17</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 14 · TERMOS 2 + ACEITE ═════════════ -->
+<div class="page">
+  <ol class="n" style="counter-reset: n 8">
+    <li><div class="stack tight"><h4>Limitação de responsabilidade</h4>
+      <p>A responsabilidade total do Desenvolvedor, sob qualquer hipótese, limita-se ao valor
+      efetivamente pago pelo Cliente neste projeto. O Desenvolvedor não responde por danos
+      indiretos, lucros cessantes, perda de oportunidade de negócio, nem por falhas de
+      serviços de terceiros — provedor de infraestrutura, registrador de domínio, redes
+      sociais ou plataformas de streaming.</p></div></li>
+
+    <li><div class="stack tight"><h4>Rescisão</h4>
+      <p>Qualquer das partes pode encerrar a contratação mediante comunicação por escrito.
+      Havendo rescisão pelo Cliente, os valores já pagos referentes a etapas concluídas não são
+      restituídos, e o trabalho executado e ainda não faturado será cobrado proporcionalmente.
+      Em qualquer hipótese de encerramento, <strong>o Cliente receberá o código-fonte e uma
+      cópia dos dados existentes até aquele momento.</strong></p></div></li>
+
+    <li><div class="stack tight"><h4>Prazos e força maior</h4>
+      <p>Os prazos pressupõem o fornecimento tempestivo de conteúdo e de retorno pelo Cliente.
+      Nenhuma das partes responde pelo descumprimento de obrigações decorrente de eventos fora
+      de seu controle razoável, incluindo falhas de infraestrutura de terceiros, interrupções
+      de serviço de provedores, desastres naturais ou determinações de autoridade.</p></div></li>
+
+    <li><div class="stack tight"><h4>Foro e lei aplicável</h4>
+      <p>Esta contratação rege-se pelas leis da República Federativa do Brasil. Eventuais
+      divergências serão resolvidas prioritariamente por negociação direta e de boa-fé entre
+      as partes.</p></div></li>
+
+    <li><div class="stack tight"><h4>Acordo integral</h4>
+      <p>Esta proposta, incluindo o escopo, os prazos, as condições de pagamento e estes termos,
+      constitui o acordo integral entre as partes e substitui quaisquer entendimentos
+      anteriores. Alterações somente terão validade se acordadas por escrito entre as partes.</p></div></li>
+  </ol>
+
+  <section class="stack" style="margin-top:1.25rem">
+    <h4>Aceite</h4>
+    <p>Proposta válida por 30 dias a contar de 01/09/2026. A aceitação pode ser formalizada
+    por confirmação escrita em mensagem eletrônica, dispensada a assinatura abaixo — que fica
+    disponível caso o Cliente prefira o registro formal.</p>
+
+    <div class="sig">
+      <div class="sig-line"></div>
+      <div class="sig-lbl">Assinatura</div>
+      <div class="sig-fields">
+        <div class="sig-field"><span class="k">Nome</span><span class="v"></span></div>
+        <div class="sig-field"><span class="k">CPF</span><span class="v"></span></div>
+        <div class="sig-field"><span class="k">Data</span><span class="v"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot"><span>Página 18</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<!-- ═════════════ 15 · ANEXO — QUESTIONÁRIO ═════════════ -->
+<div class="page">
+  <h2>Anexo · O que preciso de você</h2>
+  <p class="small">Estas são as perguntas cujas respostas determinam o que será programado.
+  Responda como for mais confortável — texto, áudio ou em ligação. Não é necessário responder
+  tudo: o que ainda não estiver definido, resolvemos conversando.</p>
+
+  <section class="stack">
+    <h3>Quem você é</h3>
+    <ul class="b">
+      <li>Sua história em poucas linhas: como começou, onde estudou, com quem já tocou</li>
+      <li>Nome completo e nome artístico — como você quer aparecer no site</li>
+      <li>Cidade e região onde você atende</li>
+      <li>Quer publicar um currículo em PDF?</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h3>Seu trabalho</h3>
+    <ul class="b">
+      <li>Que tipos de evento você toca — casamento, corporativo, bar, igreja, show autoral?</li>
+      <li>Você toca sozinho, em duo, com banda, com playback? Quais formatos oferece?</li>
+      <li>Como funciona a consultoria online hoje: formato, duração, valor, para quem é</li>
+      <li>A loja: o que você pretende vender? Produto digital, físico ou serviço?</li>
+      <li>Existe algo que você quer <em>parar</em> de fazer, ou fazer mais?</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h3>O objetivo do site</h3>
+    <ul class="b">
+      <li>Quem é a pessoa ideal que entra no site — contratante de evento, aluno, outro músico?</li>
+      <li>O que ela deve fazer depois de entrar: chamar no WhatsApp, preencher formulário, seguir no Instagram, comprar algo?</li>
+      <li>Que impressão o site precisa causar nos primeiros três segundos?</li>
+      <li>O que precisa aparecer <em>em primeiro lugar</em>, antes de tudo?</li>
+    </ul>
+  </section>
+
+  <div class="foot"><span>Página 19</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
+
+<div class="page">
+  <section class="stack">
+    <h3>Contato e contratação</h3>
+    <ul class="b">
+      <li>Formulário simples (nome, e-mail, mensagem) ou com campos de contratação (data, tipo de evento, cidade, duração, orçamento)?</li>
+      <li>Prefere que a mensagem chegue no WhatsApp, no e-mail, ou nos dois?</li>
+      <li>Você divulga preço no site, ou prefere "sob consulta"?</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h3>Material disponível</h3>
+    <ul class="b">
+      <li>Fotos: quantas, com que qualidade, tocando? Tem foto vertical e horizontal?</li>
+      <li>Vídeos: YouTube, Instagram, arquivos soltos — me mande os links</li>
+      <li>Áudio gravado, mesmo que informal</li>
+      <li>Logo, tipografia ou identidade visual que você já use</li>
+      <li>Todos os seus links: Instagram, YouTube, Spotify, TikTok, LinkedIn</li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h3>Design e domínio</h3>
+    <ul class="b">
+      <li>Além do Braxton Cook, dois ou três sites de que você goste — e o que especificamente agrada em cada um</li>
+      <li>Algum site com que você <em>não</em> quer se parecer</li>
+      <li>Cores e clima: mais escuro e sério, mais claro e leve, mais colorido?</li>
+      <li>Três opções de endereço, em ordem de preferência — eu verifico disponibilidade e preço</li>
+    </ul>
+  </section>
+
+  <div class="foot"><span>Página 20</span><span>260901 Pedro Henrique</span><span>01/09/2026</span></div>
+</div>
