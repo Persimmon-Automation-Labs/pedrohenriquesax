@@ -3,6 +3,17 @@
 Site do saxofonista **Pedro Lucena** (Pedro Henrique da Silva Lucena), São Paulo.
 Site público + loja de produto digital com Pix + conta de cliente + painel.
 
+## No ar
+
+https://renatodap.me/pedro-lucena — deploy automático a cada push para 
+(webhook do GitHub → Coolify). O  roda  antes do
+, então uma migração nova entra sozinha junto com o código.
+
+Infra: app  no , banco  no Postgres
+compartilhado, bucket MinIO  com usuário restrito ao próprio bucket.
+Gerenciado pelo CLI em ../infra: `infra logs pedro-lucena`, `infra deploy`,
+`infra db psql`.
+
 ## Comandos
 
 ```
@@ -10,8 +21,9 @@ npm run dev              # desenvolvimento
 npm run build            # prisma generate + next build
 npm run db:push          # aplica o schema
 npm run db:seed          # dados reais do Pedro + admin
-npm run verify           # 47 verificações end-to-end (precisa do servidor no ar)
-npm run audit:contrast   # WCAG AA em todas as páginas
+npm run verify [URL]     # 48 verificações end-to-end (padrão localhost:3100)
+npm run audit:contrast [URL]   # WCAG AA em 13 rotas
+node scripts/routes-audit.mjs [URL]  # h1, overflow e navegação em 390 e 1440px
 ```
 
 Acesso local do painel: `pedro@pedrolucenasax.com.br` / `pedro2026` (trocar em produção).
