@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { Settings } from "@/lib/settings";
-import { basePath } from "@/lib/storage";
 import { Reveal } from "@/components/Reveal";
+import { mediaUrl } from "@/lib/media-url";
 
 export function About({ settings: s, level = "h2" }: { level?: "h1" | "h2"; settings: Settings }) {
   const H = level;
@@ -12,7 +12,7 @@ export function About({ settings: s, level = "h2" }: { level?: "h1" | "h2"; sett
         <Reveal className="lg:col-span-5">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] group">
             {s.aboutImageUrl ? (
-              <Image src={s.aboutImageUrl} alt={s.name} fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover zoom-img" />
+              <Image src={mediaUrl(s.aboutImageUrl)} alt={s.name} fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover zoom-img" />
             ) : (
               <div className="h-full w-full bg-gradient-to-br from-[#1b2429] to-ink" />
             )}
@@ -33,7 +33,7 @@ export function About({ settings: s, level = "h2" }: { level?: "h1" | "h2"; sett
           </div>
           {s.resumeUrl && (
             <Reveal delay={120}>
-              <a href={`${basePath}${s.resumeUrl}`} target="_blank" rel="noopener noreferrer" className="btn btn-secondary mt-8">
+              <a href={mediaUrl(s.resumeUrl)} target="_blank" rel="noopener noreferrer" className="btn btn-secondary mt-8">
                 Baixar currículo
               </a>
             </Reveal>

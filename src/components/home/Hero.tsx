@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Settings } from "@/lib/settings";
+import { mediaUrl } from "@/lib/media-url";
 
 /**
  * Herói dividido 7fr / 5fr. Não centralizado — as referências que centralizam
@@ -15,7 +16,7 @@ export function Hero({ settings: s }: { settings: Settings }) {
       <div className="absolute inset-y-0 right-0 w-full md:w-[62%] lg:w-[56%]">
         {s.heroImageUrl ? (
           <Image
-            src={s.heroImageUrl}
+            src={mediaUrl(s.heroImageUrl)}
             alt={`${s.name} tocando saxofone`}
             fill priority sizes="(max-width: 768px) 100vw, 60vw"
             className="object-cover object-[center_22%]"

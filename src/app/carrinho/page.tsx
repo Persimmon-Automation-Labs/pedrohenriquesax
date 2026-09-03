@@ -5,6 +5,7 @@ import { getCart } from "@/lib/cart";
 import { brl } from "@/lib/money";
 import { removeFromCart } from "@/app/actions";
 import { Empty } from "@/components/Alert";
+import { mediaUrl } from "@/lib/media-url";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Carrinho", robots: { index: false } };
@@ -27,7 +28,7 @@ export default async function Carrinho() {
               {items.map((p) => (
                 <li key={p.id} className="flex items-center gap-5 border-b border-white/10 py-5">
                   <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-[2px] surface">
-                    {p.coverUrl && <Image src={p.coverUrl} alt="" fill sizes="80px" className="object-cover" />}
+                    {p.coverUrl && <Image src={mediaUrl(p.coverUrl)} alt="" fill sizes="80px" className="object-cover" />}
                   </div>
                   <div className="min-w-0 flex-1">
                     <Link href={`/loja/${p.slug}`} className="d-nar text-paper hover:text-accent transition-colors">{p.title}</Link>

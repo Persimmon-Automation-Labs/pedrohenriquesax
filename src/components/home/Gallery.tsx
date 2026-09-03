@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 import type { GalleryItem } from "@prisma/client";
+import { mediaUrl } from "@/lib/media-url";
 
 export function Gallery({ items, level = "h2" }: { level?: "h1" | "h2"; items: GalleryItem[] }) {
   const H = level;
@@ -37,7 +38,7 @@ export function Gallery({ items, level = "h2" }: { level?: "h1" | "h2"; items: G
                 className="group block w-full overflow-hidden rounded-[2px] surface"
                 aria-label={g.caption || `Abrir foto ${i + 1}`}>
                 <span className="relative block w-full" style={{ aspectRatio: i % 3 === 0 ? "3/4" : i % 3 === 1 ? "1/1" : "4/3" }}>
-                  <Image src={g.url} alt={g.caption || `Pedro Lucena, foto ${i + 1}`} fill
+                  <Image src={mediaUrl(g.url)} alt={g.caption || `Pedro Lucena, foto ${i + 1}`} fill
                     sizes="(max-width:768px) 50vw, 33vw" className="object-cover zoom-img" />
                 </span>
               </button>
@@ -51,7 +52,7 @@ export function Gallery({ items, level = "h2" }: { level?: "h1" | "h2"; items: G
           className="fixed inset-0 z-[80] bg-ink/97 flex items-center justify-center p-4 fade"
           onClick={() => setOpen(null)}>
           <div className="relative h-full w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
-            <Image src={items[open].url} alt={items[open].caption || "Foto ampliada"} fill sizes="100vw" className="object-contain" />
+            <Image src={mediaUrl(items[open].url)} alt={items[open].caption || "Foto ampliada"} fill sizes="100vw" className="object-contain" />
           </div>
           <button onClick={() => setOpen(null)} aria-label="Fechar" className="btn btn-ghost absolute right-4 top-4 z-10"><span className="label">Fechar</span></button>
           <button onClick={(e) => { e.stopPropagation(); move(-1); }} aria-label="Anterior" className="btn btn-ghost absolute left-2 top-1/2 -translate-y-1/2 z-10 text-2xl">‹</button>

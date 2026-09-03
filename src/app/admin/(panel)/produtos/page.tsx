@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { brl } from "@/lib/money";
+import { mediaUrl } from "@/lib/media-url";
 
 export default async function Produtos() {
   const items = await prisma.product.findMany({ orderBy: { sortOrder: "asc" }, include: { files: true } });
@@ -16,7 +17,7 @@ export default async function Produtos() {
           {items.map((p) => (
             <li key={p.id} className="flex items-center gap-4 border-b border-white/10 py-4">
               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[2px] surface">
-                {p.coverUrl && <Image src={p.coverUrl} alt="" fill sizes="56px" className="object-cover" />}
+                {p.coverUrl && <Image src={mediaUrl(p.coverUrl)} alt="" fill sizes="56px" className="object-cover" />}
               </div>
               <div className="min-w-0 flex-1">
                 <Link href={`/admin/produtos/${p.id}`} className="d-nar text-paper hover:text-accent transition-colors">{p.title}</Link>

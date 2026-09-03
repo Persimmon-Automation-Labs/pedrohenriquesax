@@ -4,6 +4,7 @@ import Image from "next/image";
 import { submitEventForm, type FormState } from "@/app/actions";
 import { Field } from "@/components/Field";
 import { Alert } from "@/components/Alert";
+import { mediaUrl } from "@/lib/media-url";
 
 const FORMATOS = ["Sax e playback", "Sax e DJ", "DJ, cantora e sax", "Duo", "Trio", "Com banda", "Quinteto autoral"];
 const SEGMENTOS = ["Casamento", "Corporativo", "Igreja", "Recepção", "Baile", "Live sax", "Show autoral"];
@@ -41,7 +42,7 @@ export function Events({ imageUrl, text, level = "h2" }: { level?: "h1" | "h2"; 
             </div>
             {imageUrl && (
               <div className="relative aspect-[3/2] overflow-hidden rounded-[2px] group">
-                <Image src={imageUrl} alt="Pedro Lucena em evento" fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover zoom-img" />
+                <Image src={mediaUrl(imageUrl)} alt="Pedro Lucena em evento" fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover zoom-img" />
               </div>
             )}
           </div>

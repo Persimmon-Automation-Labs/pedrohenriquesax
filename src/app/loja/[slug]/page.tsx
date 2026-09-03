@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { Chrome } from "@/components/Chrome";
 import { brl } from "@/lib/money";
 import { addToCart } from "@/app/actions";
+import { mediaUrl } from "@/lib/media-url";
 
 export const dynamic = "force-dynamic";
 
@@ -33,7 +34,7 @@ export default async function ProdutoPage({ params }: { params: Promise<{ slug: 
       <div className="wrap section grid gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="relative aspect-square w-full overflow-hidden rounded-[2px] surface">
           {p.coverUrl
-            ? <Image src={p.coverUrl} alt={p.title} fill priority sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
+            ? <Image src={mediaUrl(p.coverUrl)} alt={p.title} fill priority sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
             : <div className="h-full w-full bg-gradient-to-br from-[#1d2a2f] to-ink" />}
         </div>
 
