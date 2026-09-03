@@ -29,10 +29,13 @@ model SiteSetting {
   bioMedium String @default("") @db.Text
   bioLong   String @default("") @db.Text
 
-  heroImageUrl   String @default("")
-  aboutImageUrl  String @default("")
-  eventsImageUrl String @default("")
-  resumeUrl      String @default("")
+  heroImageUrl        String @default("")
+  aboutImageUrl       String @default("")
+  eventsImageUrl      String @default("")
+  mentoriaImageUrl    String @default("")
+  credentialsImageUrl String @default("")
+  contactImageUrl     String @default("")
+  resumeUrl           String @default("")
 
   instagramUrl String @default("")
   youtubeUrl   String @default("")

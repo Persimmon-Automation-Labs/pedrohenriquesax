@@ -77,6 +77,12 @@ async function main() {
     pixKeyType: "email",
     pixName: "Pedro Lucena",
     pixCity: "SAO PAULO",
+    heroImageUrl: "/fotos/hero.jpg",
+    aboutImageUrl: "/fotos/sobre.jpg",
+    eventsImageUrl: "/fotos/eventos.jpg",
+    mentoriaImageUrl: "/fotos/mentoria.jpg",
+    credentialsImageUrl: "/fotos/credenciais.jpg",
+    contactImageUrl: "/fotos/contato.jpg",
   };
 
   const atual = await prisma.siteSetting.findUnique({ where: { id: "main" } });
@@ -96,6 +102,15 @@ async function main() {
   let i = 0;
   for (const [artist, context, year, note] of CREDENCIAIS) {
     await prisma.credential.create({ data: { artist, context, year, note, sortOrder: i++ } });
+  }
+
+  // Galeria: só semeia se estiver vazia, para não apagar o que o Pedro subir.
+  if ((await prisma.galleryItem.count()) === 0) {
+    for (let i = 1; i <= 13; i++) {
+      const n = String(i).padStart(2, "0");
+      await prisma.galleryItem.create({ data: { url: `/fotos/g${n}.jpg`, sortOrder: i - 1 } });
+    }
+    console.log("  galeria semeada com 13 fotos");
   }
 
   const email = "pedro@pedrolucenasax.com.br";

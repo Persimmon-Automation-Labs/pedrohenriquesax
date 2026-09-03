@@ -19,7 +19,7 @@ export default async function Sobre() {
   return (
     <Chrome>
       <About settings={settings} level="h1" />
-      <Credentials items={credentials} />
+      <Credentials items={credentials} imageUrl={settings.credentialsImageUrl} />
     </Chrome>
   );
 }

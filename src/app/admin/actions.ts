@@ -77,6 +77,9 @@ export async function saveSettings(_p: AdminState, fd: FormData): Promise<AdminS
   const hero = await uploadFrom(fd, "heroImage", "public");
   const about = await uploadFrom(fd, "aboutImage", "public");
   const events = await uploadFrom(fd, "eventsImage", "public");
+  const mentoria = await uploadFrom(fd, "mentoriaImage", "public");
+  const creds = await uploadFrom(fd, "credentialsImage", "public");
+  const contato = await uploadFrom(fd, "contactImage", "public");
   const resume = await uploadFrom(fd, "resume", "public");
 
   await prisma.siteSetting.update({
@@ -93,6 +96,9 @@ export async function saveSettings(_p: AdminState, fd: FormData): Promise<AdminS
       ...(hero && { heroImageUrl: publicUrl(hero.key) }),
       ...(about && { aboutImageUrl: publicUrl(about.key) }),
       ...(events && { eventsImageUrl: publicUrl(events.key) }),
+      ...(mentoria && { mentoriaImageUrl: publicUrl(mentoria.key) }),
+      ...(creds && { credentialsImageUrl: publicUrl(creds.key) }),
+      ...(contato && { contactImageUrl: publicUrl(contato.key) }),
       ...(resume && { resumeUrl: publicUrl(resume.key) }),
     },
   });

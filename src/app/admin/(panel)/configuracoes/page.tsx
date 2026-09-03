@@ -63,6 +63,12 @@ export default async function Config() {
                 <input id="aboutImage" name="aboutImage" type="file" accept="image/*" className="input pt-2.5" /></div>
               <div className="field"><label htmlFor="eventsImage">Foto de Eventos</label>
                 <input id="eventsImage" name="eventsImage" type="file" accept="image/*" className="input pt-2.5" /></div>
+              <div className="field"><label htmlFor="mentoriaImage">Foto da Mentoria</label>
+                <input id="mentoriaImage" name="mentoriaImage" type="file" accept="image/*" className="input pt-2.5" /></div>
+              <div className="field"><label htmlFor="credentialsImage">Fundo das Credenciais</label>
+                <input id="credentialsImage" name="credentialsImage" type="file" accept="image/*" className="input pt-2.5" /></div>
+              <div className="field"><label htmlFor="contactImage">Foto do Contato</label>
+                <input id="contactImage" name="contactImage" type="file" accept="image/*" className="input pt-2.5" /></div>
               <div className="field"><label htmlFor="resume">Currículo em PDF</label>
                 <input id="resume" name="resume" type="file" accept="application/pdf" className="input pt-2.5" /></div>
             </div>

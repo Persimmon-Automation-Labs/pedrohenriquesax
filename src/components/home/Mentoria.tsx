@@ -1,10 +1,12 @@
 "use client";
 import { useActionState } from "react";
+import Image from "next/image";
+import { mediaUrl } from "@/lib/media-url";
 import { submitMentoriaForm, type FormState } from "@/app/actions";
 import { Field } from "@/components/Field";
 import { Alert } from "@/components/Alert";
 
-export function Mentoria({ duration, price, text, level = "h2" }: { level?: "h1" | "h2"; duration: string; price: string; text: string }) {
+export function Mentoria({ duration, price, text, imageUrl = "", level = "h2" }: { level?: "h1" | "h2"; duration: string; price: string; text: string; imageUrl?: string }) {
   const H = level;
   const [state, action, pending] = useActionState<FormState, FormData>(submitMentoriaForm, {});
   return (
@@ -28,6 +30,11 @@ export function Mentoria({ duration, price, text, level = "h2" }: { level?: "h1"
               <dd className="mono text-paper">Individual, online</dd>
             </div>
           </dl>
+          {imageUrl && (
+            <div className="relative mt-8 aspect-[4/5] w-full overflow-hidden rounded-[2px] group">
+              <Image src={mediaUrl(imageUrl)} alt="Pedro Lucena em estúdio" fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover zoom-img" />
+            </div>
+          )}
         </div>
 
         <div className="lg:col-span-7">

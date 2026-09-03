@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import { mediaUrl } from "@/lib/media-url";
 import type { Credential } from "@prisma/client";
 import { Reveal } from "@/components/Reveal";
 
@@ -14,7 +16,7 @@ const GROUPS: [string, string][] = [
   ["festival", "Festivais"],
 ];
 
-export function Credentials({ items, limit, showAll, level = "h2" }: { level?: "h1" | "h2"; items: Credential[]; limit?: number; showAll?: boolean }) {
+export function Credentials({ items, limit, showAll, imageUrl = "", level = "h2" }: { level?: "h1" | "h2"; items: Credential[]; limit?: number; showAll?: boolean; imageUrl?: string }) {
   const H = level;
   if (!items.length) return null;
   const byGroup = GROUPS.map(([key, label]) => ({
@@ -22,7 +24,13 @@ export function Credentials({ items, limit, showAll, level = "h2" }: { level?: "
   })).filter((g) => g.list.length);
 
   return (
-    <section id="credenciais" className="section relative border-t border-white/10 bg-surface/40">
+    <section id="credenciais" className="section relative overflow-hidden border-t border-white/10 bg-surface/40">
+      {imageUrl && (
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <Image src={mediaUrl(imageUrl)} alt="" fill sizes="100vw" className="object-cover object-[70%_28%] opacity-[0.13]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/92 to-ink/70" />
+        </div>
+      )}
       <div className="wrap relative">
         <Reveal>
           <p className="label text-accent">Já dividiu palco com</p>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { mediaUrl } from "@/lib/media-url";
 import { getSettings } from "@/lib/settings";
 import { Chrome } from "@/components/Chrome";
 import { PageHeader } from "@/components/PageHeader";
@@ -29,6 +31,11 @@ export default async function Contato() {
         </div>
 
         <aside className="flex flex-col gap-8">
+          {s.contactImageUrl && (
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] group">
+              <Image src={mediaUrl(s.contactImageUrl)} alt={s.name} fill sizes="(max-width:1024px) 100vw, 320px" className="object-cover zoom-img" />
+            </div>
+          )}
           <div className="flex flex-col gap-3">
             <p className="label text-faint">Direto</p>
             {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary">WhatsApp</a>}

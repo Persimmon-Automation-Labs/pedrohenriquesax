@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 
 export default async function MentoriaPage() {
   const s = await getSettings();
-  return <Chrome><Mentoria duration={s.mentoriaDuration} price={s.mentoriaPrice} text={s.mentoriaText} level="h1" /></Chrome>;
+  return <Chrome><Mentoria duration={s.mentoriaDuration} price={s.mentoriaPrice} text={s.mentoriaText} imageUrl={s.mentoriaImageUrl} level="h1" /></Chrome>;
 }

@@ -65,7 +65,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <Credentials items={credentials} limit={6} showAll />
+        <Credentials items={credentials} limit={6} showAll imageUrl={settings.credentialsImageUrl} />
         <StorePreview products={products} />
         <Agenda shows={shows} />
       </main>
