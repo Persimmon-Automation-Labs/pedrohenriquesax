@@ -56,31 +56,41 @@ Em 2026 foi selecionado entre os músicos brasileiros da Big Band do Berklee Glo
 Hoje atua em casamentos de alto padrão, eventos corporativos, live sax, shows autorais com seu quinteto, e acompanha artistas do pop nacional. Também dá mentoria online individual para saxofonistas.`;
 
 async function main() {
-  await prisma.siteSetting.upsert({
-    where: { id: "main" },
-    create: {
-      id: "main",
-      name: "Pedro Lucena",
-      tagline: "Saxofonista",
-      city: "São Paulo",
-      email: "pedrohenrique1315@yahoo.com.br",
-      whatsapp: "+55 11 96121-6535",
-      bioShort: "Bacharel pela Souza Lima & Berklee. Big bands, jazz e eventos, de Guinga a Danilo Pérez.",
-      bioMedium: "Saxofonista formado pela Souza Lima & Berklee, cinco anos na Orquestra Jovem Tom Jobim e sax alto lead da Big Band do Berklee Global Jazz Institute em 2026.",
-      bioLong: BIO_LONGA,
-      instagramUrl: "https://instagram.com/pedrolucenasax",
-      tiktokUrl: "https://tiktok.com/@lucenasax",
-      eventsText: "Toco em casamentos de alto padrão, recepções, eventos corporativos, igrejas, bailes e shows autorais. Cada evento pede um formato diferente, e eu monto o que faz sentido para o seu.",
-      mentoriaText: "Mentoria online individual, para quem quer estudar saxofone de verdade. Trabalhamos sonoridade, técnica, leitura e improvisação, no ponto em que você está.",
-      mentoriaDuration: "1h15",
-      mentoriaPrice: "R$ 150,00",
-      pixKey: "pedrohenrique1315@yahoo.com.br",
-      pixKeyType: "email",
-      pixName: "Pedro Lucena",
-      pixCity: "SAO PAULO",
-    },
-    update: {},
-  });
+  // O app cria uma linha em branco na primeira visita, então o upsert sozinho
+  // não bastava: preenche o que estiver vazio, sem sobrescrever o que o Pedro editou.
+  const DADOS = {
+    name: "Pedro Lucena",
+    tagline: "Saxofonista",
+    city: "São Paulo",
+    email: "pedrohenrique1315@yahoo.com.br",
+    whatsapp: "+55 11 96121-6535",
+    bioShort: "Bacharel pela Souza Lima & Berklee. Big bands, jazz e eventos, de Guinga a Danilo Pérez.",
+    bioMedium: "Saxofonista formado pela Souza Lima & Berklee, cinco anos na Orquestra Jovem Tom Jobim e sax alto lead da Big Band do Berklee Global Jazz Institute em 2026.",
+    bioLong: BIO_LONGA,
+    instagramUrl: "https://instagram.com/pedrolucenasax",
+    tiktokUrl: "https://tiktok.com/@lucenasax",
+    eventsText: "Toco em casamentos de alto padrão, recepções, eventos corporativos, igrejas, bailes e shows autorais. Cada evento pede um formato diferente, e eu monto o que faz sentido para o seu.",
+    mentoriaText: "Mentoria online individual, para quem quer estudar saxofone de verdade. Trabalhamos sonoridade, técnica, leitura e improvisação, no ponto em que você está.",
+    mentoriaDuration: "1h15",
+    mentoriaPrice: "R$ 150,00",
+    pixKey: "pedrohenrique1315@yahoo.com.br",
+    pixKeyType: "email",
+    pixName: "Pedro Lucena",
+    pixCity: "SAO PAULO",
+  };
+
+  const atual = await prisma.siteSetting.findUnique({ where: { id: "main" } });
+  if (!atual) {
+    await prisma.siteSetting.create({ data: { id: "main", ...DADOS } });
+  } else {
+    const faltando = Object.fromEntries(
+      Object.entries(DADOS).filter(([k]) => !atual[k] || atual[k] === "")
+    );
+    if (Object.keys(faltando).length) {
+      await prisma.siteSetting.update({ where: { id: "main" }, data: faltando });
+      console.log(`  preenchidos: ${Object.keys(faltando).join(", ")}`);
+    }
+  }
 
   await prisma.credential.deleteMany();
   let i = 0;

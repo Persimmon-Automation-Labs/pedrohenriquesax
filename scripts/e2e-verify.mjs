@@ -1,6 +1,6 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
-const B='http://localhost:3100';
+const B=process.argv[2]||'http://localhost:3100';
 const pass=[],fail=[];
 const ok=n=>{pass.push(n);console.log(`  ✓ ${n}`)};
 const no=(n,d='')=>{fail.push(n);console.log(`  ✗ ${n} ${d}`)};
