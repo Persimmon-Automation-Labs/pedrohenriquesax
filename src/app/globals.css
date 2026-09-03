@@ -165,12 +165,31 @@ body {
 .link-underline { color: var(--color-accent); text-underline-offset: 3px; }
 .link-underline:hover { text-decoration: underline; }
 
+/* A foto do herói entra por uma máscara: sem ela, a borda esquerda vira uma
+   linha dura contra o fundo. Em telas estreitas a foto é inteira, e a máscara
+   passa a ser vertical, acompanhando a vinheta. */
+.hero-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.35) 14%, #000 34%);
+  mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.35) 14%, #000 34%);
+}
+/* Abaixo de 900px a foto ocupa a tela inteira e quem escurece para o texto é a
+   vinheta. Mascarar aqui apagava a imagem e deixava um vazio embaixo. */
+@media (max-width: 767px) {
+  .hero-mask { -webkit-mask-image: none; mask-image: none; }
+}
+
 /* Vinheta que faz o nome ler sobre a foto do herói */
 .hero-scrim {
   background: linear-gradient(100deg, var(--color-ink) 4%, rgb(11 13 14 / 0.82) 34%, rgb(11 13 14 / 0.15) 72%, transparent 100%);
 }
-@media (max-width: 900px) {
-  .hero-scrim { background: linear-gradient(to top, var(--color-ink) 12%, rgb(11 13 14 / 0.78) 48%, rgb(11 13 14 / 0.35) 100%); }
+@media (max-width: 767px) {
+  /* Escurece o suficiente para o texto ler, sem apagar a foto: no celular a
+     composição é foto em cima, texto embaixo. */
+  .hero-scrim {
+    background: linear-gradient(to top,
+      rgb(11 13 14 / 0.94) 0%, rgb(11 13 14 / 0.86) 26%,
+      rgb(11 13 14 / 0.55) 55%, rgb(11 13 14 / 0.22) 100%);
+  }
 }
 
 .zoom-img { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }

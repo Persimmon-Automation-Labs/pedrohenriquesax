@@ -11,15 +11,15 @@ import { mediaUrl } from "@/lib/media-url";
 export function Hero({ settings: s }: { settings: Settings }) {
   const wa = s.whatsapp.replace(/\D/g, "");
   return (
-    <section className="relative min-h-[100dvh] flex items-center overflow-hidden">
+    <section className="relative min-h-[100dvh] flex items-end md:items-center overflow-hidden">
       {/* Retrato sangrado à direita */}
-      <div className="absolute inset-y-0 right-0 w-full md:w-[62%] lg:w-[56%]">
+      <div className="hero-mask absolute inset-y-0 right-0 w-full md:w-[64%] lg:w-[58%]">
         {s.heroImageUrl ? (
           <Image
             src={mediaUrl(s.heroImageUrl)}
             alt={`${s.name} tocando saxofone`}
             fill priority sizes="(max-width: 768px) 100vw, 60vw"
-            className="object-cover object-[center_22%]"
+            className="object-cover object-[center_top]"
           />
         ) : (
           <div className="h-full w-full bg-gradient-to-bl from-[#1d2f36] via-[#141b1f] to-ink" />
@@ -29,7 +29,7 @@ export function Hero({ settings: s }: { settings: Settings }) {
 
       <div className="wrap relative z-10 w-full">
         <div className="grid lg:grid-cols-12 items-center">
-          <div className="lg:col-span-7 flex flex-col gap-6 pt-24 pb-16 md:py-20">
+          <div className="lg:col-span-7 flex flex-col gap-6 pt-32 pb-14 md:py-20">
             <p className="label text-accent rise" style={{ animationDelay: "60ms" }}>
               {s.tagline}{s.city ? ` · ${s.city}` : ""}
             </p>
