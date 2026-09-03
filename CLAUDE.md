@@ -68,3 +68,5 @@ Sistema derivado da captura técnica das seis referências indicadas pelo client
 
 Bio, credenciais e dados vêm de `docs/requisitos/2026-09-01-requisitos-pedro-lucena.md`,
 preenchido pelo próprio cliente. As 31 credenciais estão no `prisma/seed.mjs`.
+
+<!-- deploy automático verificado em 03/09/2026 -->
