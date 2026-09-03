@@ -131,14 +131,17 @@ await s.goto(B+'/conta',{waitUntil:'networkidle'});
 const contaDepois=await s.locator('body').innerText();
 t('material aparece na biblioteca', has(contaDepois,'Método de Sonoridade'));
 const dl=await s.getByRole('link',{name:/Baixar/i}).first().getAttribute('href');
-t('link de download assinado', dl.startsWith('/conta/download/'));
-const r=await s.request.get(B+dl);
+t('link de download assinado', dl.includes('/conta/download/'));
+// o href já traz o basePath do deploy; monta a URL absoluta pela origem
+const origin=new URL(B).origin;
+const dlUrl=dl.startsWith('http')?dl:origin+dl;
+const r=await s.request.get(dlUrl);
 t('download responde 200', r.status()===200);
 t('conteúdo do arquivo entregue', (await r.text()).includes('conteudo secreto do metodo'));
 
 H('CONTROLE DE ACESSO');
 const anon=await b.newContext(); const ap=await anon.newPage();
-const r2=await ap.request.get(B+dl);
+const r2=await ap.request.get(dlUrl);
 t('estranho não baixa (403)', r2.status()===403, `status ${r2.status()}`);
 await ap.goto(orderUrl,{waitUntil:'networkidle'});
 t('estranho não vê o pedido', has(await ap.locator('body').innerText(),'Pedido protegido'));

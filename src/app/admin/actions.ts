@@ -136,9 +136,19 @@ export async function saveProduct(_p: AdminState, fd: FormData): Promise<AdminSt
     ...(cover && { coverUrl: publicUrl(cover.key) }),
   };
 
-  const product = id
-    ? await prisma.product.update({ where: { id }, data })
-    : await prisma.product.create({ data });
+  const jaExiste = await prisma.product.findFirst({ where: { slug, ...(id ? { NOT: { id } } : {}) } });
+  if (jaExiste) {
+    return { error: `Já existe um produto com o endereço "${slug}". Mude o título ou informe outro endereço.` };
+  }
+
+  let product;
+  try {
+    product = id
+      ? await prisma.product.update({ where: { id }, data })
+      : await prisma.product.create({ data });
+  } catch {
+    return { error: "Não consegui salvar o produto. Confira os campos e tente de novo." };
+  }
 
   const file = await uploadFrom(fd, "file", "private");
   if (file) {
