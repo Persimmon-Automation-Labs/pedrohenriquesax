@@ -5,9 +5,17 @@ Site público + loja de produto digital com Pix + conta de cliente + painel.
 
 ## No ar
 
-https://renatodap.me/pedro-lucena — deploy automático a cada push para 
+https://pedrolucenasax.com (e www) — deploy automático a cada push para 
 (webhook do GitHub → Coolify). O  roda  antes do
 , então uma migração nova entra sozinha junto com o código.
+
+Saiu de `renatodap.me/pedro-lucena` em 03/09/2026: o `basePath` acabou, as
+variáveis `NEXT_BASE_PATH` e `NEXT_PUBLIC_BASE_PATH` foram removidas do Coolify
+e `SITE_URL` virou `https://pedrolucenasax.com`. DNS na Cloudflare, registros A
+para 168.119.159.112 **sem proxy** (nuvem cinza) — com a nuvem laranja o
+desafio HTTP-01 não passa e o certificado nunca é emitido. Cuidado ao mudar de
+domínio: o Coolify reaproveita a build em cache, e o `basePath` fica embutido
+no bundle; foi preciso um deploy com `force=true` para o site responder na raiz.
 
 Infra: app  no , banco  no Postgres
 compartilhado, bucket MinIO  com usuário restrito ao próprio bucket.
