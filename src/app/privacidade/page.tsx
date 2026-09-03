@@ -1,4 +1,5 @@
 import { Chrome } from "@/components/Chrome";
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Política de privacidade" };
 export default function P() {
   return (

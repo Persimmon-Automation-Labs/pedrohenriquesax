@@ -2,6 +2,7 @@ import { Chrome } from "@/components/Chrome";
 import { AuthForm, Field } from "@/components/AuthForm";
 import { requestPasswordReset } from "@/lib/customer/auth";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Esqueci minha senha", robots: { index: false } };
 
 export default function EsqueciSenha() {

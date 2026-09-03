@@ -2,7 +2,12 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.SITE_URL || "http://localhost:3000";
-  const products = await prisma.product.findMany({ where: { active: true }, select: { slug: true, updatedAt: true } });
+  let products: { slug: string; updatedAt: Date }[] = [];
+  try {
+    products = await prisma.product.findMany({ where: { active: true }, select: { slug: true, updatedAt: true } });
+  } catch {
+    // banco ainda não migrado (primeiro build): o mapa sai sem os produtos
+  }
   return [
     { url: base, changeFrequency: "weekly", priority: 1 },
     ...["sobre", "eventos", "mentoria", "loja", "agenda", "galeria", "contato"].map((r) => ({
