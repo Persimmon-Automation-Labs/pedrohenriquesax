@@ -17,11 +17,11 @@ const LINKS = [
   { href: "/mentoria", label: "Mentoria" },
   { href: "/loja", label: "Loja" },
   { href: "/agenda", label: "Agenda" },
-  { href: "/galeria", label: "Galeria" },
   { href: "/contato", label: "Contato" },
 ];
 
-export function SiteHeader({ cartCount = 0, loggedIn = false }: { cartCount?: number; loggedIn?: boolean }) {
+export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "" }: { cartCount?: number; loggedIn?: boolean; whatsapp?: string }) {
+  const wa = whatsapp.replace(/\D/g, "");
   const pathname = usePathname();
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
@@ -47,7 +47,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false }: { cartCount?: nu
         }`}
       >
         <div className="wrap flex h-[68px] items-center justify-between gap-4">
-          <Link href="/" className="d-nar text-paper shrink-0 text-[0.78rem] sm:text-[0.95rem]" style={{ fontVariationSettings: '"wdth" 112, "wght" 700', letterSpacing: "0.05em" }}>
+          <Link href="/" className="d-nar uppercase text-paper shrink-0 flex items-center min-h-[44px] text-[0.78rem] sm:text-[0.95rem]" style={{ fontVariationSettings: '"wdth" 112, "wght" 700', letterSpacing: "0.05em" }}>
             Pedro Lucena
           </Link>
 
@@ -68,6 +68,20 @@ export function SiteHeader({ cartCount = 0, loggedIn = false }: { cartCount?: nu
           </nav>
 
           <div className="flex items-center gap-1">
+            {/* A ação que dá dinheiro estava fora do cabeçalho no celular: só
+                sobravam "entrar" e um carrinho de loja vazia. Abaixo de sm a
+                linha não comporta mais um botão, então lá ele abre a gaveta
+                como primeiro item. */}
+            {wa && (
+              <a
+                href={`https://wa.me/${wa}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary btn-sm mr-1 hidden sm:inline-flex"
+              >
+                Contratar
+              </a>
+            )}
             <Link href="/conta" aria-label={loggedIn ? "Minha conta" : "Entrar"} className="btn btn-ghost px-2 sm:px-3">
               <UserCircle size={20} weight="regular" aria-hidden />
               <span className="label hidden xl:inline">{loggedIn ? "Conta" : "Entrar"}</span>
@@ -99,6 +113,18 @@ export function SiteHeader({ cartCount = 0, loggedIn = false }: { cartCount?: nu
       {open && (
         <div id="menu-mobile" className="fixed inset-0 z-40 bg-ink pt-[68px] lg:hidden">
           <nav aria-label="Principal (celular)" className="wrap flex flex-col py-6">
+            {wa && (
+              <a
+                href={`https://wa.me/${wa}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="btn btn-primary mb-5 w-full"
+                style={{ animation: "rise .5s cubic-bezier(.16,1,.3,1) both" }}
+              >
+                Contratar pelo WhatsApp
+              </a>
+            )}
             {LINKS.map((l, i) => (
               <Link
                 key={l.href}

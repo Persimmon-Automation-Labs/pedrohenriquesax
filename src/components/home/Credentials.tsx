@@ -1,13 +1,21 @@
-import Link from "next/link";
-import Image from "next/image";
-import { mediaUrl } from "@/lib/media-url";
 import type { Credential } from "@prisma/client";
 import { Reveal } from "@/components/Reveal";
 
 /**
- * A assinatura do site. Nenhuma das seis referências resolve isso:
- * Grace Kelly enterra a lista, Kenny G não precisa, Braxton não tem.
- * Composta densa, condensada, em caixa alta — como cartaz de festival.
+ * A trajetória, em voz baixa.
+ *
+ * A versão anterior gastava seis linhas idênticas — Guinga, Salmaso, Moreno,
+ * Proveta, Lulinha, Ayres — todas dizendo "2021—2025 · Orquestra Jovem Tom
+ * Jobim", que é um fato só repartido em seis. Quem conhece o meio lê isso como
+ * inflação, não como currículo.
+ *
+ * Agora agrupa pelo conjunto: o grupo aparece uma vez, com quem passou por ele
+ * em seguida. Fica mais curto e diz mais. O agrupamento é no render, não no
+ * banco — o Pedro continua cadastrando uma linha por artista.
+ *
+ * O rótulo também mudou. "Já dividiu palco com" era a leitura mais generosa
+ * possível de tocar numa orquestra jovem atrás de um solista convidado, e as
+ * pessoas capazes de notar a diferença são exatamente as que ele quer impressionar.
  */
 const GROUPS: [string, string][] = [
   ["big_band", "Big bands e orquestras"],
@@ -16,53 +24,74 @@ const GROUPS: [string, string][] = [
   ["festival", "Festivais"],
 ];
 
-export function Credentials({ items, limit, showAll, imageUrl = "", level = "h2" }: { level?: "h1" | "h2"; items: Credential[]; limit?: number; showAll?: boolean; imageUrl?: string }) {
+/** Junta as credenciais que compartilham o mesmo conjunto, preservando a ordem. */
+function byEnsemble(list: Credential[]) {
+  const out: { note: string; years: string; artists: string[] }[] = [];
+  for (const c of list) {
+    const note = c.note || "";
+    const found = out.find((g) => g.note === note);
+    if (found) {
+      found.artists.push(c.artist);
+      if (c.year && !found.years) found.years = c.year;
+    } else {
+      out.push({ note, years: c.year || "", artists: [c.artist] });
+    }
+  }
+  return out;
+}
+
+export function Credentials({
+  items,
+  level = "h2",
+}: {
+  level?: "h1" | "h2";
+  items: Credential[];
+}) {
   const H = level;
   if (!items.length) return null;
+
   const byGroup = GROUPS.map(([key, label]) => ({
-    key, label, list: items.filter((i) => i.context === key).slice(0, limit),
-  })).filter((g) => g.list.length);
+    key,
+    label,
+    ensembles: byEnsemble(items.filter((i) => i.context === key)),
+  })).filter((g) => g.ensembles.length);
 
   return (
-    <section id="credenciais" className="section relative overflow-hidden border-t border-white/10 bg-surface/40">
-      {imageUrl && (
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <Image src={mediaUrl(imageUrl)} alt="" fill sizes="100vw" className="object-cover object-[70%_28%] opacity-[0.13]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/92 to-ink/70" />
-        </div>
-      )}
-      <div className="wrap relative">
+    <section id="credenciais" className="section border-t border-white/10">
+      <div className="wrap">
         <Reveal>
-          <p className="label text-accent">Já dividiu palco com</p>
-          <H className="d-l text-paper mt-4 max-w-[16ch]">Credenciais</H>
+          <p className="label text-accent">Trajetória</p>
+          <H className="d-l text-paper mt-4">Palcos e formações</H>
         </Reveal>
 
-        <div className="mt-14 flex flex-col gap-12">
+        <div className="mt-12 flex flex-col gap-10">
           {byGroup.map((g, gi) => (
             <div key={g.key}>
-              <Reveal delay={gi * 60}>
+              <Reveal delay={gi * 50}>
                 <p className="label text-faint border-b border-white/10 pb-3">{g.label}</p>
               </Reveal>
-              <ul className="mt-5 grid gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
-                {g.list.map((c, i) => (
-                  <Reveal as="li" key={c.id} delay={Math.min(i * 35, 420)}>
-                    <div className="flex items-baseline justify-between gap-4 border-b border-white/[0.07] py-3">
-                      <span className="d-nar text-paper text-[1.05rem] leading-tight">{c.artist}</span>
-                      {c.year && <span className="mono text-xs text-faint shrink-0">{c.year}</span>}
+
+              <ul className="mt-4 flex flex-col">
+                {g.ensembles.map((e, i) => (
+                  <Reveal as="li" key={`${g.key}-${i}`} delay={Math.min(i * 40, 320)}>
+                    <div className="flex flex-col gap-1 border-b border-white/[0.07] py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+                      <p className="text-paper">
+                        {e.artists.join(" · ")}
+                      </p>
+                      {(e.note || e.years) && (
+                        <p className="shrink-0 text-sm text-faint sm:text-right">
+                          {e.note}
+                          {e.note && e.years ? " · " : ""}
+                          {e.years && <span className="mono">{e.years}</span>}
+                        </p>
+                      )}
                     </div>
-                    {c.note && <p className="text-xs text-faint -mt-2 pb-2">{c.note}</p>}
                   </Reveal>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-
-        {showAll && (
-          <Reveal delay={120}>
-            <Link href="/sobre#credenciais" className="btn btn-secondary mt-12">Ver a trajetória completa</Link>
-          </Reveal>
-        )}
       </div>
     </section>
   );

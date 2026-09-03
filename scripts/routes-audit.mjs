@@ -1,6 +1,6 @@
 import { chromium } from 'playwright';
 const B = process.argv[2] || 'http://localhost:3100';
-const ROTAS = ['/','/sobre','/eventos','/mentoria','/loja','/agenda','/galeria','/contato','/entrar','/criar-conta','/carrinho','/privacidade','/termos'];
+const ROTAS = ['/','/sobre','/eventos','/mentoria','/loja','/agenda','/contato','/entrar','/criar-conta','/carrinho','/privacidade','/termos'];
 const b = await chromium.launch(); let bad = 0;
 for (const w of [390, 1440]) {
   console.log(`\n── ${w}px ──`);

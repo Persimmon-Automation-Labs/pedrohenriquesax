@@ -221,15 +221,32 @@ enum MediaKind {
   audio
 }
 
+/// Onde o vídeo aparece. Um vídeo de casamento não convence um aluno, e uma
+/// transcrição de Mark Turner não fecha um evento corporativo — então cada
+/// item é endereçado ao público que ele serve, em vez de tudo cair numa
+/// página de mídia só.
+enum MediaContext {
+  eventos
+  jazz
+  estudo
+}
+
 model MediaItem {
-  id        String    @id @default(cuid())
+  id        String       @id @default(cuid())
   kind      MediaKind
+  context   MediaContext @default(jazz)
   url       String
   title     String
-  featured  Boolean   @default(false)
-  sortOrder Int       @default(0)
+  /// Com quem, ou onde. "Edu Cristófaro e Léo Jaime", "Big Band Tom Jobim".
+  credit    String       @default("")
+  year      String       @default("")
+  /// "3:55" — usado no cartão e no schema VideoObject.
+  duration  String       @default("")
+  featured  Boolean      @default(false)
+  sortOrder Int          @default(0)
 
   @@index([kind, sortOrder])
+  @@index([context, sortOrder])
 }
 
 model AdminUser {

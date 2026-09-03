@@ -1,6 +1,6 @@
 import { chromium } from 'playwright';
 const B = process.argv[2] || 'http://localhost:3100';
-const PAGES = ['/', '/sobre', '/eventos', '/mentoria', '/loja', '/agenda', '/galeria', '/contato', '/entrar', '/criar-conta', '/carrinho', '/privacidade', '/termos'];
+const PAGES = ['/', '/sobre', '/eventos', '/mentoria', '/loja', '/agenda', '/contato', '/entrar', '/criar-conta', '/carrinho', '/privacidade', '/termos'];
 const b = await chromium.launch();
 let total = 0;
 for (const path of PAGES) {

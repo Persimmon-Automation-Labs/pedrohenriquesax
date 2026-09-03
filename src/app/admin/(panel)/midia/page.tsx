@@ -19,8 +19,23 @@ export default async function Midia() {
             </div>
           </div>
           <Field label="Link" name="url" required hint="Link do YouTube, ou endereço direto do áudio." />
+          <div className="grid gap-5 sm:grid-cols-3">
+            <div className="field">
+              <label htmlFor="context">Onde aparece</label>
+              <select id="context" name="context" className="select" defaultValue="jazz">
+                <option value="eventos">Eventos — página de contratação</option>
+                <option value="jazz">Jazz e big band — página Sobre e home</option>
+                <option value="estudo">Estudo — página da mentoria</option>
+              </select>
+            </div>
+            <Field label="Com quem / onde" name="credit" hint="Ex.: Orquestra Jovem Tom Jobim" />
+            <div className="grid grid-cols-2 gap-5">
+              <Field label="Ano" name="year" />
+              <Field label="Duração" name="duration" hint="3:55" />
+            </div>
+          </div>
           <label className="flex items-center gap-3 text-sm text-muted cursor-pointer">
-            <input type="checkbox" name="featured" className="h-4 w-4 accent-[#4FA8C4]" /> Destaque
+            <input type="checkbox" name="featured" className="h-4 w-4 accent-[#4FA8C4]" /> Destaque na home
           </label>
         </AdminForm>
       </div>

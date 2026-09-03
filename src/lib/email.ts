@@ -35,7 +35,7 @@ const SHELL = (title: string, body: string) => `<!doctype html><html lang="pt-BR
 <h1 style="margin:0 0 16px;font-size:19px;color:#F2F4F5;font-weight:700">${title}</h1>
 ${body}
 </td></tr>
-<tr><td style="padding-top:22px;font-size:12px;color:#6A757B">pedrolucenasax.com.br</td></tr>
+<tr><td style="padding-top:22px;font-size:12px;color:#6A757B">pedrolucenasax.com</td></tr>
 </table></td></tr></table></body></html>`;
 
 const P = (t: string) => `<p style="margin:0 0 13px;font-size:15px;line-height:1.6;color:#C0CACE">${t}</p>`;

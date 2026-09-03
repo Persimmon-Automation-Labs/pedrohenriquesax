@@ -9,7 +9,7 @@ import { putFile, deleteFile, publicUrl } from "@/lib/storage";
 import { sendMail, tpl } from "@/lib/email";
 import { brl, centsFromInput } from "@/lib/money";
 import { orderItems } from "@/lib/orders";
-import type { CredentialGroup, MediaKind, PixKeyType } from "@prisma/client";
+import type { CredentialGroup, MediaKind, MediaContext, PixKeyType } from "@prisma/client";
 
 export type AdminState = { error?: string; ok?: string };
 const site = () => process.env.SITE_URL || "http://localhost:3000";
@@ -274,17 +274,23 @@ export async function saveMedia(_p: AdminState, fd: FormData): Promise<AdminStat
     data: {
       url, title,
       kind: (String(fd.get("kind") ?? "video")) as MediaKind,
+      context: (String(fd.get("context") ?? "jazz")) as MediaContext,
+      credit: String(fd.get("credit") ?? "").trim(),
+      year: String(fd.get("year") ?? "").trim(),
+      duration: String(fd.get("duration") ?? "").trim(),
       featured: fd.get("featured") === "on",
       sortOrder: await prisma.mediaItem.count(),
     },
   });
-  revalidatePath("/"); revalidatePath("/admin/midia");
+  revalidatePath("/"); revalidatePath("/eventos"); revalidatePath("/mentoria");
+  revalidatePath("/sobre"); revalidatePath("/admin/midia");
   return { ok: "Item adicionado." };
 }
 export async function deleteMedia(id: string) {
   await guard();
   await prisma.mediaItem.delete({ where: { id } });
-  revalidatePath("/"); revalidatePath("/admin/midia");
+  revalidatePath("/"); revalidatePath("/eventos"); revalidatePath("/mentoria");
+  revalidatePath("/sobre"); revalidatePath("/admin/midia");
 }
 
 /* ── Mensagens ──────────────────────────────────────────── */

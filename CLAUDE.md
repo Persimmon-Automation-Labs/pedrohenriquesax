@@ -26,7 +26,7 @@ npm run audit:contrast [URL]   # WCAG AA em 13 rotas
 node scripts/routes-audit.mjs [URL]  # h1, overflow e navegação em 390 e 1440px
 ```
 
-Acesso local do painel: `pedro@pedrolucenasax.com.br` / `pedro2026` (trocar em produção).
+Acesso local do painel: `pedro@pedrolucenasax.com` / `pedro2026` (trocar em produção).
 
 ## O que não pode ser quebrado
 

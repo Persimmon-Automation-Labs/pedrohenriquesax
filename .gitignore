@@ -7,3 +7,6 @@ next-env.d.ts
 /uploads
 .storage/
 .mail/
+
+# artefatos de inspeção do navegador
+.playwright-mcp/

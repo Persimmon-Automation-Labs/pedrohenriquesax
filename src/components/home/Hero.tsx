@@ -34,9 +34,14 @@ export function Hero({ settings: s }: { settings: Settings }) {
               {s.tagline}{s.city ? ` · ${s.city}` : ""}
             </p>
 
+            {/* Os espaços entre os spans são de propósito: os spans são `block`,
+                então a quebra é visual, mas o nome acessível e o texto que o
+                Google indexa continuam sendo "Pedro Lucena", e não "PedroLucena". */}
             <h1 className="d-xl text-paper rise" style={{ animationDelay: "140ms" }}>
               {s.name.split(" ").map((w, i) => (
-                <span key={i} className="block">{w}</span>
+                <span key={i} className="block">
+                  {i > 0 ? " " : ""}{w}
+                </span>
               ))}
             </h1>
 

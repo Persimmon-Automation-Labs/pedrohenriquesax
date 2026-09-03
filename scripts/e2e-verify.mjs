@@ -56,12 +56,12 @@ t('wa.me gerado com dados', href.startsWith('https://wa.me/55') && decodeURIComp
 H('PAINEL — LOGIN E PRODUTO');
 await p.goto(B+'/admin',{waitUntil:'networkidle'});
 t('admin exige login', p.url().includes('/admin/login'));
-await p.locator('#f-email').fill('pedro@pedrolucenasax.com.br');
+await p.locator('#f-email').fill('pedro@pedrolucenasax.com');
 await p.locator('#f-password').fill('errada'); await p.getByRole('button',{name:/^Entrar$/}).click();
 await p.waitForSelector('[role="alert"]',{timeout:6000});
 t('senha errada rejeitada', true);
 await p.goto(B+'/admin/login',{waitUntil:'networkidle'});
-await p.locator('#f-email').fill('pedro@pedrolucenasax.com.br');
+await p.locator('#f-email').fill('pedro@pedrolucenasax.com');
 await p.locator('#f-password').fill('pedro2026'); await p.getByRole('button',{name:/^Entrar$/}).click();
 await p.waitForSelector('text=AGUARDANDO',{timeout:10000}).catch(()=>{});
 t('login do admin', p.url().endsWith('/admin'));

@@ -9,7 +9,7 @@ export async function Chrome({ children }: { children: React.ReactNode }) {
   const [settings, count, customer] = await Promise.all([getSettings(), cartCount(), getCustomer()]);
   return (
     <>
-      <SiteHeader cartCount={count} loggedIn={!!customer} />
+      <SiteHeader cartCount={count} loggedIn={!!customer} whatsapp={settings.whatsapp} />
       <main id="conteudo" className="pt-[68px] min-h-[60vh]">{children}</main>
       <SiteFooter settings={settings} />
     </>

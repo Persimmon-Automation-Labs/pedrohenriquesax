@@ -6,10 +6,11 @@ import { getCustomer } from "@/lib/customer/session";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Hero } from "@/components/home/Hero";
-import { Credentials } from "@/components/home/Credentials";
 import { StorePreview } from "@/components/home/StorePreview";
+import { VideoSection } from "@/components/VideoSection";
 import { Agenda } from "@/components/home/Agenda";
 import { Reveal } from "@/components/Reveal";
+import { videosJsonLd } from "@/lib/youtube";
 
 export const dynamic = "force-dynamic";
 
@@ -20,9 +21,17 @@ const CAMINHOS = [
 ];
 
 export default async function Home() {
-  const [settings, credentials, products, shows, count, customer] = await Promise.all([
+  const [settings, videos, products, shows, count, customer] = await Promise.all([
     getSettings(),
-    prisma.credential.findMany({ orderBy: [{ context: "asc" }, { sortOrder: "asc" }] }),
+    /* Destaque primeiro (o solo com a Big Band do Global Jazz), depois os dois
+       primeiros de eventos — Tierry e Léo Jaime. Um vídeo de musicalidade e
+       dois de nome reconhecível: a home atende os dois públicos sem virar
+       uma página de mídia. */
+    prisma.mediaItem.findMany({
+      where: { kind: "video" },
+      orderBy: [{ featured: "desc" }, { sortOrder: "asc" }],
+      take: 3,
+    }),
     prisma.product.findMany({ where: { active: true }, orderBy: { sortOrder: "asc" }, take: 3 }),
     prisma.show.findMany({ where: { date: { gte: new Date() } }, orderBy: { date: "asc" }, take: 4 }),
     cartCount(),
@@ -44,14 +53,17 @@ export default async function Home() {
     sameAs: [settings.instagramUrl, settings.youtubeUrl, settings.spotifyUrl, settings.tiktokUrl, settings.linkedinUrl].filter(Boolean),
   };
 
+  const videoLd = videosJsonLd(videos, site);
+
   return (
     <>
       <div id="top-sentinel" aria-hidden className="absolute top-0 h-px w-px" />
-      <SiteHeader cartCount={count} loggedIn={!!customer} />
+      <SiteHeader cartCount={count} loggedIn={!!customer} whatsapp={settings.whatsapp} />
       <main id="conteudo">
         <Hero settings={settings} />
 
-        <section className="section border-t border-white/10">
+        <section aria-labelledby="caminhos" className="section border-t border-white/10">
+          <h2 id="caminhos" className="sr-only">O que eu faço</h2>
           <div className="wrap grid gap-px sm:grid-cols-3 bg-white/10">
             {CAMINHOS.map((c, i) => (
               <Reveal key={c.href} delay={i * 80}>
@@ -65,12 +77,25 @@ export default async function Home() {
           </div>
         </section>
 
-        <Credentials items={credentials} limit={6} showAll imageUrl={settings.credentialsImageUrl} />
+        {/* Onde ficava a parede de credenciais. Um solo tocando prova mais do
+            que trinta e uma linhas afirmando, e não obriga ninguém a acreditar. */}
+        <VideoSection
+          items={videos}
+          lead
+          id="midia"
+          kicker="Ouvir e assistir"
+          title="Assista"
+          body="Um solo, e duas gravações com quem me chamou para gravar."
+        />
+
         <StorePreview products={products} />
         <Agenda shows={shows} />
       </main>
       <SiteFooter settings={settings} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {videoLd.length > 0 && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }} />
+      )}
     </>
   );
 }
