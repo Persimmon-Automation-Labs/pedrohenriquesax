@@ -18,7 +18,7 @@ import Link from "next/link";
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Vídeos",
-  description: "Gravações de Pedro Lucena: eventos, big band e jazz, e transcrições de estudo.",
+  description: "Gravações de Pedro Lucena em evento, em estúdio e com big band.",
 };
 
 /* O rótulo à direita mostra a contagem, não um sinônimo do título: "Transcrições
@@ -26,7 +26,6 @@ export const metadata: Metadata = {
 const GRUPOS = [
   { key: "eventos" as const, title: "Em evento e em estúdio" },
   { key: "jazz" as const, title: "Big band e jazz" },
-  { key: "estudo" as const, title: "Transcrições" },
 ];
 
 export default async function Videos() {

@@ -26,32 +26,37 @@ export function Hero({ settings: s }: { settings: Settings }) {
     <Image
       src={mediaUrl(recorte)}
       alt={`${s.name} tocando saxofone`}
-      width={1100}
-      height={1650}
+      width={780}
+      height={1556}
       priority
-      sizes="(max-width: 768px) 70vw, 50vw"
-      className="h-auto w-full object-contain object-bottom"
+      sizes="(max-width: 1023px) 78vw, 38vw"
+      className="aspect-[780/1556] h-auto w-full object-contain object-bottom"
     />
   );
 
   return (
-    <section className="relative overflow-hidden md:flex md:min-h-[100dvh] md:items-center">
+    <section className="relative overflow-hidden lg:flex lg:min-h-[100dvh] lg:items-center">
       {/* Computador: retrato sangrando à direita, atrás do texto */}
       {/* Campo de luz atrás da figura, para a transição não ser um corte seco
           contra o branco. */}
       <div aria-hidden className="hero-field pointer-events-none absolute inset-0" />
 
-      {/* O retrato é dimensionado pela LARGURA da tela e ancorado embaixo. Com
-          altura máxima em dvh ele mudava de tamanho conforme a altura da
-          janela — janela baixa encolhia a figura. Agora só a largura manda, e
-          o que sobrar embaixo é aparado pelo overflow da seção. */}
-      <div className="pointer-events-none absolute bottom-0 right-0 hidden md:block md:w-[46%] lg:w-[43%] xl:w-[40%] 2xl:w-[36%]">
+      {/* Ancorado no TOPO, logo abaixo do cabeçalho fixo de 68px — e não na
+          base. Ancorado embaixo, numa janela mais baixa a figura subia e a
+          cabeça sumia atrás do cabeçalho: é a proporção 1:2 do recorte contra
+          uma janela que nem sempre tem altura para ela.
+
+          Assim a cabeça está sempre livre, o tamanho continua vindo só da
+          LARGURA da tela, e o que falta de altura corta nas pernas, que é onde
+          cortar não custa nada. O PNG foi aparado até a figura (780×1556), sem
+          moldura transparente, para essa conta ser previsível. */}
+      <div className="pointer-events-none absolute right-0 top-[68px] hidden lg:block lg:w-[38%] xl:w-[35%] 2xl:w-[32%]">
         {retrato}
       </div>
 
       <div className="wrap relative z-10 w-full">
         <div className="grid items-center lg:grid-cols-12">
-          <div className="flex flex-col gap-6 pt-28 md:col-span-7 md:py-20 md:pt-28">
+          <div className="flex flex-col gap-6 pt-28 lg:col-span-7 lg:py-20 lg:pt-28">
             <p className="label text-accent rise" style={{ animationDelay: "60ms" }}>
               {s.tagline}{s.city ? ` · ${s.city}` : ""}
             </p>
@@ -88,7 +93,7 @@ export function Hero({ settings: s }: { settings: Settings }) {
         </div>
 
         {/* Celular: o retrato entra embaixo, no fluxo, sem cobrir nada */}
-        <div className="relative mt-10 md:hidden">
+        <div className="relative mt-10 lg:hidden">
           <div aria-hidden className="hero-field pointer-events-none absolute inset-0" />
           <div className="relative mx-auto w-[78%] max-w-[22rem]">{retrato}</div>
         </div>

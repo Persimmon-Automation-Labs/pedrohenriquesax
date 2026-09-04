@@ -58,7 +58,9 @@ model SiteSetting {
 }
 
 enum CredentialGroup {
+  formacao
   big_band
+  temporada
   jazz_internacional
   pop_nacional
   festival

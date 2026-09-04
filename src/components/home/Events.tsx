@@ -2,8 +2,20 @@ import Image from "next/image";
 import { RequestForm } from "@/components/RequestForm";
 import { mediaUrl } from "@/lib/media-url";
 
-const FORMATOS = ["Sax e playback", "Sax e DJ", "DJ, cantora e sax", "Duo", "Trio", "Com banda", "Quinteto autoral"];
-const SEGMENTOS = ["Casamento", "Corporativo", "Igreja", "Recepção", "Baile", "Live sax", "Show autoral"];
+const SEGMENTOS = [
+  "Casamentos", "Eventos corporativos", "Recepções",
+  "Réveillon particular", "Bodas", "Show autoral", "Entre outros",
+];
+const FORMATOS = [
+  "Sax solo",
+  "Live sax (sax & DJ)",
+  "Sax & piano",
+  "Sax & violão",
+  "Sax, voz e piano",
+  "Sax & quarteto de cordas",
+  "Sax & banda (sax, piano, bateria e baixo)",
+  "Duo a quinteto de jazz",
+];
 
 export function Events({ imageUrl, text, level = "h2" }: { level?: "h1" | "h2"; imageUrl: string; text: string }) {
   const H = level;

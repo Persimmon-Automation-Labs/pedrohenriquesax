@@ -18,10 +18,12 @@ import { Reveal } from "@/components/Reveal";
  * pessoas capazes de notar a diferença são exatamente as que ele quer impressionar.
  */
 const GROUPS: [string, string][] = [
+  ["formacao", "Formação"],
   ["big_band", "Big bands e orquestras"],
+  ["temporada", "Temporada 2025/26"],
   ["jazz_internacional", "Jazz internacional"],
   ["pop_nacional", "Pop nacional"],
-  ["festival", "Festivais"],
+  ["festival", "Grandes eventos e festivais"],
 ];
 
 /** Junta as credenciais que compartilham o mesmo conjunto, preservando a ordem. */

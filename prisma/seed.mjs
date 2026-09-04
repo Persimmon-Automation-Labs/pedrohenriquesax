@@ -7,25 +7,31 @@ const prisma = new PrismaClient();
 /** Dados reais do documento de requisitos preenchido pelo Pedro em 01/09/2026. */
 
 const CREDENCIAIS = [
+  // Formação
+  ["Escola Municipal de Música de São Paulo", "formacao", null, null],
+  ["Souza Lima & Berklee", "formacao", null, null],
+  ["Escola de Música do Estado de São Paulo", "formacao", null, null],
   // Big bands e orquestras
-  ["Guinga", "big_band", "2021—2025", "Orquestra Jovem Tom Jobim"],
+  ["Orquestra Sinfônica Villa Lobos", "big_band", null, "Tributo a Tina Turner"],
   ["Mônica Salmaso", "big_band", "2021—2025", "Orquestra Jovem Tom Jobim"],
+  ["Livia Nestrovski", "big_band", "2021—2025", "Orquestra Jovem Tom Jobim"],
+  ["Guinga", "big_band", "2021—2025", "Orquestra Jovem Tom Jobim"],
   ["Vanessa Moreno", "big_band", "2021—2025", "Orquestra Jovem Tom Jobim"],
-  ["Nailor Proveta", "big_band", "2021—2025", "Orquestra Jovem Tom Jobim"],
-  ["Lulinha Alencar", "big_band", "2021—2025", "Orquestra Jovem Tom Jobim"],
+  ["Ayrton Montarroyos", "big_band", "2021—2025", "Orquestra Jovem Tom Jobim"],
+  ["Renato Braz", "big_band", "2021—2025", "Orquestra Jovem Tom Jobim"],
   ["Nelson Ayres", "big_band", "2021—2025", "Direção da Orquestra Jovem Tom Jobim"],
   ["Tiago Costa", "big_band", "2021—2025", "Direção da Orquestra Jovem Tom Jobim"],
-  ["Debora Gurgel", "big_band", null, "Big Band Souza Lima"],
-  ["Pablo Gil", "big_band", null, "Big Band Souza Lima"],
+  // Temporada corrente
+  ["Navios temáticos da Promoação", "temporada", "2025/26", "Saxofonista residente — festas fechadas e palcos principais das embarcações"],
   // Jazz internacional
   ["Danilo Pérez", "jazz_internacional", "2026", "Big Band do Berklee Global Jazz Institute, sax alto lead"],
   ["Jeff Coffin", "jazz_internacional", null, "Big Band Souza Lima"],
   ["Anat Cohen", "jazz_internacional", null, "Big Band Souza Lima"],
+  ["Orion Lion", "jazz_internacional", null, "Big Band Souza Lima"],
   ["John Surman", "jazz_internacional", null, "Orquestra Jovem Tom Jobim"],
   ["Jens Lindeman", "jazz_internacional", "2023", "Speakin Jazz Big Band"],
   ["Georgina Jackson", "jazz_internacional", "2019", "Freedom Big Band"],
   ["Vince Di Martino", "jazz_internacional", "2019", "Freedom Big Band"],
-  ["Orion Lion", "jazz_internacional", null, "Big Band Souza Lima"],
   // Pop nacional
   ["Dilsinho", "pop_nacional", null, null],
   ["Luiza Possi", "pop_nacional", null, null],
@@ -36,16 +42,11 @@ const CREDENCIAIS = [
   ["Natanzinho Lima", "pop_nacional", null, null],
   ["Toninho Geraes", "pop_nacional", null, null],
   ["Thiago e Graciano", "pop_nacional", null, null],
-  ["Chrigor", "pop_nacional", null, null],
   // Grandes eventos e festivais
-  // A CCXP veio por áudio, depois de o currículo já estar escrito: é o maior
-  // evento de cultura pop do mundo e o palco Thunder é o principal dele.
-  // Como credencial de evento corporativo, vale mais do que metade da lista.
   ["CCXP", "festival", "2024", "Palco Thunder, Qualcomm — abertura, trilhas de games e cinema"],
   ["Festival Internacional de Campos do Jordão", "festival", "2022", "Bolsista"],
-  ["Nelson Faria", "festival", "2022", "Campos do Jordão"],
-  ["Gian Correa", "festival", "2022", "Campos do Jordão"],
-  ["Ari Colares", "festival", "2025", "Freedom Big Band"],
+  ["Ari Colares", "festival", "2025", null],
+  ["Mônica Salmaso", "festival", null, null],
 ];
 
 const BIO_LONGA = `Pedro Lucena é saxofonista, natural de São Paulo, bacharel em Música com especialidade em saxofone pela Faculdade Souza Lima & Berklee College of Music.
