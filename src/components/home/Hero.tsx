@@ -22,7 +22,7 @@ export function Hero({ settings: s }: { settings: Settings }) {
             className="object-cover object-[center_top]"
           />
         ) : (
-          <div className="h-full w-full bg-gradient-to-bl from-[#1d2f36] via-[#141b1f] to-ink" />
+          <div className="h-full w-full bg-gradient-to-bl from-[#DCE9F0] via-[#EDF2F5] to-ink" />
         )}
       </div>
       <div className="absolute inset-0 hero-scrim" />
@@ -46,7 +46,7 @@ export function Hero({ settings: s }: { settings: Settings }) {
             </h1>
 
             {s.bioShort && (
-              <p className="text-lg text-paper/85 max-w-[46ch] rise" style={{ animationDelay: "240ms" }}>
+              <p className="text-lg text-paper/80 max-w-[46ch] rise" style={{ animationDelay: "240ms" }}>
                 {s.bioShort}
               </p>
             )}

@@ -25,12 +25,12 @@ export default function NotFound() {
         O endereço pode ter mudado, ou o link que te trouxe até aqui veio com um pedaço a menos.
       </p>
 
-      <ul className="mt-12 border-t border-white/10">
+      <ul className="mt-12 border-t border-black/10">
         {SAIDAS.map(([href, title, body]) => (
           <li key={href}>
             <Link
               href={href}
-              className="group flex flex-col gap-1 border-b border-white/10 py-5 transition-colors hover:bg-surface"
+              className="group flex flex-col gap-1 border-b border-black/10 py-5 transition-colors hover:bg-surface"
             >
               <span className="d-m text-paper transition-colors group-hover:text-accent">{title}</span>
               <span className="text-sm text-muted">{body}</span>

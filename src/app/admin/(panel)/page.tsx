@@ -40,7 +40,7 @@ export default async function Dashboard() {
         {pending.length ? (
           <ul className="mt-5">
             {pending.map((o) => (
-              <li key={o.id} className="grid gap-3 border-b border-white/10 py-4 sm:grid-cols-[130px_1fr_auto_auto] sm:items-center sm:gap-5">
+              <li key={o.id} className="grid gap-3 border-b border-black/10 py-4 sm:grid-cols-[130px_1fr_auto_auto] sm:items-center sm:gap-5">
                 <Link href={`/admin/pedidos/${o.id}`} className="mono text-sm text-accent">{o.orderNumber}</Link>
                 <div className="min-w-0">
                   <p className="text-sm text-paper truncate">{o.customerName}</p>
@@ -61,7 +61,7 @@ export default async function Dashboard() {
           <h2 className="d-m text-paper">Próximas apresentações</h2>
           <ul className="mt-5">
             {shows.map((s) => (
-              <li key={s.id} className="flex items-baseline justify-between gap-4 border-b border-white/10 py-3">
+              <li key={s.id} className="flex items-baseline justify-between gap-4 border-b border-black/10 py-3">
                 <span className="text-paper">{s.venue}</span>
                 <span className="mono text-sm text-faint">{new Intl.DateTimeFormat("pt-BR", { dateStyle: "short" }).format(s.date)}</span>
               </li>

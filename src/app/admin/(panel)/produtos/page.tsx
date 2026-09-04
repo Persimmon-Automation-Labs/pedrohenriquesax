@@ -15,7 +15,7 @@ export default async function Produtos() {
       {items.length ? (
         <ul className="mt-8">
           {items.map((p) => (
-            <li key={p.id} className="flex items-center gap-4 border-b border-white/10 py-4">
+            <li key={p.id} className="flex items-center gap-4 border-b border-black/10 py-4">
               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[2px] surface">
                 {p.coverUrl && <Image src={mediaUrl(p.coverUrl)} alt="" fill sizes="56px" className="object-cover" />}
               </div>

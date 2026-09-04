@@ -33,7 +33,7 @@ export default async function Checkout() {
                 </li>
               ))}
             </ul>
-            <div className="mt-5 flex items-baseline justify-between border-t border-white/10 pt-5">
+            <div className="mt-5 flex items-baseline justify-between border-t border-black/10 pt-5">
               <span className="d-m text-paper">Total</span>
               <span className="mono text-2xl text-paper">{brl(totalCents)}</span>
             </div>

@@ -2,21 +2,32 @@
 
 /* ═══════════════════════════════════════════════════════════════
    Pedro Lucena — sistema visual
-   Tema travado em escuro. Um acento só. Raio 2px em tudo.
-   Contrastes verificados: paper 17.65:1 · muted 7.27:1 · accent 7.17:1
+   Tema travado em claro. Raio 2px em tudo.
+
+   DUAS FUNÇÕES DE ACENTO, e isto não é enfeite: o azul-bebê tem 1.71:1
+   sobre branco, ilegível como texto, e 9.32:1 como fundo de botão com
+   texto escuro por cima. Então `--color-accent` (azul escuro) vale para
+   texto, link e rótulo; `--color-accent-fill` (azul-bebê) só para
+   preenchimento. Trocar um pelo outro reprova no contraste.
+
+   Medidos sobre #F7F8FA: paper 16.55:1 · muted 7.2:1 · faint 5.23:1 ·
+   accent 5.41:1 · texto do botão sobre o azul-bebê 9.32:1
    ═══════════════════════════════════════════════════════════════ */
 
 @theme {
-  --color-ink: #0b0d0e;
-  --color-surface: #14191c;
-  --color-raised: #1b2226;
-  --color-paper: #f2f4f5;
-  --color-muted: #94a0a6;
-  --color-faint: #788286;
-  --color-accent: #d9a441;
-  --color-accent-deep: #8A6420;
-  --color-danger: #f08a7a;
-  --color-ok: #5ec98f;
+  --color-ink: #F7F8FA;
+  --color-surface: #FFFFFF;
+  --color-raised: #ECF0F3;
+  --color-paper: #131A1E;
+  --color-muted: #4A555C;
+  --color-faint: #5E6A71;
+  --color-accent: #1B6E8C;
+  --color-accent-deep: #12546B;
+  --color-accent-fill: #89CFF0;
+  --color-accent-fill-hover: #A2DBF6;
+  --color-on-fill: #0E2430;
+  --color-danger: #A32A18;
+  --color-ok: #1D6B45;
 
   --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
@@ -26,7 +37,7 @@
   --radius: 2px;
 }
 
-:root { color-scheme: dark; }
+:root { color-scheme: light; }
 
 html {
   background: var(--color-ink);
@@ -41,7 +52,7 @@ body {
   /* Um degradê muito baixo (3–4% de luz) tira a sensação de cor chapada sem
      virar "fundo colorido". Fixo, para não deslizar durante o scroll. */
   background: var(--color-ink);
-  background-image: linear-gradient(180deg, #101619 0%, var(--color-ink) 38%, var(--color-ink) 100%);
+  background-image: linear-gradient(180deg, #FFFFFF 0%, var(--color-ink) 40%, var(--color-ink) 100%);
   background-attachment: fixed;
   color: var(--color-paper);
   font-family: var(--font-sans);
@@ -51,7 +62,7 @@ body {
   overflow-x: hidden;
 }
 
-::selection { background: var(--color-accent); color: var(--color-ink); }
+::selection { background: var(--color-accent-fill); color: var(--color-on-fill); }
 
 :focus-visible {
   outline: 2px solid var(--color-accent);
@@ -120,21 +131,21 @@ body {
 .prose-w { max-width: 68ch; }
 
 /* ── Superfícies ────────────────────────────────────────────── */
-.surface { background: var(--color-surface); border: 1px solid rgb(255 255 255 / 0.09); }
+.surface { background: var(--color-surface); border: 1px solid rgb(19 26 30 / 0.13); }
 /* Cabeçalho e rodapé ganham um degrau de luz em relação ao corpo, para o site
    deixar de ser um retângulo de uma cor só. */
-.chrome-top { background-image: linear-gradient(180deg, rgb(20 25 28 / 0.92) 0%, rgb(11 13 14 / 0.88) 100%); }
-.chrome-bottom { background-image: linear-gradient(180deg, var(--color-ink) 0%, #0f1417 100%); }
+.chrome-top { background-image: linear-gradient(180deg, rgb(255 255 255 / 0.95) 0%, rgb(247 248 250 / 0.9) 100%); }
+.chrome-bottom { background-image: linear-gradient(180deg, var(--color-ink) 0%, #ECF0F3 100%); }
 /* Cartão: usado onde uma lista virava parede de texto (trajetória, formatos). */
 .card {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.035), rgb(255 255 255 / 0.012));
-  border: 1px solid rgb(255 255 255 / 0.09);
+  background: linear-gradient(180deg, rgb(19 26 30 / 0.028), rgb(19 26 30 / 0.012));
+  border: 1px solid rgb(19 26 30 / 0.13);
   border-radius: 2px;
   transition: border-color 0.18s ease, background-color 0.18s ease;
 }
-.card:hover { border-color: rgb(255 255 255 / 0.2); }
-.hair { border-color: rgb(255 255 255 / 0.09); }
-.hair-b { border-bottom: 1px solid rgb(255 255 255 / 0.09); }
+.card:hover { border-color: rgb(19 26 30 / 0.22); }
+.hair { border-color: rgb(19 26 30 / 0.13); }
+.hair-b { border-bottom: 1px solid rgb(19 26 30 / 0.13); }
 
 /* ── Botões ─────────────────────────────────────────────────── */
 .btn {
@@ -150,15 +161,15 @@ body {
 .btn:hover { transform: translateY(-1px); }
 .btn:active { transform: scale(0.985); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-.btn-primary { background: var(--color-accent); color: var(--color-ink); }
-.btn-primary:hover { background: #E6B45A; }
-.btn-secondary { border: 1px solid rgb(255 255 255 / 0.3); color: var(--color-paper); }
-.btn-secondary:hover { border-color: rgb(255 255 255 / 0.6); background: rgb(255 255 255 / 0.04); }
+.btn-primary { background: var(--color-accent-fill); color: var(--color-on-fill); }
+.btn-primary:hover { background: var(--color-accent-fill-hover); }
+.btn-secondary { border: 1px solid rgb(19 26 30 / 0.28); color: var(--color-paper); }
+.btn-secondary:hover { border-color: rgb(19 26 30 / 0.55); background: rgb(19 26 30 / 0.04); }
 .btn-ghost { color: var(--color-muted); padding: 0.6rem 0.8rem; }
 .btn-ghost:hover { color: var(--color-paper); }
 .btn-sm { padding: 0.6rem 1rem; font-size: 0.75rem; min-height: 40px; }
-.btn-danger { border: 1px solid rgb(240 138 122 / 0.45); color: var(--color-danger); }
-.btn-danger:hover { background: rgb(240 138 122 / 0.1); }
+.btn-danger { border: 1px solid rgb(163 42 24 / 0.4); color: var(--color-danger); }
+.btn-danger:hover { background: rgb(163 42 24 / 0.08); }
 
 /* ── Formulários ────────────────────────────────────────────── */
 .field { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -171,16 +182,16 @@ body {
 .input, .textarea, .select {
   width: 100%; min-height: 46px;
   background: var(--color-ink);
-  border: 1px solid rgb(255 255 255 / 0.16);
+  border: 1px solid rgb(19 26 30 / 0.26);
   border-radius: 2px; padding: 0.7rem 0.85rem;
   color: var(--color-paper); font-family: var(--font-sans); font-size: 0.95rem;
   transition: border-color 0.16s ease;
 }
-.surface .input, .surface .textarea, .surface .select { background: #0e1315; }
+.surface .input, .surface .textarea, .surface .select { background: #FBFCFD; }
 .input::placeholder, .textarea::placeholder { color: var(--color-faint); }
 .input:focus, .textarea:focus, .select:focus { border-color: var(--color-accent); outline: none; }
 .textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
-.hint { font-size: 0.8125rem; color: #8b959a; }
+.hint { font-size: 0.8125rem; color: #5E6A71; }
 .error-text { font-size: 0.8125rem; color: var(--color-danger); }
 .input[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--color-danger); }
 
@@ -219,15 +230,15 @@ body {
 
 /* Vinheta que faz o nome ler sobre a foto do herói */
 .hero-scrim {
-  background: linear-gradient(100deg, var(--color-ink) 4%, rgb(11 13 14 / 0.82) 34%, rgb(11 13 14 / 0.15) 72%, transparent 100%);
+  background: linear-gradient(100deg, var(--color-ink) 4%, rgb(247 248 250 / 0.88) 34%, rgb(247 248 250 / 0.2) 72%, transparent 100%);
 }
 @media (max-width: 767px) {
   /* Escurece o suficiente para o texto ler, sem apagar a foto: no celular a
      composição é foto em cima, texto embaixo. */
   .hero-scrim {
     background: linear-gradient(to top,
-      rgb(11 13 14 / 0.94) 0%, rgb(11 13 14 / 0.86) 26%,
-      rgb(11 13 14 / 0.55) 55%, rgb(11 13 14 / 0.22) 100%);
+      rgb(247 248 250 / 0.97) 0%, rgb(247 248 250 / 0.92) 26%,
+      rgb(247 248 250 / 0.6) 55%, rgb(247 248 250 / 0.2) 100%);
   }
 }
 
@@ -237,8 +248,8 @@ body {
 /* Barra de rolagem discreta, coerente com o tema */
 ::-webkit-scrollbar { width: 11px; height: 11px; }
 ::-webkit-scrollbar-track { background: var(--color-ink); }
-::-webkit-scrollbar-thumb { background: #2a3338; border: 3px solid var(--color-ink); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: #3b474d; }
+::-webkit-scrollbar-thumb { background: #BAC4CB; border: 3px solid var(--color-ink); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #9AA6AE; }
 
 }
 

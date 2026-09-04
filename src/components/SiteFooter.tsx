@@ -28,7 +28,7 @@ export function SiteFooter({ settings: s }: { settings: Settings }) {
   const wa = s.whatsapp.replace(/\D/g, "");
 
   return (
-    <footer className="chrome-bottom border-t border-white/10">
+    <footer className="chrome-bottom border-t border-black/10">
       <div className="wrap py-10 md:py-12">
         <div className="grid gap-8 md:grid-cols-[1.5fr_1fr] md:gap-12">
           <div>
@@ -79,7 +79,7 @@ export function SiteFooter({ settings: s }: { settings: Settings }) {
           </div>
         </div>
 
-        <div className="mt-9 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-9 flex flex-col gap-3 border-t border-black/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="mono text-xs text-faint">© {new Date().getFullYear()} {s.name}</p>
           <div className="flex flex-wrap gap-x-6">
             {[["/sobre", "Sobre"], ["/contato", "Contato"], ["/conta", "Minha conta"],

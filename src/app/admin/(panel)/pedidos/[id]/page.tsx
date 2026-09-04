@@ -49,7 +49,7 @@ export default async function PedidoAdmin({ params }: { params: Promise<{ id: st
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex items-baseline justify-between border-t border-white/10 pt-4">
+          <div className="mt-4 flex items-baseline justify-between border-t border-black/10 pt-4">
             <span className="label text-faint">Total</span>
             <span className="mono text-lg text-paper">{brl(o.totalCents)}</span>
           </div>
@@ -84,7 +84,7 @@ export default async function PedidoAdmin({ params }: { params: Promise<{ id: st
       </section>
 
       {o.status !== "cancelado" && o.status !== "reembolsado" && (
-        <div className="mt-8 flex flex-wrap gap-3 border-t border-white/10 pt-6">
+        <div className="mt-8 flex flex-wrap gap-3 border-t border-black/10 pt-6">
           <form action={setOrderStatus.bind(null, o.id, "cancelado")}>
             <button className="btn btn-danger btn-sm">Cancelar pedido</button>
           </form>

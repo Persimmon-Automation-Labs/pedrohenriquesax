@@ -61,15 +61,15 @@ export default async function Home() {
       <main id="conteudo">
         <Hero settings={settings} />
 
-        <section aria-labelledby="caminhos" className="section border-t border-white/10">
+        <section aria-labelledby="caminhos" className="section border-t border-black/10">
           <h2 id="caminhos" className="sr-only">O que eu faço</h2>
           {/* Antes isto era um grid com fundo branco a 10% e gap de 1px: o fundo
               aparecia nas bordas externas e virava duas faixas cinzas soltas nos
               lados. Agora a divisória é borda de verdade, só entre os cartões. */}
-          <div className="wrap grid sm:grid-cols-3 sm:divide-x sm:divide-white/10 divide-y sm:divide-y-0 divide-white/10 border-y border-white/10">
+          <div className="wrap grid sm:grid-cols-3 sm:divide-x sm:divide-black/10 divide-y sm:divide-y-0 divide-black/10 border-y border-black/10">
             {CAMINHOS.map((c, i) => (
               <Reveal key={c.href} delay={i * 80}>
-                <Link href={c.href} className="group flex h-full flex-col gap-3 p-7 transition-colors hover:bg-white/[0.03]">
+                <Link href={c.href} className="group flex h-full flex-col gap-3 p-7 transition-colors hover:bg-black/[0.03]">
                   <p className="label text-accent">{c.kicker}</p>
                   <p className="d-m text-paper group-hover:text-accent transition-colors">{c.title}</p>
                   <p className="text-sm text-muted">{c.body}</p>

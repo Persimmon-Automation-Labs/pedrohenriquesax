@@ -51,7 +51,7 @@ export default async function ProdutoPage({ params }: { params: Promise<{ slug: 
 
           {p.files.length > 0 && (
             <div>
-              <p className="label text-faint border-b border-white/10 pb-2">O que você recebe</p>
+              <p className="label text-faint border-b border-black/10 pb-2">O que você recebe</p>
               <ul className="mt-3 flex flex-col gap-2">
                 {p.files.map((f) => (
                   <li key={f.id} className="flex items-baseline justify-between gap-4 text-sm">

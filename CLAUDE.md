@@ -53,17 +53,19 @@ Acesso local do painel: `pedro@pedrolucenasax.com` / `pedro2026` (trocar em prod
 4. **A confirmação de pagamento é manual e isso é intencional.** Chave Pix estática não
    notifica o site. Toda tela que fala de pagamento precisa dizer isso ao cliente.
 
-5. **Tema travado em escuro, um acento só** (`#D9A441`, latão). Raio 2px em tudo. Nenhuma
-   seção inverte para claro. Tokens no topo de `src/app/globals.css`, com os contrastes
-   medidos.
+5. **Tema travado em claro, com DUAS funções de acento.** Raio 2px em tudo. Tokens no
+   topo de `src/app/globals.css`, com os contrastes medidos.
 
-   Era `#4FA8C4` até 03/09/2026. O Pedro pediu a troca por áudio, e a razão dele é boa:
-   "essa paleta de cor, esse azul preto e branco, bastante gente já usa". Latão em vez de
-   um amarelo qualquer porque é o material do próprio saxofone — e porque amarelo puro
-   (`#F0B429`) puxa para placa de trânsito. Contraste 8.66:1, melhor que os 7.17:1 do azul.
-   Cinza grafite foi testado e descartado: sem acento, o botão de contratar lê como
-   desabilitado. O acento vive em `--color-accent`; há cópias fixas em `icon.tsx`,
-   `apple-icon.tsx`, `opengraph-image.tsx`, `email.ts` e nos `accent-[...]` dos checkboxes.
+   `--color-accent` (`#1B6E8C`, azul escuro) é para **texto**: rótulo, link, destaque.
+   `--color-accent-fill` (`#89CFF0`, azul-bebê) é só para **preenchimento**: fundo de
+   botão, com `--color-on-fill` por cima. Trocar um pelo outro reprova no contraste —
+   azul-bebê como texto sobre branco dá 1.71:1, e como fundo de botão dá 9.32:1.
+
+   Medidos sobre `#F7F8FA`: paper 16.55:1 · muted 7.2:1 · faint 5.23:1 · accent 5.41:1.
+   Foi escuro com acento azul (`#4FA8C4`) e depois latão (`#D9A441`) até 03/09/2026; o
+   Pedro escolheu branco com azul-bebê. A vinheta das capas de vídeo continua **escura**
+   de propósito (`from-black/75`): a capa é uma foto, e o play precisa de contraste
+   contra ela, não contra o fundo da página.
 
 6. **A navegação é uma linha só.** Verificada de 320px a 1920px por `npm run verify`.
    Rótulos de texto só a partir de `xl`; abaixo disso, ícones do Phosphor.

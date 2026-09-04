@@ -17,9 +17,10 @@ export const alt = "Pedro Lucena — saxofonista em São Paulo";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const INK = "#0b0d0e";
-const PAPER = "#f2f4f5";
-const ACCENT = "#d9a441";
+const INK = "#F7F8FA";
+const PAPER = "#131A1E";
+const ACCENT = "#1B6E8C";
+const FILL = "#89CFF0";
 
 export default async function OpengraphImage() {
   let photo = "";
@@ -48,7 +49,7 @@ export default async function OpengraphImage() {
         <div
           style={{
             position: "absolute", top: 0, left: 0, width: size.width, height: size.height,
-            background: `linear-gradient(100deg, ${INK} 10%, rgba(11,13,14,0.88) 46%, rgba(11,13,14,0.28) 84%, rgba(11,13,14,0) 100%)`,
+            background: `linear-gradient(100deg, ${INK} 10%, rgba(247,248,250,0.9) 46%, rgba(247,248,250,0.25) 84%, rgba(247,248,250,0) 100%)`,
           }}
         />
 
@@ -71,11 +72,11 @@ export default async function OpengraphImage() {
             </div>
           </div>
 
-          <div style={{ display: "flex", marginTop: 30, fontSize: 27, color: "rgba(242,244,245,0.82)", lineHeight: 1.35 }}>
+          <div style={{ display: "flex", marginTop: 30, fontSize: 27, color: "#4A555C", lineHeight: 1.35 }}>
             Souza Lima &amp; Berklee · big bands, jazz e eventos
           </div>
 
-          <div style={{ display: "flex", marginTop: 26, width: 64, height: 3, background: ACCENT }} />
+          <div style={{ display: "flex", marginTop: 26, width: 64, height: 4, background: FILL }} />
         </div>
       </div>
     ),

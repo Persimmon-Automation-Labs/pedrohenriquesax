@@ -55,7 +55,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "", has
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-          solid || open ? "chrome-top backdrop-blur border-b border-white/10" : "border-b border-transparent"
+          solid || open ? "chrome-top backdrop-blur border-b border-black/10" : "border-b border-transparent"
         }`}
       >
         <div className="wrap flex h-[68px] items-center justify-between gap-4">
@@ -139,7 +139,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "", has
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="d-m text-paper hover:text-accent transition-colors border-b border-white/10 py-4"
+                className="d-m text-paper hover:text-accent transition-colors border-b border-black/10 py-4"
                 style={{ animation: `rise .5s cubic-bezier(.16,1,.3,1) ${i * 35}ms both` }}
               >
                 {l.label}
@@ -148,7 +148,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "", has
             <Link
               href="/conta"
               onClick={() => setOpen(false)}
-              className="d-m text-accent hover:text-paper transition-colors border-b border-white/10 py-4"
+              className="d-m text-accent hover:text-paper transition-colors border-b border-black/10 py-4"
               style={{ animation: `rise .5s cubic-bezier(.16,1,.3,1) ${links.length * 35}ms both` }}
             >
               {loggedIn ? "Minha conta" : "Entrar"}

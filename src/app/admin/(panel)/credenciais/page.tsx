@@ -36,10 +36,10 @@ export default async function Credenciais() {
         if (!list.length) return null;
         return (
           <section key={key} className="mt-10">
-            <p className="label text-faint border-b border-white/10 pb-2">{label}</p>
+            <p className="label text-faint border-b border-black/10 pb-2">{label}</p>
             <ul className="mt-3">
               {list.map((c) => (
-                <li key={c.id} className="flex items-center justify-between gap-4 border-b border-white/[0.07] py-3">
+                <li key={c.id} className="flex items-center justify-between gap-4 border-b border-black/[0.09] py-3">
                   <div className="min-w-0">
                     <p className="d-nar text-paper text-[1rem]">{c.artist}</p>
                     {(c.note || c.year) && <p className="text-xs text-faint mt-0.5">{[c.note, c.year].filter(Boolean).join(" · ")}</p>}

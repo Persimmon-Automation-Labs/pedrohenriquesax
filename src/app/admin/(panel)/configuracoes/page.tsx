@@ -31,7 +31,7 @@ export default async function Config() {
             </div>
           </fieldset>
 
-          <fieldset className="flex flex-col gap-5 border-t border-white/10 pt-7">
+          <fieldset className="flex flex-col gap-5 border-t border-black/10 pt-7">
             <legend className="d-m text-paper mb-4">Identificação</legend>
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label="Nome" name="name" defaultValue={s.name} required />
@@ -42,7 +42,7 @@ export default async function Config() {
             </div>
           </fieldset>
 
-          <fieldset className="flex flex-col gap-5 border-t border-white/10 pt-7">
+          <fieldset className="flex flex-col gap-5 border-t border-black/10 pt-7">
             <legend className="d-m text-paper mb-4">Redes</legend>
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label="Instagram" name="instagramUrl" defaultValue={s.instagramUrl} />
@@ -53,7 +53,7 @@ export default async function Config() {
             </div>
           </fieldset>
 
-          <fieldset className="flex flex-col gap-5 border-t border-white/10 pt-7">
+          <fieldset className="flex flex-col gap-5 border-t border-black/10 pt-7">
             <legend className="d-m text-paper mb-4">Imagens e currículo</legend>
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="field"><label htmlFor="heroImage">Retrato do herói (vertical)</label>

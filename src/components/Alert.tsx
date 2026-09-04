@@ -21,5 +21,5 @@ export function Empty({ title, body, action }: { title: string; body?: string; a
 }
 
 export function Skeleton({ className = "" }: { className?: string }) {
-  return <div className={`bg-white/5 rounded-[2px] animate-pulse ${className}`} />;
+  return <div className={`bg-black/5 rounded-[2px] animate-pulse ${className}`} />;
 }

@@ -7,14 +7,14 @@ export function About({ settings: s, level = "h2" }: { level?: "h1" | "h2"; sett
   const H = level;
   const paras = (s.bioLong || s.bioMedium || "").split(/\n\s*\n/).filter(Boolean);
   return (
-    <section id="sobre" className="section border-t border-white/10">
+    <section id="sobre" className="section border-t border-black/10">
       <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-5">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] group">
             {s.aboutImageUrl ? (
               <Image src={mediaUrl(s.aboutImageUrl)} alt={s.name} fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover zoom-img" />
             ) : (
-              <div className="h-full w-full bg-gradient-to-br from-[#1b2429] to-ink" />
+              <div className="h-full w-full bg-gradient-to-br from-[#E3EAEF] to-ink" />
             )}
           </div>
         </Reveal>

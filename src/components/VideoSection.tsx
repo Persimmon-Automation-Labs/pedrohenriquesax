@@ -55,11 +55,11 @@ export function VideoSection({
   const grid = lead ? rest : playable;
 
   return (
-    <section id={id} className={`${sub ? "section-sm" : "section border-t border-white/10"} ${className}`}>
+    <section id={id} className={`${sub ? "section-sm" : "section border-t border-black/10"} ${className}`}>
       <div className="wrap">
         <Reveal>
           {sub ? (
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-white/10 pb-3">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-black/10 pb-3">
               <H className="d-s text-paper">{title}</H>
               <span className="label text-faint">{kicker}</span>
             </div>

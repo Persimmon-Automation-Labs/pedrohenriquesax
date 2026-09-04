@@ -57,7 +57,7 @@ export function Credentials({
   })).filter((g) => g.ensembles.length);
 
   return (
-    <section id="credenciais" className="section border-t border-white/10">
+    <section id="credenciais" className="section border-t border-black/10">
       <div className="wrap">
         <Reveal>
           <p className="label text-accent">Trajetória</p>

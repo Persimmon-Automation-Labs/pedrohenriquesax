@@ -74,7 +74,7 @@ export function RequestForm({ defaultTipo = "evento" }: { defaultTipo?: Tipo }) 
         placeholder={evento ? "Que tipo de evento, data e cidade, se já souber." : "Sonoridade, improvisação, leitura…"}
       />
 
-      <details className="group border-t border-white/10 pt-4">
+      <details className="group border-t border-black/10 pt-4">
         <summary className="label flex cursor-pointer list-none items-center gap-2 text-faint transition-colors hover:text-muted">
           <CaretDown size={13} weight="bold" aria-hidden className="transition-transform group-open:rotate-180" />
           {evento ? "Detalhes do evento (opcional)" : "Sobre você (opcional)"}

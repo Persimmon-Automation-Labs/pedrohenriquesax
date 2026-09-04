@@ -7,12 +7,24 @@ export function youtubeId(url: string): string | null {
 }
 
 /**
- * A capa do vídeo. `maxresdefault` é 1280×720 e não existe para todo vídeo;
- * quem não tem cai para `hqdefault`, que existe sempre. O componente troca
- * sozinho no `onError`.
+ * A capa do vídeo.
+ *
+ * `maxresdefault` é 1280×720 e não existe para todo vídeo — mas o YouTube não
+ * devolve erro limpo quando falta: responde 404 com um JPEG cinza de 1097 bytes
+ * (120×90), que o navegador desenha numa boa. Por isso `onError` não basta e
+ * dois vídeos ficavam com o retângulo cinza do YouTube na grade.
+ *
+ * `sddefault` é 640×480 e existe sempre. O componente começa no maxres e cai
+ * para o sd quando o erro dispara OU quando a imagem chega com 120px de largura,
+ * que é a assinatura do espaço reservado.
  */
-export const youtubeThumb = (id: string, max = true) =>
-  `https://i.ytimg.com/vi/${id}/${max ? "maxresdefault" : "hqdefault"}.jpg`;
+export const YT_PLACEHOLDER_W = 120;
+
+/** Da melhor para a que sempre existe. `hqdefault` é o piso: nunca falta. */
+export const YT_QUALIDADES = ["maxresdefault", "sddefault", "hqdefault"] as const;
+
+export const youtubeThumb = (id: string, nivel = 0) =>
+  `https://i.ytimg.com/vi/${id}/${YT_QUALIDADES[Math.min(nivel, YT_QUALIDADES.length - 1)]}.jpg`;
 
 export const youtubeWatch = (id: string) => `https://www.youtube.com/watch?v=${id}`;
 export const youtubeEmbed = (id: string) => `https://www.youtube-nocookie.com/embed/${id}`;

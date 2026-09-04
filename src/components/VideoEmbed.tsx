@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { PlayCircle } from "@phosphor-icons/react";
-import { youtubeEmbed, youtubeThumb } from "@/lib/youtube";
+import { youtubeEmbed, youtubeThumb, YT_PLACEHOLDER_W, YT_QUALIDADES } from "@/lib/youtube";
 
 /**
  * Fachada de vídeo: mostra a capa e só carrega o player quando alguém clica.
@@ -27,7 +27,7 @@ export function VideoEmbed({
   eager?: boolean;
 }) {
   const [playing, setPlaying] = useState(false);
-  const [thumb, setThumb] = useState(() => youtubeThumb(id, true));
+  const [nivel, setNivel] = useState(0);
 
   return (
     <div className={`relative aspect-video w-full overflow-hidden bg-surface ${className}`}>
@@ -47,19 +47,29 @@ export function VideoEmbed({
           className="group absolute inset-0 h-full w-full cursor-pointer"
         >
           <img
-            src={thumb}
+            src={youtubeThumb(id, nivel)}
             alt=""
             loading={eager ? "eager" : "lazy"}
             /* A capa do YouTube sempre chega em 16:9 ou 4:3; `cover` resolve as duas. */
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-            onError={() => setThumb(youtubeThumb(id, false))}
+            onError={() => setNivel((n) => Math.min(n + 1, YT_QUALIDADES.length - 1))}
+            /* O 404 do YouTube vem com um JPEG cinza de 120×90 que carrega sem
+               disparar erro — só a largura denuncia. Vídeo antigo pode não ter
+               nem maxres nem sd, então desce até o hqdefault, que existe sempre. */
+            onLoad={(e) => {
+              if (e.currentTarget.naturalWidth <= YT_PLACEHOLDER_W) {
+                setNivel((n) => Math.min(n + 1, YT_QUALIDADES.length - 1));
+              }
+            }}
           />
-          <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-ink/10" />
+          {/* Escurece a foto, não a página: a capa é sempre uma imagem, e o
+              botão de play precisa de contraste contra ela em qualquer tema. */}
+          <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/5" />
           <span aria-hidden className="absolute inset-0 flex items-center justify-center">
             <PlayCircle
               size={68}
               weight="fill"
-              className="text-paper/85 drop-shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:text-accent"
+              className="text-paper/80 drop-shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:text-accent"
             />
           </span>
         </button>

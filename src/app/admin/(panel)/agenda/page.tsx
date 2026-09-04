@@ -23,7 +23,7 @@ export default async function Agenda() {
       {shows.length ? (
         <ul className="mt-8">
           {shows.map((s) => (
-            <li key={s.id} className="flex items-center justify-between gap-4 border-b border-white/10 py-3">
+            <li key={s.id} className="flex items-center justify-between gap-4 border-b border-black/10 py-3">
               <div>
                 <p className="text-paper">{s.venue}</p>
                 <p className="mono text-xs text-faint">{fmt.format(s.date)} · {s.city}</p>

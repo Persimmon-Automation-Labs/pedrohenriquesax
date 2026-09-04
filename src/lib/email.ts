@@ -27,7 +27,7 @@ export async function sendMail({ to, subject, html, text }: Mail) {
   return { delivered: "file" as const, file: name };
 }
 
-const SHELL = (title: string, body: string) => `<!doctype html><html lang="pt-BR"><body style="margin:0;background:#0B0D0E;font-family:-apple-system,Segoe UI,Arial,sans-serif">
+const SHELL = (title: string, body: string) => `<!doctype html><html lang="pt-BR"><body style="margin:0;background:#F7F8FA;font-family:-apple-system,Segoe UI,Arial,sans-serif">
 <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:40px 16px">
 <table width="100%" style="max-width:520px" cellpadding="0" cellspacing="0">
 <tr><td style="padding-bottom:28px"><span style="font-size:19px;font-weight:800;letter-spacing:.08em;color:#fff;text-transform:uppercase">PEDRO LUCENA</span></td></tr>
@@ -35,14 +35,14 @@ const SHELL = (title: string, body: string) => `<!doctype html><html lang="pt-BR
 <h1 style="margin:0 0 16px;font-size:19px;color:#F2F4F5;font-weight:700">${title}</h1>
 ${body}
 </td></tr>
-<tr><td style="padding-top:22px;font-size:12px;color:#6A757B">pedrolucenasax.com</td></tr>
+<tr><td style="padding-top:22px;font-size:12px;color:#5E6A71">pedrolucenasax.com</td></tr>
 </table></td></tr></table></body></html>`;
 
 const P = (t: string) => `<p style="margin:0 0 13px;font-size:15px;line-height:1.6;color:#C0CACE">${t}</p>`;
 const BTN = (href: string, label: string) =>
-  `<p style="margin:22px 0 4px"><a href="${href}" style="display:inline-block;background:#D9A441;color:#0B0D0E;text-decoration:none;padding:13px 22px;border-radius:2px;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase">${label}</a></p>`;
+  `<p style="margin:22px 0 4px"><a href="${href}" style="display:inline-block;background:#89CFF0;color:#0E2430;text-decoration:none;padding:13px 22px;border-radius:2px;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase">${label}</a></p>`;
 const CODE = (t: string) =>
-  `<p style="margin:14px 0;padding:13px;background:#0B0D0E;border:1px solid rgba(255,255,255,.14);border-radius:2px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#D9A441;word-break:break-all;line-height:1.55">${t}</p>`;
+  `<p style="margin:14px 0;padding:13px;background:#FFFFFF;border:1px solid rgba(19,26,30,.18);border-radius:2px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#1B6E8C;word-break:break-all;line-height:1.55">${t}</p>`;
 
 export const tpl = {
   orderCreated: (o: { number: string; total: string; pix: string; url: string }) => ({

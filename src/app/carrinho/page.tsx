@@ -26,7 +26,7 @@ export default async function Carrinho() {
           <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_340px] lg:gap-14">
             <ul>
               {items.map((p) => (
-                <li key={p.id} className="flex items-center gap-5 border-b border-white/10 py-5">
+                <li key={p.id} className="flex items-center gap-5 border-b border-black/10 py-5">
                   <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-[2px] surface">
                     {p.coverUrl && <Image src={mediaUrl(p.coverUrl)} alt="" fill sizes="80px" className="object-cover" />}
                   </div>
@@ -45,7 +45,7 @@ export default async function Carrinho() {
 
             <aside className="surface h-fit rounded-[2px] p-6">
               <p className="label text-faint">Resumo</p>
-              <div className="mt-5 flex items-baseline justify-between border-t border-white/10 pt-5">
+              <div className="mt-5 flex items-baseline justify-between border-t border-black/10 pt-5">
                 <span className="d-m text-paper">Total</span>
                 <span className="mono text-2xl text-paper">{brl(totalCents)}</span>
               </div>

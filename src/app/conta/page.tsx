@@ -82,7 +82,7 @@ export default async function Conta() {
           {orders.length ? (
             <ul className="mt-6">
               {orders.map((o) => (
-                <li key={o.id} className="grid gap-2 border-b border-white/10 py-4 sm:grid-cols-[150px_1fr_auto_auto] sm:items-center sm:gap-6">
+                <li key={o.id} className="grid gap-2 border-b border-black/10 py-4 sm:grid-cols-[150px_1fr_auto_auto] sm:items-center sm:gap-6">
                   <span className="mono text-sm text-accent">{o.orderNumber}</span>
                   <span className="text-sm text-muted">{fmt.format(o.createdAt)}</span>
                   <span className="pill text-muted justify-self-start">{STATUS_LABEL[o.status]}</span>

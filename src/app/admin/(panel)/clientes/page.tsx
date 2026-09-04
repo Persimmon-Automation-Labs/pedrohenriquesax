@@ -16,7 +16,7 @@ export default async function Clientes() {
           {customers.map((c) => {
             const spent = c.orders.reduce((s, o) => s + o.totalCents, 0);
             return (
-              <li key={c.id} className="grid gap-2 border-b border-white/10 py-4 sm:grid-cols-[1fr_auto_auto_auto] sm:items-center sm:gap-5">
+              <li key={c.id} className="grid gap-2 border-b border-black/10 py-4 sm:grid-cols-[1fr_auto_auto_auto] sm:items-center sm:gap-5">
                 <div className="min-w-0">
                   <p className="text-paper truncate">{c.name || "—"}</p>
                   <p className="mono text-xs text-faint truncate">{c.email}</p>

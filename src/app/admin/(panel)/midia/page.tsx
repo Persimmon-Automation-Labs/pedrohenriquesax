@@ -90,7 +90,7 @@ export default async function Midia() {
             </div>
           </div>
           <label className="flex cursor-pointer items-center gap-3 text-sm text-muted">
-            <input type="checkbox" name="featured" className="h-4 w-4 accent-[#D9A441]" /> Mostrar na home
+            <input type="checkbox" name="featured" className="h-4 w-4 accent-[#1B6E8C]" /> Mostrar na home
           </label>
         </AdminForm>
       </div>
@@ -103,10 +103,10 @@ export default async function Midia() {
               <li key={m.id} className="card flex flex-wrap items-center gap-4 p-3">
                 {yid ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={youtubeThumb(yid, false)} alt="" width={96} height={54}
+                  <img src={youtubeThumb(yid, 2)} alt="" width={96} height={54}
                        className="h-[54px] w-24 shrink-0 rounded-[2px] object-cover" />
                 ) : (
-                  <div className="h-[54px] w-24 shrink-0 rounded-[2px] bg-white/5" />
+                  <div className="h-[54px] w-24 shrink-0 rounded-[2px] bg-black/5" />
                 )}
 
                 <div className="min-w-0 flex-1">

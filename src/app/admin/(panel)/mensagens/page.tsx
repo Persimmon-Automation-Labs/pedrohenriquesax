@@ -31,7 +31,7 @@ export default async function Mensagens() {
                   </div>
                 </div>
                 {fields.length > 0 && (
-                  <dl className="mt-4 grid gap-2 border-t border-white/10 pt-4 sm:grid-cols-2">
+                  <dl className="mt-4 grid gap-2 border-t border-black/10 pt-4 sm:grid-cols-2">
                     {fields.map(([k, v]) => (
                       <div key={k}><dt className="label text-faint">{k}</dt><dd className="text-sm text-paper whitespace-pre-line">{v}</dd></div>
                     ))}

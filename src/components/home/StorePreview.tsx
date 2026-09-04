@@ -7,7 +7,7 @@ export function StorePreview({ products, level = "h2" }: { level?: "h1" | "h2"; 
   const H = level;
   if (!products.length) return null;
   return (
-    <section id="loja" className="section border-t border-white/10">
+    <section id="loja" className="section border-t border-black/10">
       <div className="wrap">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6">

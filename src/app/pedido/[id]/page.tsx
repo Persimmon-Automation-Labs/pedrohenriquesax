@@ -55,7 +55,7 @@ export default async function PedidoPage({ params }: { params: Promise<{ id: str
               </li>
             ))}
           </ul>
-          <div className="mt-5 flex items-baseline justify-between border-t border-white/10 pt-5">
+          <div className="mt-5 flex items-baseline justify-between border-t border-black/10 pt-5">
             <span className="d-m text-paper">Total</span>
             <span className="mono text-2xl text-paper">{brl(order.totalCents)}</span>
           </div>
@@ -75,13 +75,13 @@ export default async function PedidoPage({ params }: { params: Promise<{ id: str
 
             <div className="mt-6">
               <p className="label text-faint">Pix copia e cola</p>
-              <p className="mono mt-2 break-all rounded-[2px] border border-white/10 bg-ink p-3 text-[0.7rem] leading-relaxed text-accent">
+              <p className="mono mt-2 break-all rounded-[2px] border border-black/10 bg-ink p-3 text-[0.7rem] leading-relaxed text-accent">
                 {order.pixPayload}
               </p>
               <CopyButton text={order.pixPayload} />
             </div>
 
-            <div className="mt-7 border-t border-white/10 pt-5">
+            <div className="mt-7 border-t border-black/10 pt-5">
               <p className="text-sm text-muted">
                 Assim que o Pedro confirmar o recebimento, o material é liberado aqui e enviado no seu e-mail.
                 Normalmente leva alguns minutos.

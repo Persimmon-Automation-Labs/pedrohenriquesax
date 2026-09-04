@@ -29,7 +29,7 @@ export default async function Pedidos({ searchParams }: { searchParams: Promise<
       {orders.length ? (
         <ul className="mt-8">
           {orders.map((o) => (
-            <li key={o.id} className="grid gap-3 border-b border-white/10 py-4 sm:grid-cols-[130px_1fr_130px_auto_auto] sm:items-center sm:gap-5">
+            <li key={o.id} className="grid gap-3 border-b border-black/10 py-4 sm:grid-cols-[130px_1fr_130px_auto_auto] sm:items-center sm:gap-5">
               <Link href={`/admin/pedidos/${o.id}`} className="mono text-sm text-accent">{o.orderNumber}</Link>
               <div className="min-w-0">
                 <p className="text-sm text-paper truncate">{o.customerName}</p>
