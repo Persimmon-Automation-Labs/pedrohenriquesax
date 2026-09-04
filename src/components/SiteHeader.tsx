@@ -1,7 +1,9 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { mediaUrl } from "@/lib/media-url";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { ShoppingBagOpen, List, X, UserCircle } from "@phosphor-icons/react";
 
 /**
@@ -59,8 +61,23 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "", has
         }`}
       >
         <div className="wrap flex h-[68px] items-center justify-between gap-4">
-          <Link href="/" className="d-nar uppercase text-paper shrink-0 flex items-center min-h-[44px] text-[0.78rem] sm:text-[0.95rem]" style={{ fontVariationSettings: '"wdth" 112, "wght" 700', letterSpacing: "0.05em" }}>
-            Pedro Lucena
+          {/* O monograma dele ao lado do nome. Estava só no ícone da aba, que
+              é onde ninguém procura por uma marca. */}
+          <Link href="/" className="flex min-h-[44px] shrink-0 items-center gap-2.5 sm:gap-3">
+            <Image
+              src={mediaUrl("/marca/monograma-escuro.png")}
+              alt=""
+              width={150}
+              height={170}
+              priority
+              className="h-[22px] w-auto sm:h-[26px]"
+            />
+            <span
+              className="d-nar uppercase text-paper text-[0.78rem] sm:text-[0.95rem]"
+              style={{ fontVariationSettings: '"wdth" 112, "wght" 700', letterSpacing: "0.05em" }}
+            >
+              Pedro Lucena
+            </span>
           </Link>
 
           <nav aria-label="Principal" className="hidden lg:flex items-center gap-6">

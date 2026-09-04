@@ -215,6 +215,22 @@ body {
 .link-underline { color: var(--color-accent); text-underline-offset: 3px; }
 .link-underline:hover { text-decoration: underline; }
 
+/* Campo atrás do retrato: um cinza muito claro que nasce sob a figura e some
+   antes de encostar no texto. Sem ele o recorte flutua num branco chapado; a
+   ideia é dar chão, não desenhar uma caixa — por isso raio grande e nenhuma
+   borda. */
+.hero-field {
+  background: radial-gradient(115% 88% at 76% 62%,
+    #E7ECF1 0%, rgb(231 236 241 / 0.6) 42%, rgb(231 236 241 / 0) 70%);
+}
+@media (max-width: 767px) {
+  /* No celular o retrato está embaixo, no fluxo: o campo acompanha. */
+  .hero-field {
+    background: radial-gradient(90% 46% at 50% 88%,
+      #E7ECF1 0%, rgb(231 236 241 / 0.55) 45%, rgb(231 236 241 / 0) 72%);
+  }
+}
+
 /* A máscara e a vinheta do herói foram removidas em 03/09/2026: elas existiam
    para esconder a borda dura entre o fundo escuro da foto de estúdio e a
    página. Com o retrato recortado em PNG transparente não há borda, e no tema

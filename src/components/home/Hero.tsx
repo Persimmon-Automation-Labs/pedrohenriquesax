@@ -30,14 +30,22 @@ export function Hero({ settings: s }: { settings: Settings }) {
       height={1650}
       priority
       sizes="(max-width: 768px) 70vw, 50vw"
-      className="h-auto w-auto object-contain object-bottom"
+      className="h-auto w-full object-contain object-bottom"
     />
   );
 
   return (
     <section className="relative overflow-hidden md:flex md:min-h-[100dvh] md:items-center">
       {/* Computador: retrato sangrando à direita, atrás do texto */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-end justify-end md:flex md:w-[60%] lg:w-[54%] xl:w-[50%] [&_img]:max-h-[100dvh]">
+      {/* Campo de luz atrás da figura, para a transição não ser um corte seco
+          contra o branco. */}
+      <div aria-hidden className="hero-field pointer-events-none absolute inset-0" />
+
+      {/* O retrato é dimensionado pela LARGURA da tela e ancorado embaixo. Com
+          altura máxima em dvh ele mudava de tamanho conforme a altura da
+          janela — janela baixa encolhia a figura. Agora só a largura manda, e
+          o que sobrar embaixo é aparado pelo overflow da seção. */}
+      <div className="pointer-events-none absolute bottom-0 right-0 hidden md:block md:w-[46%] lg:w-[43%] xl:w-[40%] 2xl:w-[36%]">
         {retrato}
       </div>
 
@@ -80,8 +88,9 @@ export function Hero({ settings: s }: { settings: Settings }) {
         </div>
 
         {/* Celular: o retrato entra embaixo, no fluxo, sem cobrir nada */}
-        <div className="mt-10 flex justify-center md:hidden [&_img]:max-h-[56dvh]">
-          {retrato}
+        <div className="relative mt-10 md:hidden">
+          <div aria-hidden className="hero-field pointer-events-none absolute inset-0" />
+          <div className="relative mx-auto w-[78%] max-w-[22rem]">{retrato}</div>
         </div>
       </div>
     </section>
