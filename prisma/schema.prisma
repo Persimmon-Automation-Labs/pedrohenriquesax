@@ -244,6 +244,8 @@ model MediaItem {
   year      String       @default("")
   /// "3:55" — usado no cartão e no schema VideoObject.
   duration  String       @default("")
+  /// Capa. Só para vídeo hospedado aqui — o do YouTube traz a sua.
+  poster    String       @default("")
   featured  Boolean      @default(false)
   sortOrder Int          @default(0)
 

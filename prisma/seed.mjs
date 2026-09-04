@@ -117,12 +117,13 @@ async function main() {
   // dois nomes que já estavam na parede de credenciais sem prova nenhuma.
   if ((await prisma.mediaItem.count()) === 0) {
     let ordem = 0;
-    for (const [id, title, credit, year, duration, context, featured] of VIDEOS) {
+    for (const [id, title, credit, year, duration, context, featured, poster] of VIDEOS) {
+      // um caminho começando com "/" é arquivo nosso; o resto é id do YouTube
+      const url = id.startsWith("/") ? id : `https://www.youtube.com/watch?v=${id}`;
       await prisma.mediaItem.create({
         data: {
-          kind: "video",
-          url: `https://www.youtube.com/watch?v=${id}`,
-          title, credit, year, duration, context,
+          kind: "video", url, title, credit, year, duration, context,
+          poster: poster || "",
           featured: !!featured,
           sortOrder: ordem++,
         },

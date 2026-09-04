@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { MediaItem } from "@prisma/client";
+import { youtubeId } from "@/lib/youtube";
 import { Reveal } from "@/components/Reveal";
 import { VideoEmbed } from "@/components/VideoEmbed";
-import { youtubeId } from "@/lib/youtube";
 
 /**
  * Vídeo colocado ao lado do que ele prova.
@@ -48,7 +48,7 @@ export function VideoSection({
   sub?: boolean;
 }) {
   const H = level;
-  const playable = items.filter((m) => youtubeId(m.url));
+  const playable = items.filter((m) => m.url);
   if (!playable.length) return null;
 
   const [first, ...rest] = playable;
@@ -84,7 +84,7 @@ export function VideoSection({
              só maior. */
           <Reveal delay={80}>
             <figure className="mt-8 max-w-2xl">
-              <VideoEmbed id={youtubeId(first.url)!} title={first.title} eager />
+              <VideoEmbed url={first.url} poster={first.poster} title={first.title} eager />
               <Legenda item={first} />
             </figure>
           </Reveal>
@@ -95,7 +95,9 @@ export function VideoSection({
             {grid.map((m, i) => (
               <Reveal as="li" key={m.id} delay={Math.min(i * 60, 360)}>
                 <figure>
-                  <VideoEmbed id={youtubeId(m.url)!} title={m.title} />
+                  <VideoEmbed url={m.url} poster={m.poster} title={m.title}
+                    aspect={youtubeId(m.url) ? "" : "630/1120"}
+                    className={youtubeId(m.url) ? "" : "mx-auto max-w-[15rem]"} />
                   <Legenda item={m} />
                 </figure>
               </Reveal>

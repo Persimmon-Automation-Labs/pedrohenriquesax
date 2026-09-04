@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/Reveal";
-import { mediaUrl } from "@/lib/media-url";
+import { VideoEmbed } from "@/components/VideoEmbed";
 
 /**
  * O único registro de evento de verdade que existe: o Pedro tocando live sax
@@ -18,16 +18,8 @@ export function LiveSax({ src = "/video/live-sax.mp4", poster = "/video/live-sax
     <section id="live-sax" className="section border-t border-black/10">
       <div className="wrap grid items-center gap-10 lg:grid-cols-[minmax(0,340px)_1fr] lg:gap-16">
         <Reveal>
-          <video
-            className="w-full max-w-[340px] rounded-[2px] border border-black/10 bg-surface"
-            src={mediaUrl(src)}
-            poster={mediaUrl(poster)}
-            controls
-            preload="none"
-            playsInline
-          >
-            Seu navegador não toca este vídeo.
-          </video>
+          <VideoEmbed url={src} poster={poster} title="Live sax em evento" aspect="782/1280"
+            className="max-w-[340px] rounded-[2px] border border-black/10" />
         </Reveal>
 
         <Reveal delay={90}>

@@ -6,6 +6,7 @@ import { VideoSection } from "@/components/VideoSection";
 import { Empty } from "@/components/Alert";
 import { videosJsonLd } from "@/lib/youtube";
 import Link from "next/link";
+import { Spotify } from "@/components/Spotify";
 
 /**
  * O acervo. Um lugar só com tudo.
@@ -65,6 +66,13 @@ export default async function Videos() {
           />
         </div>
       )}
+
+      {/* A playlist entra depois dos vídeos: som gravado é outro tipo de prova,
+          e é a única que o site tinha como mostrar de trabalho de estúdio. */}
+      <Spotify
+        playlistId="2DoalDFTdg45JYx1t4V9eP"
+        body="Faixas que gravei com outros artistas, reunidas pelo próprio Pedro."
+      />
 
       {ld.length > 0 && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />

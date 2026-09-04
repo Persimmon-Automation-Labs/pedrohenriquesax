@@ -1,6 +1,7 @@
 /**
  * Os vídeos, endereçados a quem eles convencem.
- * [id do YouTube, título, com quem/onde, ano, duração, contexto, destaque]
+ * [id do YouTube OU caminho do arquivo, título, com quem/onde, ano, duração,
+ *  contexto, destaque, capa (só para arquivo próprio)]
  *
  * `eventos`  — pop reconhecível, produção grande: é o que um contratante de
  *              casamento ou corporativo precisa ver antes de escrever.
@@ -23,5 +24,8 @@ export const VIDEOS = [
   ["MNWuZAFp2j4", "Affirmation", "George Benson · Music in the Park", "2024", "2:10", "jazz", false],
   ["TS2zVsZcubE", "Viajando pelo Brasil", "Hermeto Pascoal, com Carol Panesi", "2025", "1:00", "jazz", false],
   ["nJ34Bqtc_Q8", "Trumpet Tune — solo", "Freedom Big Band", "2020", "0:56", "jazz", false],
+  // Hospedado aqui, não no YouTube: gravação de celular que o Pedro mandou
+  // dizendo ter "um carinho enorme" por ela. Ele solando com a big band.
+  ["/video/solo-bigband.mp4", "Solo com a big band", "Ao vivo", "", "0:59", "jazz", false, "/video/solo-bigband.jpg"],
 
 ];

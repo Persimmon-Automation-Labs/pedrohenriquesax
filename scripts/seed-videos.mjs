@@ -20,11 +20,11 @@ const main = async () => {
   let ordem = await prisma.mediaItem.count();
   let novos = 0;
 
-  for (const [id, title, credit, year, duration, context, featured] of VIDEOS) {
-    const url = `https://www.youtube.com/watch?v=${id}`;
+  for (const [id, title, credit, year, duration, context, featured, poster] of VIDEOS) {
+    const url = id.startsWith("/") ? id : `https://www.youtube.com/watch?v=${id}`;
     if (jaTem.has(url)) continue;
     await prisma.mediaItem.create({
-      data: { kind: "video", url, title, credit, year, duration, context, featured: !!featured, sortOrder: ordem++ },
+      data: { kind: "video", url, title, credit, year, duration, context, poster: poster || "", featured: !!featured, sortOrder: ordem++ },
     });
     novos++;
   }
