@@ -11,7 +11,7 @@ export default function Icon() {
       <div
         style={{
           width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center",
-          background: "#4fa8c4", color: "#0b0d0e", fontSize: 19, fontWeight: 800, letterSpacing: -1,
+          background: "#d9a441", color: "#0b0d0e", fontSize: 19, fontWeight: 800, letterSpacing: -1,
         }}
       >
         PL

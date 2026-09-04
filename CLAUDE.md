@@ -53,8 +53,17 @@ Acesso local do painel: `pedro@pedrolucenasax.com` / `pedro2026` (trocar em prod
 4. **A confirmação de pagamento é manual e isso é intencional.** Chave Pix estática não
    notifica o site. Toda tela que fala de pagamento precisa dizer isso ao cliente.
 
-5. **Tema travado em escuro, um acento só** (`#4FA8C4`). Raio 2px em tudo. Nenhuma seção
-   inverte para claro. Tokens no topo de `src/app/globals.css`, com os contrastes medidos.
+5. **Tema travado em escuro, um acento só** (`#D9A441`, latão). Raio 2px em tudo. Nenhuma
+   seção inverte para claro. Tokens no topo de `src/app/globals.css`, com os contrastes
+   medidos.
+
+   Era `#4FA8C4` até 03/09/2026. O Pedro pediu a troca por áudio, e a razão dele é boa:
+   "essa paleta de cor, esse azul preto e branco, bastante gente já usa". Latão em vez de
+   um amarelo qualquer porque é o material do próprio saxofone — e porque amarelo puro
+   (`#F0B429`) puxa para placa de trânsito. Contraste 8.66:1, melhor que os 7.17:1 do azul.
+   Cinza grafite foi testado e descartado: sem acento, o botão de contratar lê como
+   desabilitado. O acento vive em `--color-accent`; há cópias fixas em `icon.tsx`,
+   `apple-icon.tsx`, `opengraph-image.tsx`, `email.ts` e nos `accent-[...]` dos checkboxes.
 
 6. **A navegação é uma linha só.** Verificada de 320px a 1920px por `npm run verify`.
    Rótulos de texto só a partir de `xl`; abaixo disso, ícones do Phosphor.

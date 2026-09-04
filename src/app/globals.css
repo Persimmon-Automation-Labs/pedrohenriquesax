@@ -13,8 +13,8 @@
   --color-paper: #f2f4f5;
   --color-muted: #94a0a6;
   --color-faint: #788286;
-  --color-accent: #4fa8c4;
-  --color-accent-deep: #1e6c85;
+  --color-accent: #d9a441;
+  --color-accent-deep: #8A6420;
   --color-danger: #f08a7a;
   --color-ok: #5ec98f;
 
@@ -151,7 +151,7 @@ body {
 .btn:active { transform: scale(0.985); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 .btn-primary { background: var(--color-accent); color: var(--color-ink); }
-.btn-primary:hover { background: #62b5cf; }
+.btn-primary:hover { background: #E6B45A; }
 .btn-secondary { border: 1px solid rgb(255 255 255 / 0.3); color: var(--color-paper); }
 .btn-secondary:hover { border-color: rgb(255 255 255 / 0.6); background: rgb(255 255 255 / 0.04); }
 .btn-ghost { color: var(--color-muted); padding: 0.6rem 0.8rem; }

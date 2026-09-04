@@ -23,7 +23,7 @@ export function ProductForm({ product }: { product?: Product & { files: ProductF
           <Field label="Descrição" name="description" textarea defaultValue={product?.description} />
 
           <label className="flex items-center gap-3 text-sm text-muted cursor-pointer">
-            <input type="checkbox" name="active" defaultChecked={product?.active ?? true} className="h-4 w-4 accent-[#4FA8C4]" />
+            <input type="checkbox" name="active" defaultChecked={product?.active ?? true} className="h-4 w-4 accent-[#D9A441]" />
             Visível na loja
           </label>
 

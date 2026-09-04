@@ -14,8 +14,8 @@ export default function AppleIcon() {
           alignItems: "center", justifyContent: "center", background: "#0b0d0e",
         }}
       >
-        <div style={{ display: "flex", fontSize: 78, fontWeight: 800, color: "#4fa8c4", letterSpacing: -4 }}>PL</div>
-        <div style={{ display: "flex", marginTop: 12, width: 44, height: 3, background: "#4fa8c4" }} />
+        <div style={{ display: "flex", fontSize: 78, fontWeight: 800, color: "#d9a441", letterSpacing: -4 }}>PL</div>
+        <div style={{ display: "flex", marginTop: 12, width: 44, height: 3, background: "#d9a441" }} />
       </div>
     ),
     { ...size },

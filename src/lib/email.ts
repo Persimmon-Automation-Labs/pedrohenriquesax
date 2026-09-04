@@ -40,9 +40,9 @@ ${body}
 
 const P = (t: string) => `<p style="margin:0 0 13px;font-size:15px;line-height:1.6;color:#C0CACE">${t}</p>`;
 const BTN = (href: string, label: string) =>
-  `<p style="margin:22px 0 4px"><a href="${href}" style="display:inline-block;background:#4FA8C4;color:#0B0D0E;text-decoration:none;padding:13px 22px;border-radius:2px;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase">${label}</a></p>`;
+  `<p style="margin:22px 0 4px"><a href="${href}" style="display:inline-block;background:#D9A441;color:#0B0D0E;text-decoration:none;padding:13px 22px;border-radius:2px;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase">${label}</a></p>`;
 const CODE = (t: string) =>
-  `<p style="margin:14px 0;padding:13px;background:#0B0D0E;border:1px solid rgba(255,255,255,.14);border-radius:2px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#4FA8C4;word-break:break-all;line-height:1.55">${t}</p>`;
+  `<p style="margin:14px 0;padding:13px;background:#0B0D0E;border:1px solid rgba(255,255,255,.14);border-radius:2px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#D9A441;word-break:break-all;line-height:1.55">${t}</p>`;
 
 export const tpl = {
   orderCreated: (o: { number: string; total: string; pix: string; url: string }) => ({

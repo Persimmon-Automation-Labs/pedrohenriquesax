@@ -90,7 +90,7 @@ export default async function Midia() {
             </div>
           </div>
           <label className="flex cursor-pointer items-center gap-3 text-sm text-muted">
-            <input type="checkbox" name="featured" className="h-4 w-4 accent-[#4FA8C4]" /> Mostrar na home
+            <input type="checkbox" name="featured" className="h-4 w-4 accent-[#D9A441]" /> Mostrar na home
           </label>
         </AdminForm>
       </div>

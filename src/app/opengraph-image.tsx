@@ -19,7 +19,7 @@ export const contentType = "image/png";
 
 const INK = "#0b0d0e";
 const PAPER = "#f2f4f5";
-const ACCENT = "#4fa8c4";
+const ACCENT = "#d9a441";
 
 export default async function OpengraphImage() {
   let photo = "";
