@@ -37,7 +37,11 @@ const CREDENCIAIS = [
   ["Toninho Geraes", "pop_nacional", null, null],
   ["Thiago e Graciano", "pop_nacional", null, null],
   ["Chrigor", "pop_nacional", null, null],
-  // Festivais
+  // Grandes eventos e festivais
+  // A CCXP veio por áudio, depois de o currículo já estar escrito: é o maior
+  // evento de cultura pop do mundo e o palco Thunder é o principal dele.
+  // Como credencial de evento corporativo, vale mais do que metade da lista.
+  ["CCXP", "festival", "2024", "Palco Thunder, Qualcomm — abertura, trilhas de games e cinema"],
   ["Festival Internacional de Campos do Jordão", "festival", "2022", "Bolsista"],
   ["Nelson Faria", "festival", "2022", "Campos do Jordão"],
   ["Gian Correa", "festival", "2022", "Campos do Jordão"],
