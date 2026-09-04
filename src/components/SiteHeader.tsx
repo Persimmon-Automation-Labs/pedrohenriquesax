@@ -15,13 +15,25 @@ const LINKS = [
   { href: "/sobre", label: "Sobre" },
   { href: "/eventos", label: "Eventos" },
   { href: "/mentoria", label: "Mentoria" },
+  { href: "/videos", label: "Vídeos" },
   { href: "/loja", label: "Loja" },
   { href: "/agenda", label: "Agenda" },
   { href: "/contato", label: "Contato" },
 ];
 
-export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "" }: { cartCount?: number; loggedIn?: boolean; whatsapp?: string }) {
+export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "", hasProducts = true, hasShows = true }: {
+  cartCount?: number; loggedIn?: boolean; whatsapp?: string; hasProducts?: boolean; hasShows?: boolean;
+}) {
+  /* Loja sem produto e agenda sem data não entram no menu: um link que só leva
+     a um pedido de desculpas custa mais do que a ausência dele. */
+  const links = LINKS.filter((l) =>
+    (l.href !== "/loja" || hasProducts) && (l.href !== "/agenda" || hasShows));
   const wa = whatsapp.replace(/\D/g, "");
+  /* Abrir uma conversa em branco faz a pessoa ter que inventar a primeira
+     frase, que é onde muita gente desiste. O texto já vai escrito. */
+  const waHref = wa
+    ? `https://wa.me/${wa}?text=${encodeURIComponent("Olá, Pedro! Vim pelo site e queria um orçamento para um evento.")}`
+    : "";
   const pathname = usePathname();
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
@@ -43,7 +55,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "" }: {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-          solid || open ? "bg-ink/95 backdrop-blur border-b border-white/10" : "border-b border-transparent"
+          solid || open ? "chrome-top backdrop-blur border-b border-white/10" : "border-b border-transparent"
         }`}
       >
         <div className="wrap flex h-[68px] items-center justify-between gap-4">
@@ -52,7 +64,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "" }: {
           </Link>
 
           <nav aria-label="Principal" className="hidden lg:flex items-center gap-6">
-            {LINKS.map((l) => {
+            {links.map((l) => {
               const active = pathname === l.href || pathname.startsWith(l.href + "/");
               return (
                 <Link
@@ -74,7 +86,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "" }: {
                 como primeiro item. */}
             {wa && (
               <a
-                href={`https://wa.me/${wa}`}
+                href={waHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary btn-sm mr-1 hidden sm:inline-flex"
@@ -82,29 +94,26 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "" }: {
                 Contratar
               </a>
             )}
-            <Link href="/conta" aria-label={loggedIn ? "Minha conta" : "Entrar"} className="btn btn-ghost px-2 sm:px-3">
-              <UserCircle size={20} weight="regular" aria-hidden />
-              <span className="label hidden xl:inline">{loggedIn ? "Conta" : "Entrar"}</span>
+            <Link href="/conta" aria-label={loggedIn ? "Minha conta" : "Entrar"} title={loggedIn ? "Minha conta" : "Entrar"} className="btn btn-ghost px-2 sm:px-3">
+              <UserCircle size={22} weight="regular" aria-hidden />
             </Link>
-            <Link href="/carrinho" aria-label={`Carrinho, ${cartCount} ${cartCount === 1 ? "item" : "itens"}`} className="btn btn-ghost relative px-2 sm:px-3 gap-1.5">
-              <ShoppingBagOpen size={20} weight="regular" aria-hidden />
-              <span className="label hidden xl:inline">Carrinho</span>
+            {hasProducts && <Link href="/carrinho" aria-label={`Carrinho, ${cartCount} ${cartCount === 1 ? "item" : "itens"}`} title="Carrinho" className="btn btn-ghost relative px-2 sm:px-3 gap-1.5">
+              <ShoppingBagOpen size={22} weight="regular" aria-hidden />
               {cartCount > 0 && (
                 <span className="mono text-[0.65rem] bg-accent text-ink rounded-[2px] px-1.5 py-0.5 leading-none" aria-live="polite">
                   {cartCount}
                 </span>
               )}
-            </Link>
+            </Link>}
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="menu-mobile"
-              aria-label={open ? "Fechar menu" : "Abrir menu"}
+              aria-label={open ? "Fechar menu" : "Abrir menu"} title={open ? "Fechar" : "Menu"}
               className="btn btn-ghost lg:hidden px-2 sm:px-3"
             >
-              {open ? <X size={20} aria-hidden /> : <List size={20} aria-hidden />}
-              <span className="label hidden xl:inline">{open ? "Fechar" : "Menu"}</span>
+              {open ? <X size={22} aria-hidden /> : <List size={22} aria-hidden />}
             </button>
           </div>
         </div>
@@ -115,7 +124,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "" }: {
           <nav aria-label="Principal (celular)" className="wrap flex flex-col py-6">
             {wa && (
               <a
-                href={`https://wa.me/${wa}`}
+                href={waHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
@@ -125,7 +134,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "" }: {
                 Contratar pelo WhatsApp
               </a>
             )}
-            {LINKS.map((l, i) => (
+            {links.map((l, i) => (
               <Link
                 key={l.href}
                 href={l.href}
@@ -140,7 +149,7 @@ export function SiteHeader({ cartCount = 0, loggedIn = false, whatsapp = "" }: {
               href="/conta"
               onClick={() => setOpen(false)}
               className="d-m text-accent hover:text-paper transition-colors border-b border-white/10 py-4"
-              style={{ animation: `rise .5s cubic-bezier(.16,1,.3,1) ${LINKS.length * 35}ms both` }}
+              style={{ animation: `rise .5s cubic-bezier(.16,1,.3,1) ${links.length * 35}ms both` }}
             >
               {loggedIn ? "Minha conta" : "Entrar"}
             </Link>

@@ -4,15 +4,15 @@ import { Reveal } from "@/components/Reveal";
 const fmt = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric", timeZone: "America/Sao_Paulo" });
 
 /** Oculta automaticamente se não houver apresentação futura. */
-export function Agenda({ shows, level = "h2" }: { level?: "h1" | "h2"; shows: Show[] }) {
+export function Agenda({ shows, level = "h2", className = "" }: { level?: "h1" | "h2"; shows: Show[]; className?: string }) {
   const H = level;
   if (!shows.length) return null;
   return (
-    <section id="agenda" className="section border-t border-white/10">
+    <section id="agenda" className={`section border-t border-white/10 ${className}`}>
       <div className="wrap">
         <Reveal>
           <p className="label text-accent">Onde me ver</p>
-          <H className="d-l text-paper mt-4">Agenda</H>
+          <H className="d-l text-paper mt-3">Agenda</H>
         </Reveal>
         <ul className="mt-10">
           {shows.map((s, i) => (

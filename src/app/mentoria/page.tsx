@@ -25,7 +25,7 @@ export default async function MentoriaPage() {
 
   return (
     <Chrome>
-      <Mentoria duration={s.mentoriaDuration} price={s.mentoriaPrice} text={s.mentoriaText} imageUrl={s.mentoriaImageUrl} level="h1" />
+      <Mentoria duration={s.mentoriaDuration} price={s.mentoriaPrice} imageUrl={s.mentoriaImageUrl} level="h1" />
       {/* As transcrições são material didático pronto: mostram o ouvido e o
           método de estudo melhor do que qualquer parágrafo sobre a mentoria. */}
       <VideoSection
@@ -33,7 +33,6 @@ export default async function MentoriaPage() {
         id="transcricoes"
         kicker="Como eu estudo"
         title="Transcrições"
-        body="Solos que tirei de ouvido e gravei. É esse trabalho que a mentoria ensina a fazer."
       />
       {ld.length > 0 && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />

@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Reveal";
+import { mediaUrl } from "@/lib/media-url";
 
 /**
  * O único registro de evento de verdade que existe: o Pedro tocando live sax
@@ -19,8 +20,8 @@ export function LiveSax({ src = "/video/live-sax.mp4", poster = "/video/live-sax
         <Reveal>
           <video
             className="w-full max-w-[340px] rounded-[2px] border border-white/10 bg-surface"
-            src={src}
-            poster={poster}
+            src={mediaUrl(src)}
+            poster={mediaUrl(poster)}
             controls
             preload="none"
             playsInline

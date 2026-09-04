@@ -10,8 +10,8 @@
  */
 export const VIDEOS = [
   // ── Eventos ──────────────────────────────────────────────────────────
-  ["ieAUlb9spk8", "Terceiro Sofrendo", "Thiago e Graciano, part. Tierry · DVD Onda de Amor", "2022", "2:53", "eventos", false],
-  ["6sQbhlfHYlE", "Uma Mensagem de Amor", "Edu Cristófaro e Léo Jaime", "2026", "4:27", "eventos", false],
+  ["ieAUlb9spk8", "Terceiro Sofrendo", "Thiago e Graciano, part. Tierry · DVD Onda de Amor", "2022", "2:53", "eventos", true],
+  ["6sQbhlfHYlE", "Uma Mensagem de Amor", "Edu Cristófaro e Léo Jaime", "2026", "4:27", "eventos", true],
   ["ng9T5VGBAmg", "Codinome Beija-flor", "Edu Cristófaro", "2026", "5:16", "eventos", false],
   ["qRdgTQ-YW68", "Simples Desejo", "Edu Cristófaro", "2026", "6:42", "eventos", false],
   ["AuSnoq318HY", "Um Milagre Senhor", "Prisma Brasil · ADVEC", "2022", "5:07", "eventos", false],

@@ -38,7 +38,7 @@ export default async function Eventos() {
         id="videos"
         kicker="Como soa"
         title="Gravações"
-        body="Trabalhos em que me chamaram para gravar. Dá para ouvir o som antes de fechar."
+        verMais
       />
       {ld.length > 0 && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />

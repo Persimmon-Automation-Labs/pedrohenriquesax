@@ -21,21 +21,20 @@ const CAMINHOS = [
 ];
 
 export default async function Home() {
-  const [settings, videos, products, shows, count, customer] = await Promise.all([
+  const [settings, videos, products, shows, count, customer, produtosAtivos, showsFuturos] = await Promise.all([
     getSettings(),
-    /* Destaque primeiro (o solo com a Big Band do Global Jazz), depois os dois
-       primeiros de eventos — Tierry e Léo Jaime. Um vídeo de musicalidade e
-       dois de nome reconhecível: a home atende os dois públicos sem virar
-       uma página de mídia. */
+    /* Quem escolhe o que aparece na home é o Pedro, pela caixa "destaque" no
+       painel — não uma regra de ordenação escondida aqui. */
     prisma.mediaItem.findMany({
-      where: { kind: "video" },
-      orderBy: [{ featured: "desc" }, { sortOrder: "asc" }],
-      take: 3,
+      where: { kind: "video", featured: true },
+      orderBy: { sortOrder: "asc" },
     }),
     prisma.product.findMany({ where: { active: true }, orderBy: { sortOrder: "asc" }, take: 3 }),
     prisma.show.findMany({ where: { date: { gte: new Date() } }, orderBy: { date: "asc" }, take: 4 }),
     cartCount(),
     getCustomer(),
+    prisma.product.count({ where: { active: true } }),
+    prisma.show.count({ where: { date: { gte: new Date() } } }),
   ]);
 
   const site = process.env.SITE_URL || "http://localhost:3000";
@@ -58,16 +57,19 @@ export default async function Home() {
   return (
     <>
       <div id="top-sentinel" aria-hidden className="absolute top-0 h-px w-px" />
-      <SiteHeader cartCount={count} loggedIn={!!customer} whatsapp={settings.whatsapp} />
+      <SiteHeader cartCount={count} loggedIn={!!customer} whatsapp={settings.whatsapp} hasProducts={produtosAtivos > 0} hasShows={showsFuturos > 0} />
       <main id="conteudo">
         <Hero settings={settings} />
 
         <section aria-labelledby="caminhos" className="section border-t border-white/10">
           <h2 id="caminhos" className="sr-only">O que eu faço</h2>
-          <div className="wrap grid gap-px sm:grid-cols-3 bg-white/10">
+          {/* Antes isto era um grid com fundo branco a 10% e gap de 1px: o fundo
+              aparecia nas bordas externas e virava duas faixas cinzas soltas nos
+              lados. Agora a divisória é borda de verdade, só entre os cartões. */}
+          <div className="wrap grid sm:grid-cols-3 sm:divide-x sm:divide-white/10 divide-y sm:divide-y-0 divide-white/10 border-y border-white/10">
             {CAMINHOS.map((c, i) => (
               <Reveal key={c.href} delay={i * 80}>
-                <Link href={c.href} className="group flex h-full flex-col gap-3 bg-ink p-7 transition-colors hover:bg-surface">
+                <Link href={c.href} className="group flex h-full flex-col gap-3 p-7 transition-colors hover:bg-white/[0.03]">
                   <p className="label text-accent">{c.kicker}</p>
                   <p className="d-m text-paper group-hover:text-accent transition-colors">{c.title}</p>
                   <p className="text-sm text-muted">{c.body}</p>
@@ -85,7 +87,7 @@ export default async function Home() {
           id="midia"
           kicker="Ouvir e assistir"
           title="Assista"
-          body="Um solo, e duas gravações com quem me chamou para gravar."
+          verMais
         />
 
         <StorePreview products={products} />

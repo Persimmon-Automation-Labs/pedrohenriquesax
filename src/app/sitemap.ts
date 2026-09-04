@@ -8,9 +8,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch {
     // banco ainda não migrado (primeiro build): o mapa sai sem os produtos
   }
+  // Loja e agenda respondem 404 quando estão vazias — não podem entrar no mapa.
+  let temShow = false;
+  try {
+    temShow = (await prisma.show.count({ where: { date: { gte: new Date() } } })) > 0;
+  } catch { /* banco ainda não migrado */ }
+
+  const rotas = ["sobre", "eventos", "mentoria", "videos", "contato"];
+  if (products.length) rotas.push("loja");
+  if (temShow) rotas.push("agenda");
+
   return [
     { url: base, changeFrequency: "weekly", priority: 1 },
-    ...["sobre", "eventos", "mentoria", "loja", "agenda", "contato"].map((r) => ({
+    ...rotas.map((r) => ({
       url: `${base}/${r}`, changeFrequency: "weekly" as const, priority: 0.8,
     })),
     ...products.map((p) => ({ url: `${base}/loja/${p.slug}`, lastModified: p.updatedAt, priority: 0.7 })),

@@ -64,27 +64,27 @@ export function Credentials({
           <H className="d-l text-paper mt-4">Palcos e formações</H>
         </Reveal>
 
-        <div className="mt-12 flex flex-col gap-10">
+        {/* Era uma lista de linhas separadas por filete, que numa tela larga
+            virava um campo de branco entre o nome e a data. Em cartão, cada
+            conjunto vira um bloco fechado e a página para de parecer vazia. */}
+        <div className="mt-8 flex flex-col gap-8">
           {byGroup.map((g, gi) => (
             <div key={g.key}>
               <Reveal delay={gi * 50}>
-                <p className="label text-faint border-b border-white/10 pb-3">{g.label}</p>
+                <p className="label text-faint">{g.label}</p>
               </Reveal>
 
-              <ul className="mt-4 flex flex-col">
+              <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {g.ensembles.map((e, i) => (
                   <Reveal as="li" key={`${g.key}-${i}`} delay={Math.min(i * 40, 320)}>
-                    <div className="flex flex-col gap-1 border-b border-white/[0.07] py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
-                      <p className="text-paper">
-                        {e.artists.join(" · ")}
-                      </p>
+                    <div className="card h-full p-4">
                       {(e.note || e.years) && (
-                        <p className="shrink-0 text-sm text-faint sm:text-right">
-                          {e.note}
-                          {e.note && e.years ? " · " : ""}
+                        <p className="flex flex-wrap items-baseline gap-x-2 text-xs text-faint">
+                          {e.note && <span>{e.note}</span>}
                           {e.years && <span className="mono">{e.years}</span>}
                         </p>
                       )}
+                      <p className="mt-2 text-paper leading-snug">{e.artists.join(" · ")}</p>
                     </div>
                   </Reveal>
                 ))}

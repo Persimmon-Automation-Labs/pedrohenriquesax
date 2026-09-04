@@ -71,6 +71,21 @@ export async function submitMentoriaForm(_prev: FormState, fd: FormData): Promis
   return { ok: true };
 }
 
+/**
+ * Um pedido só, de qualquer tipo. O formulário unificado manda `tipo` e daqui
+ * cai no fluxo que já existia — evento devolve o WhatsApp preenchido, mentoria
+ * apenas confirma.
+ */
+export async function submitRequest(prev: FormState, fd: FormData): Promise<FormState> {
+  const tipo = String(fd.get("tipo") ?? "evento");
+  if (tipo === "mentoria") {
+    // O campo livre chama-se "message" no formulário e "goal" no schema antigo.
+    if (!fd.get("goal") && fd.get("message")) fd.set("goal", String(fd.get("message")));
+    return submitMentoriaForm(prev, fd);
+  }
+  return submitEventForm(prev, fd);
+}
+
 export async function submitGeneralForm(_prev: FormState, fd: FormData): Promise<FormState> {
   const parsed = generalFormSchema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return { error: "Confira os campos destacados.", fieldErrors: fieldErrors(parsed.error) };

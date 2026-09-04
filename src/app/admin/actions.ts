@@ -286,6 +286,37 @@ export async function saveMedia(_p: AdminState, fd: FormData): Promise<AdminStat
   revalidatePath("/sobre"); revalidatePath("/admin/midia");
   return { ok: "Item adicionado." };
 }
+/** Liga/desliga o destaque — é isto que decide o que aparece na home. */
+export async function toggleMediaFeatured(id: string) {
+  await guard();
+  const m = await prisma.mediaItem.findUnique({ where: { id } });
+  if (!m) return;
+  await prisma.mediaItem.update({ where: { id }, data: { featured: !m.featured } });
+  revalidatePath("/"); revalidatePath("/videos"); revalidatePath("/admin/midia");
+}
+
+/** Move o vídeo para outra página. */
+export async function setMediaContext(id: string, context: MediaContext) {
+  await guard();
+  await prisma.mediaItem.update({ where: { id }, data: { context } });
+  revalidatePath("/"); revalidatePath("/videos"); revalidatePath("/eventos");
+  revalidatePath("/mentoria"); revalidatePath("/admin/midia");
+}
+
+/** Sobe ou desce um vídeo na ordem em que aparece. */
+export async function moveMedia(id: string, dir: "up" | "down") {
+  await guard();
+  const todos = await prisma.mediaItem.findMany({ orderBy: { sortOrder: "asc" } });
+  const i = todos.findIndex((m) => m.id === id);
+  const j = dir === "up" ? i - 1 : i + 1;
+  if (i < 0 || j < 0 || j >= todos.length) return;
+  await prisma.$transaction([
+    prisma.mediaItem.update({ where: { id: todos[i].id }, data: { sortOrder: j } }),
+    prisma.mediaItem.update({ where: { id: todos[j].id }, data: { sortOrder: i } }),
+  ]);
+  revalidatePath("/"); revalidatePath("/videos"); revalidatePath("/admin/midia");
+}
+
 export async function deleteMedia(id: string) {
   await guard();
   await prisma.mediaItem.delete({ where: { id } });
