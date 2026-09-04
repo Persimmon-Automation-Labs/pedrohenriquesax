@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 const CAMINHOS = [
   { href: "/eventos", kicker: "Contratação", title: "Eventos", body: "Casamentos de alto padrão, corporativo, live sax, shows autorais. Sete formatos, do solo ao quinteto." },
   { href: "/mentoria", kicker: "Aulas", title: "Mentoria online", body: "Individual, 1h15. De sonoridade a improvisação, no ponto em que você está." },
-  { href: "/loja", kicker: "Estudo", title: "Métodos e e-books", body: "Os materiais que uso com meus alunos, para baixar na hora." },
+  { href: "/loja", kicker: "Estudo", title: "Métodos e e‑books", body: "Os materiais que uso com meus alunos, para baixar na hora." },
 ];
 
 export default async function Home() {

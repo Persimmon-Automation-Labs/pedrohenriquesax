@@ -21,22 +21,12 @@ export const metadata: Metadata = {
   description: "Gravações de Pedro Lucena: eventos, big band e jazz, e transcrições de estudo.",
 };
 
+/* O rótulo à direita mostra a contagem, não um sinônimo do título: "Transcrições
+   de estudo" ao lado de "Transcrições" era a mesma palavra duas vezes. */
 const GRUPOS = [
-  {
-    key: "eventos" as const,
-    kicker: "Eventos e gravações",
-    title: "Em evento e em estúdio",
-  },
-  {
-    key: "jazz" as const,
-    kicker: "Big band e jazz",
-    title: "Em performance",
-  },
-  {
-    key: "estudo" as const,
-    kicker: "Estudo",
-    title: "Transcrições",
-  },
+  { key: "eventos" as const, title: "Em evento e em estúdio" },
+  { key: "jazz" as const, title: "Big band e jazz" },
+  { key: "estudo" as const, title: "Transcrições" },
 ];
 
 export default async function Videos() {
@@ -61,9 +51,10 @@ export default async function Videos() {
               key={g.key}
               items={doGrupo}
               id={g.key}
-              kicker={g.kicker}
+              kicker={`${doGrupo.length} ${doGrupo.length === 1 ? "vídeo" : "vídeos"}`}
               title={g.title}
-              className={i === 0 ? "section-first" : ""}
+              sub
+              className={i === 0 ? "pt-6" : ""}
             />
           );
         })

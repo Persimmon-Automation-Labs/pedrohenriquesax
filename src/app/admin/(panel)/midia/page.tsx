@@ -22,7 +22,7 @@ export default async function Midia() {
   const items = await prisma.mediaItem.findMany({
     orderBy: [{ sortOrder: "asc" }],
   });
-  const destaques = items.filter((m) => m.featured).length;
+  const naHome = items.filter((m) => m.featured);
 
   return (
     <>
@@ -30,8 +30,38 @@ export default async function Midia() {
       <p className="mt-4 text-muted prose-w">
         Todos os vídeos aparecem em <strong className="text-paper">/videos</strong>. A página escolhida
         manda o vídeo também para a página correspondente. Os marcados como{" "}
-        <strong className="text-paper">destaque</strong> são os que aparecem na home — {destaques} agora.
+        <strong className="text-paper">destaque</strong> são os que aparecem na home.
       </p>
+
+      {/* A ordem da home se edita aqui, entre os vídeos da home — e não
+          empurrando cada um por cima da lista inteira. */}
+      <section className="surface mt-8 rounded-[2px] p-6">
+        <h2 className="d-s text-paper">Na home, nesta ordem</h2>
+        {naHome.length ? (
+          <ol className="mt-4 flex flex-col gap-2">
+            {naHome.map((m, i) => (
+              <li key={m.id} className="card flex items-center gap-3 p-3">
+                <span className="mono w-6 shrink-0 text-center text-sm text-faint">{i + 1}</span>
+                <span className="min-w-0 flex-1 truncate text-paper">{m.title}</span>
+                <span className="hidden truncate text-xs text-faint sm:block">{m.credit}</span>
+                <form action={moveMedia.bind(null, m.id, "up", "destaque")}>
+                  <button className="btn btn-ghost btn-sm" disabled={i === 0} title="Subir na home">↑</button>
+                </form>
+                <form action={moveMedia.bind(null, m.id, "down", "destaque")}>
+                  <button className="btn btn-ghost btn-sm" disabled={i === naHome.length - 1} title="Descer na home">↓</button>
+                </form>
+                <form action={toggleMediaFeatured.bind(null, m.id)}>
+                  <button className="btn btn-ghost btn-sm text-danger" title="Tirar da home">Tirar</button>
+                </form>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p className="mt-4 text-muted">
+            Nenhum vídeo na home. Marque um como destaque na lista abaixo.
+          </p>
+        )}
+      </section>
 
       <div className="surface mt-8 rounded-[2px] p-6">
         <AdminForm action={saveMedia} submitLabel="Adicionar">
@@ -106,10 +136,10 @@ export default async function Midia() {
                 </form>
 
                 <div className="flex gap-1">
-                  <form action={moveMedia.bind(null, m.id, "up")}>
+                  <form action={moveMedia.bind(null, m.id, "up", "tudo")}>
                     <button className="btn btn-ghost btn-sm" disabled={i === 0} title="Subir">↑</button>
                   </form>
-                  <form action={moveMedia.bind(null, m.id, "down")}>
+                  <form action={moveMedia.bind(null, m.id, "down", "tudo")}>
                     <button className="btn btn-ghost btn-sm" disabled={i === items.length - 1} title="Descer">↓</button>
                   </form>
                   <form action={deleteMedia.bind(null, m.id)}>

@@ -31,7 +31,7 @@ function Legenda({ item }: { item: MediaItem }) {
 
 export function VideoSection({
   items, kicker, title, body, lead = false, level = "h2",
-  id = "videos", className = "", verMais = false,
+  id = "videos", className = "", verMais = false, sub = false,
 }: {
   items: MediaItem[];
   kicker: string;
@@ -42,6 +42,10 @@ export function VideoSection({
   id?: string;
   className?: string;
   verMais?: boolean;
+  /** Subseção de uma página que já tem título próprio (o acervo em /videos).
+   *  Sem o par rótulo-de-acento + display grande, que repetido logo abaixo do
+   *  h1 da página vira a mesma construção duas vezes seguidas. */
+  sub?: boolean;
 }) {
   const H = level;
   const playable = items.filter((m) => youtubeId(m.url));
@@ -51,18 +55,25 @@ export function VideoSection({
   const grid = lead ? rest : playable;
 
   return (
-    <section id={id} className={`section border-t border-white/10 ${className}`}>
+    <section id={id} className={`${sub ? "section-sm" : "section border-t border-white/10"} ${className}`}>
       <div className="wrap">
         <Reveal>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="label text-accent">{kicker}</p>
-              <H className="d-l text-paper mt-3">{title}</H>
+          {sub ? (
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-white/10 pb-3">
+              <H className="d-s text-paper">{title}</H>
+              <span className="label text-faint">{kicker}</span>
             </div>
-            {verMais && (
-              <Link href="/videos" className="btn btn-secondary btn-sm">Ver todos os vídeos</Link>
-            )}
-          </div>
+          ) : (
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="label text-accent">{kicker}</p>
+                <H className="d-l text-paper mt-3">{title}</H>
+              </div>
+              {verMais && (
+                <Link href="/videos" className="btn btn-secondary btn-sm">Ver todos os vídeos</Link>
+              )}
+            </div>
+          )}
           {body && <p className="mt-5 text-muted prose-w">{body}</p>}
         </Reveal>
 
@@ -80,7 +91,7 @@ export function VideoSection({
         )}
 
         {grid.length > 0 && (
-          <ul className={`grid gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 ${lead ? "mt-12" : "mt-8"}`}>
+          <ul className={`grid gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 ${lead ? "mt-12" : sub ? "mt-6" : "mt-8"}`}>
             {grid.map((m, i) => (
               <Reveal as="li" key={m.id} delay={Math.min(i * 60, 360)}>
                 <figure>

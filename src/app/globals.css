@@ -80,6 +80,8 @@ body {
   text-transform: uppercase;
 }
 .d-m {
+  /* Duas linhas equilibradas em vez de uma cheia e uma órfã. */
+  text-wrap: balance;
   font-family: var(--font-display);
   font-variation-settings: "wdth" 106, "wght" 700;
   font-size: clamp(1.35rem, 2.6vw, 1.8rem);

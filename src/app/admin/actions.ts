@@ -303,18 +303,32 @@ export async function setMediaContext(id: string, context: MediaContext) {
   revalidatePath("/mentoria"); revalidatePath("/admin/midia");
 }
 
-/** Sobe ou desce um vídeo na ordem em que aparece. */
-export async function moveMedia(id: string, dir: "up" | "down") {
+/**
+ * Sobe ou desce um vídeo — dentro do conjunto em que ele está sendo mostrado.
+ *
+ * `escopo: "destaque"` mexe só entre os vídeos da home. Sem isso, para levar o
+ * solo do Global Jazz ao topo da home era preciso passá-lo por cima de todos os
+ * vídeos de evento, um clique de cada vez, porque a ordem é a da lista inteira.
+ *
+ * Troca os valores reais de sortOrder entre os dois, e não o índice do array:
+ * com um vídeo apagado no meio, os índices deixam de bater com os sortOrder e a
+ * versão anterior embaralhava a lista.
+ */
+export async function moveMedia(id: string, dir: "up" | "down", escopo: "tudo" | "destaque" = "tudo") {
   await guard();
-  const todos = await prisma.mediaItem.findMany({ orderBy: { sortOrder: "asc" } });
-  const i = todos.findIndex((m) => m.id === id);
+  const lista = await prisma.mediaItem.findMany({
+    where: escopo === "destaque" ? { featured: true } : {},
+    orderBy: { sortOrder: "asc" },
+  });
+  const i = lista.findIndex((m) => m.id === id);
   const j = dir === "up" ? i - 1 : i + 1;
-  if (i < 0 || j < 0 || j >= todos.length) return;
+  if (i < 0 || j < 0 || j >= lista.length) return;
   await prisma.$transaction([
-    prisma.mediaItem.update({ where: { id: todos[i].id }, data: { sortOrder: j } }),
-    prisma.mediaItem.update({ where: { id: todos[j].id }, data: { sortOrder: i } }),
+    prisma.mediaItem.update({ where: { id: lista[i].id }, data: { sortOrder: lista[j].sortOrder } }),
+    prisma.mediaItem.update({ where: { id: lista[j].id }, data: { sortOrder: lista[i].sortOrder } }),
   ]);
-  revalidatePath("/"); revalidatePath("/videos"); revalidatePath("/admin/midia");
+  revalidatePath("/"); revalidatePath("/videos"); revalidatePath("/eventos");
+  revalidatePath("/mentoria"); revalidatePath("/admin/midia");
 }
 
 export async function deleteMedia(id: string) {
