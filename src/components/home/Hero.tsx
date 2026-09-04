@@ -25,27 +25,22 @@ export function Hero({ settings: s }: { settings: Settings }) {
      continuaram servindo o recorte antigo — com moldura transparente e outra
      proporção, o que empurrava a cabeça para o meio da tela. Trocar o nome é
      o que garante que ninguém sirva os bytes velhos. */
-  const recorte = "/fotos/hero-recorte-v2.png";
+  const retratoUrl = "/fotos/g01.jpg";
 
   const retrato = (
     <Image
-      src={mediaUrl(recorte)}
-      alt={`${s.name} tocando saxofone`}
-      width={780}
-      height={1556}
+      src={mediaUrl(retratoUrl)}
+      alt={`${s.name} com o saxofone`}
+      fill
       priority
-      sizes="(max-width: 1023px) 78vw, 43vw"
-      className="aspect-[780/1556] h-auto w-full object-contain object-bottom"
+      sizes="(max-width: 1023px) 100vw, 46vw"
+      className="object-cover object-[38%_center]"
     />
   );
 
   return (
     <section className="relative overflow-hidden lg:flex lg:min-h-[100dvh] lg:items-center">
       {/* Computador: retrato sangrando à direita, atrás do texto */}
-      {/* Campo de luz atrás da figura, para a transição não ser um corte seco
-          contra o branco. */}
-      <div aria-hidden className="hero-field pointer-events-none absolute inset-0" />
-
       {/* Ancorado no TOPO, logo abaixo do cabeçalho fixo de 68px — e não na
           base. Ancorado embaixo, numa janela mais baixa a figura subia e a
           cabeça sumia atrás do cabeçalho: é a proporção 1:2 do recorte contra
@@ -55,7 +50,12 @@ export function Hero({ settings: s }: { settings: Settings }) {
           LARGURA da tela, e o que falta de altura corta nas pernas, que é onde
           cortar não custa nada. O PNG foi aparado até a figura (780×1556), sem
           moldura transparente, para essa conta ser previsível. */}
-      <div className="pointer-events-none absolute right-0 top-[68px] hidden lg:block lg:w-[43%] xl:w-[40%] 2xl:w-[36%]">
+      {/* Painel sangrado à direita, do topo ao pé da seção.
+          O recorte anterior existia para o retrato não brigar com o fundo
+          branco. Esta foto resolve isso de outro jeito: em vez de flutuar, ela
+          ocupa um bloco inteiro, e o encontro entre o branco da página e o
+          preto da foto vira uma linha reta — que é desenho, não emenda. */}
+      <div className="absolute inset-y-0 right-0 hidden lg:block lg:w-[46%] xl:w-[44%]">
         {retrato}
       </div>
 
@@ -98,10 +98,10 @@ export function Hero({ settings: s }: { settings: Settings }) {
         </div>
 
         {/* Celular: o retrato entra embaixo, no fluxo, sem cobrir nada */}
-        <div className="relative mt-10 lg:hidden">
-          <div aria-hidden className="hero-field pointer-events-none absolute inset-0" />
-          <div className="relative mx-auto w-[78%] max-w-[22rem]">{retrato}</div>
-        </div>
+        {/* No celular vira uma faixa sangrada embaixo do texto. As margens
+            negativas cancelam o padding do .wrap, para a foto ir de borda a
+            borda como vai no computador. */}
+        <div className="relative mt-10 aspect-[4/3] w-[100vw] -mx-[clamp(1.15rem,5vw,3rem)] lg:hidden">{retrato}</div>
       </div>
     </section>
   );

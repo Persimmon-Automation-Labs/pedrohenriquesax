@@ -76,7 +76,7 @@ async function main() {
     bioLong: BIO_LONGA,
     instagramUrl: "https://instagram.com/pedrolucenasax",
     tiktokUrl: "https://tiktok.com/@lucenasax",
-    eventsText: "Toco em casamentos de alto padrão, recepções, eventos corporativos, igrejas, bailes e shows autorais. Cada evento pede um formato diferente, e eu monto o que faz sentido para o seu.",
+    eventsText: "Seu evento merece mais do que música: merece um som que os convidados vão lembrar. Cada festa pede um formato diferente, e eu monto o que faz sentido para a sua.",
     mentoriaText: "Mentoria online individual, para quem quer estudar saxofone de verdade. Trabalhamos sonoridade, técnica, leitura e improvisação, no ponto em que você está.",
     mentoriaDuration: "1h15",
     mentoriaPrice: "R$ 150,00",
