@@ -20,7 +20,12 @@ import { mediaUrl } from "@/lib/media-url";
  */
 export function Hero({ settings: s }: { settings: Settings }) {
   const wa = s.whatsapp.replace(/\D/g, "");
-  const recorte = "/fotos/hero-recorte.png";
+    /* Nome com versão de propósito. O arquivo mudou mas o URL não, e o
+     otimizador do Next (minimumCacheTTL de 30 dias) e o cache do navegador
+     continuaram servindo o recorte antigo — com moldura transparente e outra
+     proporção, o que empurrava a cabeça para o meio da tela. Trocar o nome é
+     o que garante que ninguém sirva os bytes velhos. */
+  const recorte = "/fotos/hero-recorte-v2.png";
 
   const retrato = (
     <Image
@@ -29,7 +34,7 @@ export function Hero({ settings: s }: { settings: Settings }) {
       width={780}
       height={1556}
       priority
-      sizes="(max-width: 1023px) 78vw, 38vw"
+      sizes="(max-width: 1023px) 78vw, 43vw"
       className="aspect-[780/1556] h-auto w-full object-contain object-bottom"
     />
   );
@@ -50,7 +55,7 @@ export function Hero({ settings: s }: { settings: Settings }) {
           LARGURA da tela, e o que falta de altura corta nas pernas, que é onde
           cortar não custa nada. O PNG foi aparado até a figura (780×1556), sem
           moldura transparente, para essa conta ser previsível. */}
-      <div className="pointer-events-none absolute right-0 top-[68px] hidden lg:block lg:w-[38%] xl:w-[35%] 2xl:w-[32%]">
+      <div className="pointer-events-none absolute right-0 top-[68px] hidden lg:block lg:w-[43%] xl:w-[40%] 2xl:w-[36%]">
         {retrato}
       </div>
 
